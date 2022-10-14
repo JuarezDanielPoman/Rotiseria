@@ -1,0 +1,189 @@
+
+/*
+    =================================
+    |   ESTILOS PARA EL HEADER MENU |
+    |================================
+*/
+  .btn-primary{
+    background-color: rgb(220, 36, 36);
+    border-radius: 20px;
+    color: aliceblue;
+  }
+
+  .btn-primary:hover{
+    background-color: rgb(167, 70, 70);
+    color: rgb(248, 248, 249);
+  }
+
+  .boton-registrar{
+    border: 1px solid #000000; /*anchura, estilo y color borde*/
+    padding: 8px; /*espacio alrededor texto*/
+    background-color: #ff0000; /* color botón */
+    color: #ffffff; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    /*font-family: 'Helvetica', sans-serif; tipografía texto*/
+    border-radius: 50px;/* bordes redondos */
+    /* font-size: 1vw; */
+  }
+  
+
+  .boton-registrar:hover{
+    color: #ffffff; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+   
+  }
+
+  .boton-explorar{
+    border: 1px solid #ae332e; /*anchura, estilo y color borde*/
+    padding: 8px; /*espacio alrededor texto*/
+    margin: 40px;
+    background-color: #f54e07; /* color botón */
+    color: #ffffff; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    /*font-family: 'Helvetica', sans-serif; tipografía texto*/
+    border-radius: 50px;/* bordes redondos */
+    /* font-size: 2vw; */
+}
+.boton-explorar:hover{
+    text-decoration: none;
+    color: #ffffff; 
+}
+
+  .img-jumbutrom{
+    height: 100%;
+    width: 90%;
+  }
+
+  .h4-jumbotron{
+    color: #222;
+    font-family: 'Lucida Console', Monaco, monospace;
+  }
+.nav-bar{
+    background: #E38646;
+    padding: 20px;
+    display: block;
+    color: white;
+    cursor: pointer; /*Pone la manito en el cursos*/
+    font-size: 1.5em;
+    width: 100%;
+}
+
+.main-nav{
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu, .submenu{
+    list-style: none; /*Saca los puntos de las listas*/
+    padding: 0;
+    margin: 0;
+}
+
+.menu{
+    background: #555;
+    width: 100%;
+    margin-left: -200%; /*se va a ocultar*/
+    transition: all 0.5s;
+}
+
+.menu__link{
+    display: block; /*para elementos a*/
+    padding: 15px;
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    right: auto;
+} 
+
+.menu__link:hover{
+    background: #444;
+    text-decoration: none;
+    color: aqua;
+}
+
+.submenu{
+    height: 0; /*le quitamos el alto para que haga el efecto*/
+    overflow: hidden; /*para que no se vea*/
+    transition: all 0.3s;
+}
+
+.submenu .menu__link:hover{
+    background: #222;
+}
+
+.submenu .menu__link{
+    background: #333;
+    padding-left: 50px;
+}
+
+.mostrar{ /*se la llama de JS*/
+    margin-left: 0;
+}
+
+#carrito-menu{
+    /* position: fixed; */
+    /* float:right;  */
+    /* right: 550px; */
+    left: 30%;
+    display:flex;
+    color: #e9fc13;
+}
+
+#usuario-menu{
+    left: 800px;
+}
+
+#carrito-menu:hover{
+    background-color:#4cb0e7;
+    color: #000000;
+}
+
+
+
+/*Responsive*/
+
+@media(min-width:1024px){
+
+    .nav-bar{
+        display: none;
+    }
+
+    .menu{
+        margin-left: 0;
+        display: flex;
+    }
+
+    .container-submenu{
+        position: relative;
+    }
+
+    .submenu{
+        position: absolute;
+        top: 60px;
+        width: 200px;
+        overflow: visible;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .container-submenu:hover .submenu{
+        opacity: 1;
+        visibility: visible;
+    }
+   
+}
+
+@media(max-width:662px){
+    #carrito-menu{
+        /* position: fixed; */
+        /* float:right;  */
+        left: 0px;
+        /* color: #ed157a; */
+    }
+    #usuario-menu{
+        left: 0px;
+    }
+}

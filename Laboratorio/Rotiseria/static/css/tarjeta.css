@@ -1,0 +1,142 @@
+
+/*
+    =======================================
+    |   ESTILOS PARA LA SECCION DE TARJETA |
+    |======================================
+*/
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.container #menu-tarjeta{
+    margin: 2rem 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-promociones{
+    /* font-family: 'Blaka Ink', cursive;*/
+    font-family: 'Blaka Ink', cursive; 
+    font-family: 'Bungee Spice', cursive;
+    /* font-size: 85px; */
+    font-size:6vw
+}
+
+.titulo-platos{
+    font-family: 'Bungee Spice', cursive;
+    font-family: 'Dancing Script', cursive;
+    /* font-size: 70px */
+    font-size:4vw
+} 
+
+a{
+    text-decoration: none;
+}
+.wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.column-4{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.tarjeta-rest{
+    background-repeat: no-repeat;
+    height: 400px;
+    border-radius: 6px;
+    padding: 1rem .5rem;
+    display: flex;
+    align-items: end;
+    border: 2px solid rgb(7, 7, 7);
+}
+
+.img-tarjeta{
+   display: none; /*es para que no se vea la img, xq ya enta de fondo*/
+}
+.titulo_tarjeta{
+    color: #fff;
+}
+.wrap-text_tarjeta-rest{
+    color: #fff;
+    padding: .5rem;
+    border-radius: 6px;
+    background: linear-gradient(to top, rgb(0 0 0 / .5),rgb(0 0 0 / .5));
+}
+
+.wrap-text_tarjeta-rest p{
+    color: #f2f2f2;
+}
+
+.cta-wrap_tarjeta-rest{
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+}
+
+.precio_tarjeta-rest span{
+    font-size: 2.5rem;
+    font-family: 'Permanent Marker', cursive;
+    color: rgb(244, 177, 169);
+}
+.cta_tarjeta-rest{
+    background-color: #FFC300;
+    padding: .25rem 1rem;
+    border-radius: 4px;
+}
+.cta_tarjeta-rest a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.botones-tarjeta .btn-info{
+    /*BOTON VER INFORMACION SOBRE EL PRODUCTO*/
+    float: right;
+    border: 1px solid #292929; /*anchura, estilo y color borde*/
+    padding: 1px; /*espacio alrededor texto*/
+    margin: 2px;
+    background-color: #f3f3f3; /* color botón */
+    color: #161616; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif;    /*tipografía texto */
+    height:30px;width:30px;
+    border-radius:50%;
+}
+
+
+.botones-tarjeta .btn-success{
+    /*BOTON AÑADIR AL CARRITO*/
+    float: right;
+    border: 1px solid #83a428; /*anchura, estilo y color borde*/
+    padding: 1px; /*espacio alrededor texto*/
+    margin: 2px;
+    background-color: #e0ee1b; /* color botón */
+    color: #060606; /*color texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    border-radius: 8px;/* bordes redondos */
+}
+
+@media (max-width:1024px){
+    .column-4{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media (max-width:768px){
+    .column-4{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width:480px){
+    .column-4{
+        grid-template-columns: repeat(1,1fr);
+    }
+    
+}

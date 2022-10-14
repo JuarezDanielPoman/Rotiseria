@@ -1,0 +1,312 @@
+
+
+/*
+    =======================================
+    |   ESTILOS GENERALES PARA LA PAGINA  |
+    |======================================
+*/
+
+html{
+  scroll-behavior:smooth;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family:monac;
+    /* min-height: 40px; */
+    /* background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    box-sizing: border-box;
+    font-family: system-ui;
+  }
+
+#fondo-pagina{
+  background-color: #363B40;
+  padding: auto;
+  margin: auto;
+  padding-top: 0;
+  min-height: 100px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 100%; 
+  background-image: url('../assets/fondocuerporotiseria.jpg');
+}
+
+#acerca-de-roti{
+  background-color: antiquewhite;;
+  border-radius: 20px;
+}
+
+.bg-jumbotron,#presentacion{
+  background-image: url(../assets/4.jpg);
+  background-size: cover;
+  background-position: 40%;
+  height: 90vh;
+}
+
+#presentacion{
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+  width: 95%;
+}
+
+
+#boton-arriba{
+  font-size: 3vw;
+  position: fixed;
+  bottom: 20px;
+  right: -100px; /*para que no aparezca*/
+  width: 45px;
+  text-decoration: none;
+  /* color: #da681c; */
+  color: #bb8629;
+  transition: all 1s;
+}
+/* .color-menu {
+    background-color: rgb(23, 22, 22);
+  }
+
+.color-item-menu{
+    color: rgb(245, 14, 14);
+}
+#submenu{
+  /* background-color: #888888; */
+  /* background-color: rgba(0, 0, 0, 0.2); 
+  background-color:#888888 ;
+} */
+
+
+#tipoplato{
+  /* background-color: #888888; */
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color:#888888 ;
+}
+.color-item-submenu{
+  text-decoration: none;
+  text-decoration-color: white;
+}
+
+.row .fondo-card{
+  margin: 15px;
+  border: 1px solid rgb(7, 7, 7);
+  border-radius: 6px;
+  box-shadow: 5px 5px 9px #da681c
+}
+
+/* .card{
+  /* margin-right: 500px; 
+  margin-left: 1000px;
+  width: 20rem; 
+  height: 25rem;
+} */
+/* 
+.fondo-card{
+  background-color: white;
+} */
+
+/* .card-title{
+  text-align: center;
+} */
+/* 
+.card-text{
+  text-align: center;
+} */
+
+
+/* 
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+} */
+
+
+.formulario {
+  /*box-shadow: 10px 10px 8px #221d1d;*/
+  border: 1px solid rgb(48, 47, 53);
+  background-color: #ffffff;
+}
+
+.color-tabla-text{
+  color: black;
+}
+
+.inactivo{
+  display: none;
+}
+
+#tabla-pedidos-pendientes .cabera-tabla:hover{
+  /* background-color: rgb(234, 242, 8); */
+  background-color: rgb(117, 237, 219)
+}
+
+h2{
+  color: black;
+  margin: auto;
+  padding: auto;
+}
+
+h3{
+  color: black;
+   margin: 0px;
+    padding: 0px;
+    border: 12px;
+}
+
+h1{
+  color:white ;
+  margin: 0px;
+  padding: 0px;
+  border: 12px;
+
+}
+
+section{
+  background-size: 100%; 
+  padding: auto;
+  margin: auto;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/fondocuerporotiseria.jpg');
+}
+
+.btn-sample { 
+  color: #FFFFFF; 
+  background-color: #59390C; 
+  border-color: #0A0A0A; 
+} 
+ 
+.btn-sample:hover, 
+.btn-sample:focus, 
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  color: #FFFFFF; 
+  background-color: #59390C; 
+  border-color: #0A0A0A; 
+} 
+ 
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  background-image: none; 
+} 
+ 
+.btn-sample.disabled, 
+.btn-sample[disabled], 
+fieldset[disabled] .btn-sample, 
+.btn-sample.disabled:hover, 
+.btn-sample[disabled]:hover, 
+fieldset[disabled] .btn-sample:hover, 
+.btn-sample.disabled:focus, 
+.btn-sample[disabled]:focus, 
+fieldset[disabled] .btn-sample:focus, 
+.btn-sample.disabled:active, 
+.btn-sample[disabled]:active, 
+fieldset[disabled] .btn-sample:active, 
+.btn-sample.disabled.active, 
+.btn-sample[disabled].active, 
+fieldset[disabled] .btn-sample.active { 
+  background-color: #59390C; 
+  border-color: #0A0A0A; 
+} 
+ 
+.btn-sample .badge { 
+  color: #59390C; 
+  background-color: #FFFFFF; 
+}
+
+.fa-signature{
+  position: relative;
+
+}
+
+.form-control-feedback {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.form-control {
+  padding-left: 30px!important;
+}
+
+.slider{
+  width: 95%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slider ul{
+  display: flex;
+  padding:0;
+  width: 500%;
+  height: 400%;
+
+  animation: cambio 15s infinite alternate ease-in;
+
+}
+
+.slider li{
+  width: 100%;
+  list-style: none;
+}
+
+.slider img{
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes cambio {
+  0%{margin-left:0;}
+  20%{margin-left:0;}
+
+  25%{margin-left:-100%;}
+  45%{margin-left:-100%;}
+
+  50%{margin-left:-200%;}
+  70%{margin-left:-200%;}
+
+  75%{margin-left:-300%;}
+  100%{margin-left:-300%;}
+
+}
+
+#logo img{
+height: 300px;  
+width: auto;
+}
+
+
+@media (max-width:1024px){
+#logo img{
+  height: 200px;  
+  width: auto;
+  }
+}
+
+@media (max-width:768px){
+  
+#logo img{
+  height: 100px;  
+  width: auto;
+  }
+}
+
+@media (max-width:480px){
+  
+#logo img{
+  height: 80px;  
+  width: auto;
+  }
+}
