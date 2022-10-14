@@ -38,13 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.Pedido',
-<<<<<<< HEAD
     'apps.Usuario',
-
-=======
-    'apps.Usuario'
->>>>>>> b989e21278a86a38ea88069446237cb88aa33868
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
