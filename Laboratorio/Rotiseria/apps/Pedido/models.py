@@ -1,12 +1,14 @@
 from random import choices
 from django.db import models
 
+from Laboratorio.Rotiseria.apps import Usuario
+
 # Create your models here.
 
 class Pedidos(models.model):
     cod_pedido = models.AutoField(PrimaryKey=True)
     fecha_pedido = models.DateTimeField(auto_now_add=True)
-    #usuario = models.ForeignKey(Usuario,blank=False,null=False,on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario,blank=False,null=False,on_delete=models.CASCADE)
     opcion = [
         ('Envio','envio'),
         ('Retiro','retiro'),

@@ -8,6 +8,7 @@ class Persona(models.model):
     fecha_nacimiento = models.DateField()
     email = models.CharField(max_legth=300)
     #falta domicilio y telefono
+    
 class cadete(Persona):
     vigenciadelcarnet = models.DateField()
     numero_patente = models.CharField()
