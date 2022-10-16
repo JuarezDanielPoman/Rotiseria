@@ -14,7 +14,16 @@ class Pedidos(models.model):
     ]
     modalidadentrega = models.CharField(choices=opcion)
     hora_entrega_desde = models.DateTimeField()
-    estado_entrega = models.CharField(max_length=300)
+    estados = [
+        ('Pendiente','pendiente'),
+        ('En preparacion','en preparacion'),
+        ('En camino','en camino'),
+        ('Entregado','entregado'),
+        ('Devuelto','devuelto'),
+        ('Cancelado','cancelado'),
+
+    ]
+    estado_entrega = models.CharField(choices=estados)
     hora_entrega_hasta = models.DateTimeField()
 
 class platos(models.model):
