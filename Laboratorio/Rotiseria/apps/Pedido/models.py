@@ -1,10 +1,10 @@
 from random import choices
 from django.db import models
 
-from Laboratorio.Rotiseria.apps import Usuario
+from apps import Usuario
 
 # Create your models here.
-
+"""
 class Pedidos(models.model):
     cod_pedido = models.AutoField(PrimaryKey=True)
     fecha_pedido = models.DateTimeField(auto_now_add=True)
@@ -45,3 +45,4 @@ class platos(models.model):
     ]
     especialidad = models.CharField(choices=especialidadades)
     pedido = models.ManyToManyField(Pedidos)
+    """

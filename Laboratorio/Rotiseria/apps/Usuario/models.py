@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-
+"""
 class Persona(models.model):
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
@@ -14,7 +14,7 @@ class cadete(Persona):
     numero_patente = models.CharField()
     fecha_ingreso = models.DateField()
 
-"""
+
 class Usuario(Persona):
     #nombreusuario = models.CharsFiled(max_length=300)
     #contraseña = models.CharsField(max_length=300)

@@ -250,10 +250,10 @@ fieldset[disabled] .btn-sample.active {
 .slider ul{
   display: flex;
   padding:0;
-  width: 500%;
+  width: 400%;
   height: 400%;
 
-  animation: cambio 15s infinite alternate ease-in;
+  animation: cambio 20s infinite alternate ease-in;
 
 }
 
