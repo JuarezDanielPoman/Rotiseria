@@ -23,6 +23,13 @@
     font-size:6vw
 }
 
+.titulo-presentacion{
+    /* font-family: 'Blaka Ink', cursive;*/
+    font-family: 'Permanent Marker', cursive;
+    /* font-size: 85px; */
+    font-size:2vw;
+    color:rgb(255, 0, 0);
+}
 .titulo-platos{
     font-family: 'Bungee Spice', cursive;
     font-family: 'Dancing Script', cursive;
