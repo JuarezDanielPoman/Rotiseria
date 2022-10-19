@@ -310,3 +310,8 @@ width: auto;
   width: auto;
   }
 }
+
+.encabezado{
+  background-image: url(../assets/fondoMenu.png); 
+  background-size: 100%;
+}
