@@ -52,6 +52,8 @@ a{
     display: flex;
     align-items: end;
     border: 2px solid rgb(7, 7, 7);
+    background: url(../assets/despensa.jpg) center;
+    background-size: cover;
 }
 
 .img-tarjeta{
