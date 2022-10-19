@@ -109,34 +109,10 @@
 
 
     </header>
- 
-    <div class="slider">
-    <ul>
-        <li><img src="{% static 'assets/1.png' %}" alt=""></li>
-        <li><img src="{% static 'assets/2.png' %}" alt=""></li>
-        <li><img src="{% static 'assets/3.png' %}" alt=""></li>
-        <li><img src="{% static 'assets/4.jpg' %}" alt=""></li>
-    </ul>
-    </div>
-
-    <div id="presentacion" class="jumbotron bg-jumbotron d-flex flex-column justify-content-center align-items-center text-white text-center">
-        
-        <h1 class="display-3 text-capitalize w-70">BIENVENIDOS AL MEJOR SABOR</h1>
-        <p class="lead w-75">Proba todas las delicias que tenemos para vos, en los diferentes rubros de comidas. Vegetariana, Celiaca, para Diabeticos y comidas en general. 
-                    todo, todo lo que buscas lo encontra <a href="#">aqui</a>, en "EL BUEN GUSTO ROTISERIA".
-                    ¡Hace tu pedido! y aprovecha todos los descuentos que tenemos para vos. &#128521 
-                </p>
-        <hr class="my-4 bg-dark">
-        
-        <div class="row">
-            <div class="col-md-auto">
-                <a id="explorar" class="boton-explorar hvr-wobble-vertical" href="#menu-tarjeta" role="button">Explorar menu</a>
-                <a class="boton-registrar hvr-pulse-grow" data-toggle="modal" data-target="#ventanaModalLogin" href="#" role="button">Ingresar</a>
-            </div>
-        </div>
-    </div> 
-
-        
+ <section>
+    {% block contenido %}
+    {% endblock %}
+</section>
      Seccion de Platos 
     <div class="contenedor">
         
