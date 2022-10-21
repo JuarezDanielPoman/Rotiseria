@@ -7,12 +7,13 @@
         
         <section id="menu-tarjeta" style="background-image: url('../assets/fondocuerporotiseria.jpg'); background-size: 100%; padding: auto; margin: 0px;">
             
-            <!-- Promociones -->
+            <!-- Titulp de Seccion -->
             <div class="text-center mb-3">
                 <h2 class="hvr-grow-shadow titulo-promociones mb-2">PROMOCIONES</h2><br>
                 <h3 class="hvr-float-shadow titulo-platos">Platos del día</h3>
             </div>
-
+            
+            <!-- Tarjetas de promociones -->
             <div class="container mb-5 mt-3" id="lista-productos">
 
                 <div class="wrap column-4 columns mt-3">
@@ -90,81 +91,80 @@
                 </div>
 
                 <div class="container mb-5 mt-3" id="lista-productos">
-
-                <div class="wrap column-4 columns mt-3">
-    
-                    <div class="tarjeta-rest hvr-glow">
-                        <img src="{% static 'assets/despensa.jpg' %}" class="img-tarjeta"></img>
-                        <div class="wrap-text_tarjeta-rest">
-                            <h3 class="titulo_tarjeta text-center">Tarta de verduras</h3>
-                            <p>¡Hecha para que la disfrutes con mucho sabor!
-                                <div class="cta-wrap_tarjeta-rest">
-                                    <div class="precio_tarjeta-rest">
-                                        <span class="hvr-glow">$500</span>
-                                    </div>   
+                    <div class="wrap column-4 columns mt-3">
+        
+                        <div class="tarjeta-rest hvr-glow">
+                            <img src="{% static 'assets/despensa.jpg' %}" class="img-tarjeta"></img>
+                            <div class="wrap-text_tarjeta-rest">
+                                <h3 class="titulo_tarjeta text-center">Tarta de verduras</h3>
+                                <p>¡Hecha para que la disfrutes con mucho sabor!
+                                    <div class="cta-wrap_tarjeta-rest">
+                                        <div class="precio_tarjeta-rest">
+                                            <span class="hvr-glow">$500</span>
+                                        </div>   
+                                    </div>
+                                </p>
+                                <div class="botones-tarjeta">
+                                    <a class="btn btn-success hvr-grow agregar-carrito" data-id="1"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
+                                    <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                                 </div>
-                            </p>
-                            <div class="botones-tarjeta">
-                                <a class="btn btn-success hvr-grow agregar-carrito" data-id="1"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
-                                <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="tarjeta-rest hvr-glow">
-                        <img src="../assets/despensa.jpg" class="img-tarjeta"></img>
-                        <div class="wrap-text_tarjeta-rest">
-                            <h3 class="titulo_tarjeta text-center">Milanesa </h3>
-                            <p>¡Hecha para que la disfrutes con mucho sabor!
-                                <div class="cta-wrap_tarjeta-rest">
-                                    <div class="precio_tarjeta-rest">
-                                        <span class="hvr-glow">$800</span>
-                                    </div>   
+                        <div class="tarjeta-rest hvr-glow">
+                            <img src="../assets/despensa.jpg" class="img-tarjeta"></img>
+                            <div class="wrap-text_tarjeta-rest">
+                                <h3 class="titulo_tarjeta text-center">Milanesa </h3>
+                                <p>¡Hecha para que la disfrutes con mucho sabor!
+                                    <div class="cta-wrap_tarjeta-rest">
+                                        <div class="precio_tarjeta-rest">
+                                            <span class="hvr-glow">$800</span>
+                                        </div>   
+                                    </div>
+                                </p>
+                                <div class="botones-tarjeta">
+                                    <a class="btn btn-success hvr-grow agregar-carrito" data-id="2"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
+                                    <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                                 </div>
-                            </p>
-                            <div class="botones-tarjeta">
-                                <a class="btn btn-success hvr-grow agregar-carrito" data-id="2"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
-                                <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="tarjeta-rest hvr-glow">
-                        <div class="wrap-text_tarjeta-rest">
-                            <h3 class="titulo_tarjeta text-center">Pizza</h3>
-                            <p>¡Hecha para que la disfrutes con mucho sabor!
-                                <div class="cta-wrap_tarjeta-rest">
-                                    <div class="precio_tarjeta-rest">
-                                        <span class="hvr-glow">$750</span>
-                                    </div>   
+                        <div class="tarjeta-rest hvr-glow">
+                            <div class="wrap-text_tarjeta-rest">
+                                <h3 class="titulo_tarjeta text-center">Pizza</h3>
+                                <p>¡Hecha para que la disfrutes con mucho sabor!
+                                    <div class="cta-wrap_tarjeta-rest">
+                                        <div class="precio_tarjeta-rest">
+                                            <span class="hvr-glow">$750</span>
+                                        </div>   
+                                    </div>
+                                </p>
+                                <div class="botones-tarjeta">
+                                    <a class="btn btn-success hvr-grow agregar-carrito" data-id="3"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
+                                    <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                                 </div>
-                            </p>
-                            <div class="botones-tarjeta">
-                                <a class="btn btn-success hvr-grow agregar-carrito" data-id="3"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
-                                <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="tarjeta-rest hvr-glow" >
-                        <div class="wrap-text_tarjeta-rest">
-                            <h3 class="titulo_tarjeta text-center">Tarta de choclo</h3>
-                            <p>¡Hecha para que la disfrutes con mucho sabor!
-                                <div class="cta-wrap_tarjeta-rest">
-                                    <div class="precio_tarjeta-rest">
-                                        <span class="hvr-glow">$500</span>
-                                    </div>   
+                        <div class="tarjeta-rest hvr-glow" >
+                            <div class="wrap-text_tarjeta-rest">
+                                <h3 class="titulo_tarjeta text-center">Tarta de choclo</h3>
+                                <p>¡Hecha para que la disfrutes con mucho sabor!
+                                    <div class="cta-wrap_tarjeta-rest">
+                                        <div class="precio_tarjeta-rest">
+                                            <span class="hvr-glow">$500</span>
+                                        </div>   
+                                    </div>
+                                </p>
+                                <div class="botones-tarjeta">
+                                    <a class="btn btn-success hvr-grow agregar-carrito" data-id="4"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
+                                    <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                                 </div>
-                            </p>
-                            <div class="botones-tarjeta">
-                                <a class="btn btn-success hvr-grow agregar-carrito" data-id="4"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
-                                <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                             </div>
                         </div>
+                        
                     </div>
-                    
                 </div>
-            </div>
             </div>
         </section>
     </div>

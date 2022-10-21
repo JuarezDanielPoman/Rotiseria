@@ -34,6 +34,9 @@ class Especialidad(models.Model):
 class Plato(models.Model):
     codigo_plato = models.AutoField(primary_key=True)
     nombre_plato = models.CharField(max_length=200,blank=True)
+    precio_plato = models.DecimalField(max_digits=8, decimal_places=2, default=None)
+    vigencia_plato = models.BooleanField(default=True)
+    estado_promocion = models.BooleanField(default=False)
     tipo_plato = models.ForeignKey(TipoPlato,on_delete=models.CASCADE)
     especialidad = models.ForeignKey(Especialidad,on_delete=models.CASCADE)
 
@@ -63,41 +66,3 @@ class Pedido(models.Model):
     def __str__(self):
         texto = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
         return texto.format(self.persona.nombre, self.platos, self.estado_entrega, self.modo_entrega,self.fecha_pedido, self.hora_entrega_desde, self.hora_entrega_hasta,)
-
-"""
-    estados = [
-        ('Pendiente','pendiente'),
-        ('En preparacion','en preparacion'),
-        ('En camino','en camino'),
-        ('Entregado','entregado'),
-        ('Devuelto','devuelto'),
-        ('Cancelado','cancelado'),
-
-    ]
-    estado_entrega = models.CharField(choices=estados,default='Pendiente')
-   
-    opcion = [
-        ('Envio','envio'),
-        ('Retiro','retiro'),
-
-    ]
-    modalidadentrega = models.CharField(max_length=100,blank= True,choices=opcion)
-    
-     
-    especialidadades = [
-        ('Normal','normal'),
-        ('Vegetariano','vegetariano'),
-        ('celiaco','Celiaco'),
-        ('diabetico','Diabetico'),
-
-    ]
-    especialidad = models.CharField(max_length=100,blank= True,choices=especialidadades)
-    
-    tipo_platos = [
-        ('Entrada','entrada'),
-        ('Plato Principal','plato Principal'),
-        ('postre','Postre')
-    ]
-    tipo_plato = models.CharField(max_length=100,blank= True,choices=tipo_platos)
-    
-    """
