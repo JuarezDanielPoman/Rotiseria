@@ -44,7 +44,7 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=200, blank= True)
     fecha_nacimiento = models.DateField(blank= True)
     email = models.CharField(max_length=300,blank= True)
-    domicilio = models.OneToOneField(Domicilio, on_delete=models.CASCADE)
+    domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE)
     telefono = models.ForeignKey(Telefono, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
@@ -53,6 +53,7 @@ class Persona(models.Model):
 
 
 class cadete(Persona):
+    #persona = models.ForeignKey(Persona, on_delete=models.CASCADE,default=None)
     fecha_vigencia_carnet = models.DateField(blank=True)
     numero_patente = models.CharField(max_length=7,blank=True)
     fecha_ingreso = models.DateField(blank=True)

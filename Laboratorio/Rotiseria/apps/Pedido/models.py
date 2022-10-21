@@ -34,12 +34,12 @@ class Especialidad(models.Model):
 class Plato(models.Model):
     codigo_plato = models.AutoField(primary_key=True)
     nombre_plato = models.CharField(max_length=200,blank=True)
-    tipo_plato = models.OneToOneField(TipoPlato,on_delete=models.CASCADE)
-    especialidad = models.OneToOneField(Especialidad,on_delete=models.CASCADE)
+    tipo_plato = models.ForeignKey(TipoPlato,on_delete=models.CASCADE)
+    especialidad = models.ForeignKey(Especialidad,on_delete=models.CASCADE)
 
     def __str__(self):
-        texto = "{0} - {1} - {2} - {3}"
-        return texto.format(self.codigo_plato, self.nombre_plato, self.tipo_plato, self.especialidad)
+        texto = "{0} - {1} - {2}"
+        return texto.format(self.nombre_plato, self.especialidad.descripcion_especialidad, self.tipo_plato.descripcion_tipo_plato)
 
 class ModalidadEntrega(models.Model):
     modoentrega = models.AutoField(primary_key=True)
@@ -55,14 +55,14 @@ class Pedido(models.Model):
     persona = models.ForeignKey(Persona,blank=False,null=False,on_delete=models.CASCADE)
     hora_entrega_desde = models.TimeField(blank= True)
     hora_entrega_hasta = models.TimeField(blank= True)
-    estado_entrega = models.OneToOneField(EstadoEntrega, on_delete=models.CASCADE)
+    estado_entrega = models.ForeignKey(EstadoEntrega, on_delete=models.CASCADE)
     platos = models.ManyToManyField(Plato)
-    modo_entrega = models.OneToOneField(ModalidadEntrega,on_delete=models.CASCADE)
+    modo_entrega = models.ForeignKey(ModalidadEntrega,on_delete=models.CASCADE)
 
 
     def __str__(self):
-        texto = "{0} - {1} - {2} - {3}"
-        return texto.format(self.cod_pedido, self.fecha_pedido, self.persona, self.hora_entrega_desde, self.hora_entrega_hasta, self.estado_entrega, self.platos, self.modo_entrega)
+        texto = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
+        return texto.format(self.persona.nombre, self.platos, self.estado_entrega, self.modo_entrega,self.fecha_pedido, self.hora_entrega_desde, self.hora_entrega_hasta,)
 
 """
     estados = [
