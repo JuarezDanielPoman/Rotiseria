@@ -9,8 +9,11 @@
     <title>{% block titulo %}{% endblock %}</title>
     <!-- estilos al menu -->
     <link rel="stylesheet" href="{% static 'css/estiloNav.css' %}">
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <!-- boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     
     <!-- estilos generales -->
@@ -24,7 +27,7 @@
     
     <!-- iconos --cls
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
     
 
     <!-- Tipo de letra -->
@@ -109,55 +112,12 @@
 
 
     </header>
-    
-    <div class="slider">
-        <ul>
-            <li><img src="{% static 'assets/1.png' %}" alt=""></li>
-            <li><img src="{% static 'assets/2.png' %}" alt=""></li>
-            <li><img src="{% static 'assets/3.png' %}" alt=""></li>
-            <li><img src="{% static 'assets/4.jpg' %}" alt=""></li>
-        </ul>
-    </div>
-    
-    <div id="presentacion" class="jumbotron bg-jumbotron d-flex flex-column justify-content-center align-items-center text-white text-center">
-            
-            <h1 class="display-3 text-capitalize w-70 titulo-promociones ">BIENVENIDOS AL MEJOR SABOR</h1>
-            <p class="lead w-75 titulo-presentacion ">Proba todas las delicias que tenemos para vos, en los diferentes rubros de comidas. Vegetariana, Celiaca, para Diabeticos y comidas en general. 
-                        todo, todo lo que buscas lo encontra <a href="#">aqui</a>, en "EL BUEN GUSTO ROTISERIA".
-                        ¡Hace tu pedido! y aprovecha todos los descuentos que tenemos para vos. &#128521 
-                    </p>
-            <hr class="my-4 bg-dark">
-            
-            <div class="row">
-                <div class="col-md-auto">
-                    <a id="explorar" class="boton-explorar hvr-wobble-vertical" href="#menu-tarjeta" role="button">Explorar menu</a>
-                    <a class="boton-registrar hvr-pulse-grow" data-toggle="modal" data-target="#ventanaModalLogin" href="#" role="button">Ingresar</a>
-                </div>
-            </div>
-    </div>
     <section>
         {% block contenido %}
         {% endblock %}
     </section>
     
-    <!-- Jumbotron acerca de -->    
-    <div class="container mt-10">   
-        <div class="jumbotron"id="acerca-de-roti" >
-            <div class="row"> 
-                <div class="col-md-6 img">
-                    <img class="img-jumbutrom" src="{% static 'assets/jumbotrom.jpg' %}" alt="">
-                </div>
-                <div class="col-md-6">
-                    <span class="nosotros">Nosotros</span>
-                    <!-- <h1 class="display-4 h4-jumbotron">¿Quienes somos?</h1> -->
-                    <h2>Rotiseria "El mejor sabor"</h2>
-                    <p class="lead">La rotiseria el mejor sabor nació en 2020 cuando Lucas Zarate se quedo sin trabajo jaja Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde in est reprehenderit neque beatae quibusdam consequuntur nemo eaque eligendi porro earum, voluptatem, ut eos quasi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae nemo veritatis impedit repellendus et obcaecati cum excepturi quo corporis, minima sed reiciendis quod, nam veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, tenetur!</p>
-                    <hr class="my-4 bg-dark">
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <!-- Seccion Modal Ingredientes -->
     <section>
         <div class="modal" tabindex="-1" role="dialog" id="ventanaModalInfo">
@@ -279,14 +239,9 @@
     </footer>
 
     
-
     <script src="{% static 'js/Menu.js' %}"></script>
     <script src="{% static 'js/botonArriba.js' %}"></script>
     <script src="{% static 'js/carrito.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <!-- script iconos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.js" integrity="sha512-8XtSBQOB+R4dpcpQBpYC5Q7ti7y/MjIF0l/1ZiSd4xM04Dr052S/Py981Pzmwo2HrXCR2JhYE1MYR15aZGMnig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Alerts -->

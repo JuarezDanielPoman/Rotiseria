@@ -1,0 +1,155 @@
+{%  extends 'base/base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+    <div class="d-flex justify-content-center">
+        <div class="card col-sm-7 p-3 formulario"> 
+            <div class="mb-2">
+                <!--<div class="abs-center">-->
+                <form id="formulario-pedido" action="#" method="post">
+                        <fieldset>
+                        <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
+                    
+                        <div class="col-auto mb-2">
+                            <label  for="nombre">Nombre</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
+                                <input pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" type="text" class="nombre form-control mb-2 text-center" required id="nombre" placeholder="Ingrese su Nombre">
+                                </div>                               
+                        </div>
+                    
+                        <div class="form-group has-feedback col-auto mb-2">
+                            <label for="">Apellido</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="fa-solid fa-user hvr-icon form-control-feedback"></i>
+                                <input pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" type="text"  class="form-control mb-2 text-center" required id="apellido" placeholder="Ingrese su Apellido">
+                                
+                            </div>                                        
+                        </div>
+                    
+                        <div class="col-auto mb-2">
+                            <label>Seleccione el tipo de Telefono</label>
+                                <div>
+                                    <label>Fijo</label>
+                                    <input  type="radio" name="telefono-seleccionado" id="fijo" onclick="mostrarInputFijo()">
+
+                                    <label>Celular</label>
+                                    <input type="radio" name="telefono-seleccionado" id="celular" onclick="mostrarInputCelular()">
+                                        
+
+                                </div>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="fa-solid fa-phone form-control-feedback hvr-icon inactivo"></i>
+                                    <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-fijo" placeholder="Ingrese su telefono fijo">
+                                </div>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-phone form-control-feedback hvr-icon inactivo"></i>
+                                    <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-celular" placeholder="Ingrese su telefono celular">
+                                </div>
+                        </div>
+                    
+                        <div class="col-auto mb-2">
+                            <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                            <input class="form-control mb-2" type="date" id="fechanacimiento" required>
+                        </div>
+                    
+                        <div class="col-auto mb-2">
+                            <label for="correo">Mail</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                            <i class="fa-regular fa-envelope form-control-feedback hvr-icon"></i>
+                            <input class="form-control mb-2 text-center" type="email" id="correo" required placeholder="Ingrese su Mail">
+                            </div>
+                        </div>
+                    
+                        <fieldset>
+                            <legend>Domicilio</legend>
+                            <div class="col-auto">
+                                <label>Calle</label><br>
+                               <div class="hvr-icon-pulse form-group has-feedback">
+                                 <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
+                                 <input class="form-control mb-2 text-center" list="lista-calle" placeholder="Ingrese el nombre de la calle">
+                                     <datalist id="lista-calle">
+                                         <option value="1 de Mayo"></option>
+                                         <option value="15 de Noviembre"></option>
+                                         <option value="9 de Julio"></option>
+                                     </datalist>
+                               </div>
+                            </div>
+                            <div class="col-auto">
+                                <label for="numero-calle">Numero de Calle</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-arrow-up-9-1 form-control-feedback"></i>
+                                    <input class="form-control mb-2 text-center" type="number" name="numero-calle" id="numero-calle" placeholder="Ingrese el numero de calle"><br>
+                                </div> 
+                           </div>
+                            
+                            <div class="col-auto">
+                                <label>Departamento</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                    <input class="form-control mb-2 text-center" list="lista-departamento" placeholder="Departamento">
+                                        <datalist id="lista-departamento">
+                                            <option value="ANCASTI"></option>
+                                            <option value="AMBATO"></option>
+                                            <option value="ANDALGALA"></option>
+                                            <option value="POMAN"></option>
+                                        </datalist>
+                                </div>
+                            </div>
+                            
+                            <div class="col-auto">
+                                <label for="zona-domicilicio">Zona</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                <select class="form-control mb-2 text-center" name="zona-domicilio" id="zona-domicilicio">
+                                    <option value="" selected>Seleccione</option>
+                                    <option value="1">Norte</option>
+                                    <option value="2">Sur</option>
+                                    <option value="3">Este</option>
+                                    <option value="4">Oeste</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="col-auto">
+                                <label>Localidad</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                <input class="form-control mb-2 text-center" list="lista-localidad" placeholder="Localidad">
+                                    <datalist id="lista-localidad">
+                                        <option value="CAPITAL-S.F.DEL VALLE DE CATAMARCA"></option>
+                                        <option value="BANDA DE VARELA- CAPITAL"></option>
+                                        <option value="LA CALERA "></option>
+                                    </datalist>
+                                </div>
+                            </div>
+                    
+                            <div class="col-auto">
+                                <label>Barrios</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                <input class="form-control mb-2 text-center" list="lista-barrio" placeholder="Barrio">
+                                    <datalist id="lista-barrio">
+                                        <option value="10 VIVIENDA"></option>
+                                        <option value="11 DE MAYO"></option>
+                                        <option value="16 DE AGOSTO"></option>
+                                    </datalist>
+                                </div>
+                            </div>
+                    
+                        </fieldset>
+                     
+                 </fieldset>
+                 <div class="col-auto text-center">
+                    <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
+                    <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
+                </div>
+             </form>
+       </div>
+     </div> 
+   </div>     
+</section>
+    <script src="{% static 'js/validar.js' %}"></script>
+    <br>
+{% endblock contenido %}  
