@@ -1,24 +1,31 @@
 from ast import pattern
 import email
+from re import A
 from tkinter import Widget
 from xml.dom.minidom import AttributeList
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import NumberInput
+from django.forms import NumberInput, TextInput
 
 from .models import Persona
 
 class PersonaForm(forms.ModelForm):
+    numero = forms.CharField()
+    tipo_telefono = forms.CharField()
     class Meta:
         model = Persona
-        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento','telefono', 'email','domicilio')
+        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','numero','domicilio')
     
-    widgets = {
-    'cuil': NumberInput(attrs={'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"nombre form-control mb-2 text-center" , 'id':"nombre", 'placeholder':"Ingrese su Nombre"})
-    }
-    
+        widgets = {
+            'cuil': forms.NumberInput(attrs={'name':"cuil" , 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"cuil", 'placeholder':"Ingrese su Cuil"}),
+            'nombre': forms.TextInput(attrs={'name':"nombre" ,'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"nombre form-control mb-2 text-center" , 'id':"nombre", 'placeholder':"Ingrese su Nombre"}),
+            'apellido': forms.TextInput(attrs={'name':"apellido" ,'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"form-control mb-2 text-center" , 'id':"apellidoi", 'placeholder':"Ingrese su Apellido"}),
+            'email': forms.EmailInput(attrs={'class':"form-control mb-2 text-center" , 'type':"email", 'id':"correo",'placeholder':"Ingrese su Mail"}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':"form-control mb-2" ,'type':"date" ,'id':"fechanacimiento"})
 
+        }
 
+        
 
 """
 class ProgramaForm(forms.ModelForm):

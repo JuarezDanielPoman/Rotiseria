@@ -15,6 +15,8 @@ def creacion_cliente(request):
         cliente_form = PersonaForm(request.POST)
         if cliente_form.is_valid():
             nuevo_cliente = cliente_form.save(commit=True)
+            id=id
+
     else:
         cliente_form = PersonaForm()    
     return render(request,'Usuario/RegistroDeClientes.html',{'form': cliente_form})
