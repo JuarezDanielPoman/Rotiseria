@@ -13,11 +13,18 @@
                         {{form.errors}}
                         
                         {{form.numero}}
-                        {{form.tipo_telefono}}
+                        {{form.telefono}}
                         {{form.numero_calle}}
                         {{form.nombre_calle}}
                         {{form.nombre_barrio}}
                         {{form.descripcion_zona}}
+
+                        <!-- {% for field in form %}
+                         <div class="campo">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        </div><br>
+                         {% endfor %} -->
                         <div class="col-auto mb-2">
                             <label  for="cuil">Cuil</label><br>
                                 <div class="hvr-icon-pulse form-group has-feedback">

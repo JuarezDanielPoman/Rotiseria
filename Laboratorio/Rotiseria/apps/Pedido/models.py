@@ -30,6 +30,8 @@ class Especialidad(models.Model):
     def __str__(self):
         texto = "{0}"
         return texto.format(self.descripcion_especialidad)
+    class Meta:
+        verbose_name = "Especialidade"
 
 class Plato(models.Model):
     codigo_plato = models.AutoField(primary_key=True)
