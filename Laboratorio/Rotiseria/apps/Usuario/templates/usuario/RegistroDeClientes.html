@@ -11,6 +11,13 @@
                         <fieldset>
                         <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
                         {{form.errors}}
+                        
+                        {{form.numero}}
+                        {{form.tipo_telefono}}
+                        {{form.numero_calle}}
+                        {{form.nombre_calle}}
+                        {{form.nombre_barrio}}
+                        {{form.descripcion_zona}}
                         <div class="col-auto mb-2">
                             <label  for="cuil">Cuil</label><br>
                                 <div class="hvr-icon-pulse form-group has-feedback">
@@ -41,28 +48,7 @@
                             {{form.fecha_nacimiento}}
                         </div>
 
-                        <div class="col-auto mb-2">
-                            <label>Seleccione el tipo de Telefono</label>
-                                <div>
-                                    <label>Fijo</label>
-                                    <input  type="radio" name="telefono-seleccionado" id="fijo" onclick="mostrarInputFijo()">
-
-                                    <label>Celular</label>
-                                    <input type="radio" name="telefono-seleccionado" id="celular" onclick="mostrarInputCelular()">
-                                        
-
-                                </div>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="fa-solid fa-phone form-control-feedback hvr-icon inactivo"></i>
-                                    <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-fijo" placeholder="Ingrese su telefono fijo">
-                                </div>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-phone form-control-feedback hvr-icon inactivo"></i>
-                                    <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-celular" placeholder="Ingrese su telefono celular">
-                                </div>
-                        </div>
-                        {{form.numero}}
-                        {{form.tipo_telefono}}
+                        
 
 
                         <div class="col-auto mb-2">
@@ -73,58 +59,7 @@
                         </div>
                         </div>
                     
-                        <fieldset>
-                            <legend>Domicilio</legend>
-
-                            <div class="col-auto">
-                                <label for="numero-calle">Numero de Calle</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-arrow-up-9-1 form-control-feedback"></i>
-                                    <input class="form-control mb-2 text-center" type="number" name="numero-calle" id="numero-calle" placeholder="Ingrese el numero de calle"><br>
-                                </div> 
-                           </div>
-
-                            <div class="col-auto">
-                                <label>Calle</label><br>
-                               <div class="hvr-icon-pulse form-group has-feedback">
-                                 <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
-                                 <input class="form-control mb-2 text-center" list="lista-calle" placeholder="Ingrese el nombre de la calle">
-                                     <datalist id="lista-calle">
-                                         <option value="1 de Mayo"></option>
-                                         <option value="15 de Noviembre"></option>
-                                         <option value="9 de Julio"></option>
-                                     </datalist>
-                               </div>
-                            </div>
-                            
-                            <div class="col-auto">
-                                <label>Barrios</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                <input class="form-control mb-2 text-center" list="lista-barrio" placeholder="Barrio">
-                                    <datalist id="lista-barrio">
-                                        <option value="10 VIVIENDA"></option>
-                                        <option value="11 DE MAYO"></option>
-                                        <option value="16 DE AGOSTO"></option>
-                                    </datalist>
-                                </div>
-                            </div>
-                            
-                            <div class="col-auto">
-                                <label for="zona-domicilicio">Zona</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                <select class="form-control mb-2 text-center" name="zona-domicilio" id="zona-domicilicio">
-                                    <option value="" selected>Seleccione</option>
-                                    <option value="1">Norte</option>
-                                    <option value="2">Sur</option>
-                                    <option value="3">Este</option>
-                                    <option value="4">Oeste</option>
-                                </select>
-                                </div>
-                            </div>
-
-                        </fieldset>
+                        
                      
                  </fieldset>
                  <div class="col-auto text-center">

@@ -1,5 +1,6 @@
 from ast import pattern
 import email
+from email.policy import default
 from re import A
 from tkinter import Widget
 from xml.dom.minidom import AttributeList
@@ -7,14 +8,18 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import NumberInput, TextInput
 
-from .models import Persona
+from .models import Domicilio, Persona
 
 class PersonaForm(forms.ModelForm):
     numero = forms.CharField()
     tipo_telefono = forms.CharField()
+    nombre_calle = forms.CharField()
+    numero_calle = forms.IntegerField()
+    nombre_barrio = forms.CharField()
+    descripcion_zona = forms.CharField()
     class Meta:
         model = Persona
-        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','numero','domicilio')
+        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','numero','numero_calle','nombre_calle','nombre_barrio','descripcion_zona')
     
         widgets = {
             'cuil': forms.NumberInput(attrs={'name':"cuil" , 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"cuil", 'placeholder':"Ingrese su Cuil"}),
@@ -22,10 +27,23 @@ class PersonaForm(forms.ModelForm):
             'apellido': forms.TextInput(attrs={'name':"apellido" ,'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"form-control mb-2 text-center" , 'id':"apellidoi", 'placeholder':"Ingrese su Apellido"}),
             'email': forms.EmailInput(attrs={'class':"form-control mb-2 text-center" , 'type':"email", 'id':"correo",'placeholder':"Ingrese su Mail"}),
             'fecha_nacimiento': forms.DateInput(attrs={'class':"form-control mb-2" ,'type':"date" ,'id':"fechanacimiento"})
-
         }
 
-        
+        def save(self, commit=True):
+            Domicilio, created = Domicilio.objects.get_or_create(
+            name = self.cleaned_data['Domicilio']
+        )
+            self.cleaned_data['Domicilio'] = Domicilio.id
+            return super(PersonaForm, self).save(commit)
+
+        def save(self, commit=True):
+            ZonaDomicilio, created = ZonaDomicilio.objects.get_or_create(
+            name = self.cleaned_data['ZonaDomicilio']
+        )
+            self.cleaned_data['ZonaDomicilio'] = ZonaDomicilio.id
+            return super(PersonaForm, self).save(commit)
+
+    
 
 """
 class ProgramaForm(forms.ModelForm):

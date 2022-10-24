@@ -44,7 +44,7 @@ class Persona(models.Model):
     apellido = models.CharField(max_length=200, blank= True)
     fecha_nacimiento = models.DateField(blank= True)
     email = models.CharField(max_length=300,blank= True)
-    domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE)
+    domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE, default=None)
     telefono = models.ForeignKey(Telefono, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
