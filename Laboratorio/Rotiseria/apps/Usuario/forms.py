@@ -1,6 +1,7 @@
 from ast import pattern
 import email
 from email.policy import default
+from multiprocessing import context
 from re import A
 from tkinter import Widget
 from xml.dom.minidom import AttributeList
@@ -9,27 +10,22 @@ from django.core.exceptions import ValidationError
 from django.forms import NumberInput, TextInput
 from .models import Domicilio, Persona,Telefono,ZonaDomicilio
 
-class DomicilioForm(forms.ModelForm):
-    cuil = forms.CharField(widget=forms.TextInput(attrs={'name':"cuil" ,'required':True, 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"cuil", 'placeholder':"Ingrese su Cuil"}))
-    nombre = forms.CharField(widget=forms.TextInput(attrs={'name':"nombre" ,'required':True,'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"nombre form-control mb-2 text-center" , 'id':"nombre", 'placeholder':"Ingrese su Nombre"}))
-    apellido = forms.CharField(widget=forms.TextInput(attrs={'name':"apellido" ,'required':True,'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"form-control mb-2 text-center" , 'id':"apellidoi", 'placeholder':"Ingrese su Apellido"}))
-    fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'class':"form-control mb-2",'required':True ,'type':"date" ,'id':"fechanacimiento"}))
-    email = forms.CharField(widget=forms.EmailInput(attrs={'class':"form-control mb-2 text-center" ,'required':True, 'type':"email", 'id':"correo",'placeholder':"Ingrese su Mail"}),)
-    telefono = forms.CharField()
-    descripcion_zona = forms.CharField()    
+class DomicilioForm(forms.ModelForm):   
     class Meta:
         model = Domicilio
-        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','numero_calle','nombre_calle','nombre_barrio','descripcion_zona')
+        fields = ('numero_calle','nombre_calle','nombre_barrio')
+        prefix = 'domicilio'
 
 
-"""
+
 
 class PersonaForm(forms.ModelForm):
     
     class Meta:
         model = Persona
         fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','domicilio','telefono')
-    
+        prefix = 'persona'
+
         widgets = {
             'cuil': forms.NumberInput(attrs={'name':"cuil" , 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"cuil", 'placeholder':"Ingrese su Cuil"}),
             'nombre': forms.TextInput(attrs={'name':"nombre" ,'pattern':"[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" , 'type':"text" , 'class':"nombre form-control mb-2 text-center" , 'id':"nombre", 'placeholder':"Ingrese su Nombre"}),
@@ -38,12 +34,19 @@ class PersonaForm(forms.ModelForm):
             'fecha_nacimiento': forms.DateInput(attrs={'class':"form-control mb-2" ,'type':"date" ,'id':"fechanacimiento"})
         }
 
-        """
+        
 
-class Telefono(forms.ModelForm):
+class TelefonoForm(forms.ModelForm):
     class Meta:
         model = Telefono
         fields = ('tipo_telefono','numero')
+        prefix = 'telefono'
+
+class ZonaDomicilioForm(forms.ModelForm):
+    class Meta:
+        model = ZonaDomicilio
+        fields = ('descripcion_zona',)
+        prefix = 'zona'
 
 
 

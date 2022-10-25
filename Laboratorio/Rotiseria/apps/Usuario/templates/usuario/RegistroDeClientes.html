@@ -7,17 +7,20 @@
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
                 <!--<div class="abs-center">-->
-                <form id="formulario-pedido" action="#" method="post">
+                <form id="formulario-pedido" action="#" method="POST">
                         <fieldset>
                         <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
                         {{form.errors}}
-                        
+                        <!--                         
                         {{form.numero}}
                         {{form.telefono}}
                         {{form.numero_calle}}
                         {{form.nombre_calle}}
-                        {{form.nombre_barrio}}
-                        {{form.descripcion_zona}}
+                        {{form.nombre_barrio}} -->
+                        {{domicilio_form.as_p}}
+                        {{zona_form.as_p}}
+
+                        {{telefono_form.as_p}}
 
                         <!-- {% for field in form %}
                          <div class="campo">
@@ -29,14 +32,14 @@
                             <label  for="cuil">Cuil</label><br>
                                 <div class="hvr-icon-pulse form-group has-feedback">
                                     <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
-                                {{form.cuil}}  
+                                {{persona_form.cuil}}  
                         </div>
 
                         <div class="col-auto mb-2">
                             <label  for="nombre">Nombre</label><br>
                                 <div class="hvr-icon-pulse form-group has-feedback">
                                     <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
-                                {{form.nombre}}
+                                {{persona_form.nombre}}
  
                                
                         </div>
@@ -45,14 +48,14 @@
                             <label for="">Apellido</label><br>
                             <div class="hvr-icon-pulse form-group has-feedback">
                                 <i class="fa-solid fa-user hvr-icon form-control-feedback"></i>
-                                {{form.apellido}}
+                                {{persona_form.apellido}}
                                 
                             </div>                                        
                         </div>
 
                         <div class="col-auto mb-2">
                             <label for="fecha-nacimiento">Fecha de nacimiento</label>
-                            {{form.fecha_nacimiento}}
+                            {{persona_form.fecha_nacimiento}}
                         </div>
 
                         
@@ -62,7 +65,7 @@
                             <label for="correo">Mail</label><br>
                             <div class="hvr-icon-pulse form-group has-feedback">
                             <i class="fa-regular fa-envelope form-control-feedback hvr-icon"></i>
-                            {{form.email}}
+                            {{persona_form.email}}
                         </div>
                         </div>
                     
@@ -70,6 +73,7 @@
                      
                  </fieldset>
                  <div class="col-auto text-center">
+                    
                     {% csrf_token %}
                     <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
                     <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
