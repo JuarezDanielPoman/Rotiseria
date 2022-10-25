@@ -7,10 +7,17 @@
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
                 <!--<div class="abs-center">-->
-                <form id="formulario-pedido" action="#" method="POST">
+                <form id="formulario-pedido" enctype="multipart/form-data" method="post">
                         <fieldset>
                         <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
+                        
                         {{form.errors}}
+                        {% csrf_token %}
+                        {{domicilio_form.errors}}
+                        {{zona_form.errors}}
+                        {{telefono_form.errors}}
+                        {{persona_form.errors}}
+
                         <!--                         
                         {{form.numero}}
                         {{form.telefono}}
@@ -74,7 +81,6 @@
                  </fieldset>
                  <div class="col-auto text-center">
                     
-                    {% csrf_token %}
                     <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
                     <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
                 </div>

@@ -23,7 +23,7 @@ class PersonaForm(forms.ModelForm):
     
     class Meta:
         model = Persona
-        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','domicilio','telefono')
+        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email')
         prefix = 'persona'
 
         widgets = {
