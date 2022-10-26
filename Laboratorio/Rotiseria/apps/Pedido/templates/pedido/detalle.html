@@ -1,8 +1,7 @@
 {% extends "base/base.html" %}
 {% block titulo %}Detalle de Persona{% endblock %}
 {% block contenido %}
-
-<h1 class="text-center" style="color: black;">Persona: {{ persona.nombre }}</h1>
+<h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
 {% if messages %}
     {% for message in messages %}
         {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
@@ -11,24 +10,24 @@
 <div class="d-flex justify-content-center">
     <div class="card col-sm-7 p-3 formulario"> 
         <div class="mb-2">
-<p><strong>Persona ingresada</strong></p>
+<p><strong>Plato ingresado</strong></p>
 <ul>
-  {% for persona in persona.all %}
-    <li>{{ persona }}</li>
+  {% for plato in plato.all %}
+    <li>{{ plato }}</li>
   {% endfor %}
 </ul>
-<p><strong>Nombre : </strong>{{ persona.nombre}}</p>
-<p><strong>Apellido:</strong> {{ persona.apellido}}</p>
-<p><strong>Fecha de Nacimiento:</strong>{{ persona.fecha_nacimiento}}</p>
-<p><strong>Email:</strong>{{ persona.email}}</p>
-<p><strong>Domicilio:</strong>{{ persona.domicilio}}</p>
-<p><strong>Telefono :</strong>{{ persona.telefono}}</p>
+<p><strong>Nombre Plato: </strong>{{ plato.nombre_plato}}</p>
+<p><strong>Precio de plato:</strong> {{ plato.precio_plato}}</p>
+<p><strong>Vigencia Plato:</strong>{{ plato.vigencia_plato}}</p>
+<p><strong>Estado de promocion:</strong>{{ plato.estado_promocion}}</p>
+<p><strong>vigencia Plato:</strong>{{ plato.tipo_plato}}</p>
+<p><strong>vigencia Plato:</strong>{{ plato.especialidad}}</p>
 
 
 <form action="#" method="POST">
    
   {% csrf_token %}
-  <input type="hidden" name="id_persona" value="#">
+  <input type="hidden" name="id_plato" value="#">
   <button class="btn btn-Secondary"><a href="#">Editar</a></button>
   <input class="btn btn-Secondary" type="submit" value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
 </form>

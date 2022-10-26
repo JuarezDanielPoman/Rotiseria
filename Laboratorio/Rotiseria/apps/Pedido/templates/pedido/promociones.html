@@ -42,9 +42,10 @@
             <!-- Tarjetas de promociones -->
 
             <!-- fila -->
-            <div class="tarjeta-rest hvr-glow">
-                {% for p in platos %}
-                    <div class="wrap-text_tarjeta-rest">
+                <div class="tarjeta-rest hvr-glow ">
+
+                    <div class="wrap-text_tarjeta-rest img-tarjeta">
+                        {% for p in platos %}
                         <h3 class="titulo_tarjeta text-center">{{p.nombre_plato}} </h3>
                         <p>¡Hecha para que la disfrutes con mucho sabor!
                             <div class="cta-wrap_tarjeta-rest">
@@ -57,8 +58,8 @@
                             <a class="btn btn-success hvr-grow agregar-carrito" data-id="{{p.codigo_plato}}"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
                             <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
                         </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
                 
             </div>
         </section>

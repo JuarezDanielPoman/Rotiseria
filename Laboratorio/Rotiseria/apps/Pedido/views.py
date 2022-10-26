@@ -1,6 +1,6 @@
-from audioop import reverse
-from pyexpat.errors import messages
-from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
 
 from apps.Pedido.forms import PlatoForm
 from apps.Pedido.models import Plato
@@ -13,8 +13,8 @@ def creacion_menu(request):
         if plato_form.is_valid():
             p=plato_form.save(commit=True)
             messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p))
-            return redirect(reverse('Usuario:detalle', args={p.id}))
+            'Se ha agregado correctamente el plato {}'.format(p))
+            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_plato}))
     else:
         plato_form = PlatoForm(prefix='menu')
     return render(request,'Pedido/RegistroDeMenu.html',{'plato_form': plato_form})
@@ -22,3 +22,11 @@ def creacion_menu(request):
 def promociones(request):
     lista_platos = Plato.objects.all()
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
+
+
+
+def menu_detalle(request, pk):
+    plato = get_object_or_404(Plato, pk=pk)
+    return render(request,
+                  'Pedido/detalle.html',
+                  {'plato': plato})
