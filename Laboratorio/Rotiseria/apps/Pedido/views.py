@@ -9,7 +9,7 @@ from apps.Pedido.forms import PlatoForm
 def creacion_menu(request):
     if (request.method == 'POST'):
         plato_form = PlatoForm(request.POST, prefix='menu')
-        if PlatoForm.is_valid():
+        if plato_form.is_valid():
             p=plato_form.save(commit=True)
             messages.success(request,
             'Se ha agregado correctamente la persona {}'.format(p))
