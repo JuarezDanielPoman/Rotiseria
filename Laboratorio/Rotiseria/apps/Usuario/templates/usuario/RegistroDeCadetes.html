@@ -1,0 +1,149 @@
+{%  extends 'base/base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+    <div class="d-flex justify-content-center">
+        <div class="card col-sm-7 p-3 formulario"> 
+            <div class="mb-2">
+                <!--<div class="abs-center">-->
+                <form id="formulario-pedido" enctype="multipart/form-data" method="post">
+                        <fieldset>
+                        <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
+                        
+                        {{form.errors}}
+                        {% csrf_token %}
+                        {{domicilio_form.errors}}
+                        {{zona_form.errors}}
+                        {{telefono_form.errors}}
+                        {{persona_form.errors}}
+
+                        <!--                         
+                        {{form.numero}}
+                        {{form.telefono}}
+                        {{form.numero_calle}}
+                        {{form.nombre_calle}}
+                        {{form.nombre_barrio}} -->
+                        
+
+                        <!-- {% for field in form %}
+                         <div class="campo">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        </div><br>
+                         {% endfor %} -->
+                        <div class="col-auto mb-2">
+                            <label  for="cuil">Cuil</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
+                                {{persona_form.cuil}}  
+                        </div>
+
+                        <div class="col-auto mb-2">
+                            <label  for="nombre">Nombre</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
+                                {{persona_form.nombre}}
+ 
+                               
+                        </div>
+                    
+                        <div class="form-group has-feedback col-auto mb-2">
+                            <label for="">Apellido</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="fa-solid fa-user hvr-icon form-control-feedback"></i>
+                                {{persona_form.apellido}}
+                                
+                            </div>                                        
+                        </div>
+
+                        <div class="col-auto mb-2">
+                            <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                            {{persona_form.fecha_nacimiento}}
+                        </div>
+
+
+                        <div class="col-auto mb-2">
+                            <label for="correo">Mail</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                            <i class="fa-regular fa-envelope form-control-feedback hvr-icon"></i>
+                            {{persona_form.email}}
+                        </div>
+                        </div>
+                        {{telefono_form.as_p}}
+                        <fieldset>
+                            <legend>Domicilio</legend>
+                            
+                            <div class="col-auto">
+                                <label for="numero-calle">Numero de Calle</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-arrow-up-9-1 form-control-feedback"></i>
+                                    {{domicilio_form.numero_calle}}
+                                </div> 
+                           </div>
+
+                            <div class="col-auto">
+                                <label>Calle</label><br>
+                               <div class="hvr-icon-pulse form-group has-feedback">
+                                 <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
+                                 {{domicilio_form.nombre_calle}}
+                            </div>
+
+                            <div class="col-auto">
+                                <label>Barrios</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                    {{domicilio_form.nombre_barrio}}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <label for="zona-domicilicio">Zona</label><br>
+                                <div class="hvr-icon-pulse form-group has-feedback">
+                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                    {{zona_form.descripcion_zona}}
+                                </div>
+                            </div>
+                        
+                       
+
+                    </fieldset>
+                    <fieldset><legend>Cadete</legend>
+                        <div class="col-auto">
+                            <label for="vig-carnet">Vigencia del carnet</label>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-regular fa-id-card form-control-feedback"></i>
+                                {{persona_form.fecha_vigencia_carnet}}
+                            </div>
+                        </div>
+                        
+                        <div class="col-auto">
+                        <label for="num-patente">Numero de la patente</label>
+                        <div class="hvr-icon-pulse form-group has-feedback">
+                            <i class="hvr-icon fa-regular fa-id-card form-control-feedback"></i>
+                            {{persona_form.numero_patente}}
+                            
+                        </div>    
+                    </div>
+                
+                        <div class="col-auto">
+                        <label for="fecha-trab">Fecha inicio al trabajo</label>
+                        <div class="hvr-icon-pulse form-group has-feedback">
+                            <i class="hvr-icon fa-regular fa-id-card form-control-feedback"></i>
+                            {{persona_form.fecha_ingreso}}
+                            </div></div>
+                        <br> 
+                    </fieldset>
+                 </fieldset>
+                 <div class="col-auto text-center">
+                    
+                    <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
+                    <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
+                </div>
+             </form>
+       </div>
+     </div> 
+   </div>     
+</section>
+    <script src="{% static 'js/validar.js' %}"></script>
+    <br>
+{% endblock contenido %}  
