@@ -9,6 +9,6 @@ app_name='Usuario'
 urlpatterns=[
     path('RegistroDeClientes',creacion_cliente,name='RegistroDeClientes'),
     path('RegistroDeCadetes',creacion_cadete,name='RegistroDeCadetes'),
-    path('Usuario/detalle.html',persona_detalle,name='detalle'),
+    path('<int:pk>/', persona_detalle, name='persona_detalle'),
 
 ]

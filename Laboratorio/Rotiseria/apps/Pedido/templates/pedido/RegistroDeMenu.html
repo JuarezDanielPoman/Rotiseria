@@ -1,0 +1,75 @@
+{%  extends 'base/base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+
+<section>
+    <div class="d-flex justify-content-center">
+        <div class="card col-sm-7 p-3 formulario"> 
+            <div class="mb-2">
+        <form action="#" method="POST">
+            <fieldset>
+                <legend class="text-center">INGRESE LOS DATOS</legend>
+            
+              <div class="col-auto mb-2">
+                  <label for="plato">Tipo de menu</label>
+                  <select id="plato" class="form-control mb-2 text-center" required name="plato">
+                      <option value="" selected>Seleccione</option>
+                      <option value="1">Entrada</option> 
+                      <option value="2">Plato Principal</option> 
+                      <option value="3">Postre</option> 
+                  </select><br/>
+                
+              </div>
+              <div class="col-auto ">
+        
+                <label for="codMenu">Codigo del Menu</label><br>
+                <input type="number" class="form-control mb-2 text-center" required placeholder="Ingrese Codigo" id="codMenu" name="codMenu"><br>
+            </div>
+                <div class="col-auto ">
+            
+                <label for="nomMenu">Nombre del Menu</label><br>
+                <input type="text" class="form-control mb-2 text-center" required placeholder="Ingrese Nombre" id="nomMenu" name="nomMenu"><br>
+            </div>
+                <div class="col-auto ">
+            
+                <label for="decripMenu">Descripcion del Menu</label><br>
+                <input type="text" class="form-control mb-2 text-center" required placeholder="Ingrese descripcion" id="decripMenu" name="decripMenu"><br>
+            </div>
+                <div class="col-auto ">
+            
+                <label for="precio">Precio de plato</label><br> 
+                <!-- Agregar tipo precio a la BASE DE DATOS (Tabla MENU) -->
+                <input type="number" class="form-control mb-2 text-center" required placeholder="Ingrese precio" id="precio" name="precio"><br>
+            </div>
+                <div class="col-auto">
+            
+                <label for="vigencia">Vigencia del menu </label>&nbsp;Si
+                <input type="radio" class="text-center" required id="vigencia" name="vigencia">&nbsp;No
+                <input type="radio" class="text-center" required id="vigenciano" name="vigencia"><br>
+            </div>
+                <div class="col-auto ">
+            
+                <label for="tipoPlato">Tipo de plato</label>
+                <select id="tipoPlato" class="form-control mb-2 text-center" required name="tipoPlato">
+                    <option value="" selected>Seleccione</option>
+                    <option value="1">Normal</option> 
+                    <option value="2">Vegetariano</option> 
+                    <option value="3" >Celiaco</option> 
+                    <option value="4">Diabetico</option> 
+                </select><br/><br/>
+            </div>
+            </fieldset>
+            <div class="col-auto text-center">
+                <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
+                <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
+            </div>
+        </form>
+    </div>    
+    </div>  
+</div>    
+
+</section>
+
+{% endblock contenido %}  

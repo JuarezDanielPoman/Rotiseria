@@ -37,10 +37,9 @@ def creacion_cliente(request):
             p.telefono_id=t.id
             p.save()
 
-            print(request.post['persona'])
             messages.success(request,
             'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
-            return redirect(reverse('Usuario:detalle', args={p.id}))
+            return redirect(reverse('Usuario:persona_detalle', args={p.id}))
     else:
         domicilio_form = DomicilioForm(prefix='domicilio')
         persona_form = PersonaForm(prefix='persona')
@@ -49,12 +48,6 @@ def creacion_cliente(request):
     return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
  
 
-
-def persona_detalle(request, pk):
-    persona = get_object_or_404(Persona, pk=pk)
-    return render(request,
-                  'Usuario/detalle.html',
-                  {'persona': persona})
 
 def creacion_cadete(request):
     if (request.method == 'POST'):
@@ -88,3 +81,9 @@ def creacion_cadete(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
  
+
+def persona_detalle(request, pk):
+    persona = get_object_or_404(Persona, pk=pk)
+    return render(request,
+                  'Usuario/detalle.html',
+                  {'persona': persona})
