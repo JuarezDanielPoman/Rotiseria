@@ -16,7 +16,12 @@ class DomicilioForm(forms.ModelForm):
         fields = ('numero_calle','nombre_calle','nombre_barrio')
         prefix = 'domicilio'
 
+        widgets = {
+        'numero_calle': forms.NumberInput(attrs={'name':"numero_calle" , 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"numero_calle", 'placeholder':"Ingrese numero de calle"}),
+        'nombre_calle': forms.TextInput(attrs={'name':"nombre_calle" , 'type':"text" , 'class':"form-control mb-2 text-center" , 'id':"nombre_calle", 'placeholder':"Ingrese nombre de calle"}),
+        'nombre_barrio': forms.TextInput(attrs={'name':"nombre_barrio" , 'type':"text" , 'class':"form-control mb-2 text-center" , 'id':"nombre_barrio", 'placeholder':"Ingrese nombre de barrio"}),
 
+        }
 
 
 class PersonaForm(forms.ModelForm):
@@ -41,14 +46,20 @@ class TelefonoForm(forms.ModelForm):
         model = Telefono
         fields = ('tipo_telefono','numero')
         prefix = 'telefono'
+        widgets = {
+            'numero': forms.NumberInput(attrs={'name':"numero" , 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"numero", 'placeholder':"Ingrese su numero de telefono"}),
+            'tipo_telefono': forms.Select(attrs={'name':"tipo_telefono" , 'type':"number" , 'class':"form-control mb-2 text-center" , 'id':"tipo_telefono"}),
+        }
 
 class ZonaDomicilioForm(forms.ModelForm):
     class Meta:
         model = ZonaDomicilio
         fields = ('descripcion_zona',)
         prefix = 'zona'
-
-
+        op=[('norte','Norte'),('sur','Sur'),('este','Este'),('oeste','Oeste')]
+        widgets = {
+        'descripcion_zona': forms.Select(choices=op,attrs={'name':"descripcion_zona"  , 'type':"text" , 'class':"nombre form-control mb-2 text-center" , 'id':"descripcion_zona", 'placeholder':"Ingrese la zona"}),
+        }
 
 
 
