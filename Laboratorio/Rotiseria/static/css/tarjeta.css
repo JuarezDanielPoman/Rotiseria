@@ -23,13 +23,6 @@
     font-size:6vw
 }
 
-.titulo-presentacion{
-    /* font-family: 'Blaka Ink', cursive;*/
-    font-family: 'Permanent Marker', cursive;
-    /* font-size: 85px; */
-    font-size:2vw;
-    color:rgb(255, 0, 0);
-}
 .titulo-platos{
     font-family: 'Bungee Spice', cursive;
     font-family: 'Dancing Script', cursive;
@@ -59,13 +52,9 @@ a{
     display: flex;
     align-items: end;
     border: 2px solid rgb(7, 7, 7);
-    background: url(../assets/despensa.jpg) center;
-    background-size: cover;
 }
 
-.img-tarjeta{
-   display: none; /*es para que no se vea la img, xq ya enta de fondo*/
-}
+
 .titulo_tarjeta{
     color: #fff;
 }
@@ -117,6 +106,7 @@ a{
     border-radius:50%;
 }
 
+
 .botones-tarjeta .btn-success{
     /*BOTON AÑADIR AL CARRITO*/
     float: right;
@@ -128,6 +118,11 @@ a{
     text-decoration: none; /*decoración texto*/
     text-transform: uppercase; /*capitalización texto*/
     border-radius: 8px;/* bordes redondos */
+}
+
+.img-tarjeta{
+    background: url(../assets/despensa.jpg) center;
+    background-size: cover;
 }
 
 @media (max-width:1024px){

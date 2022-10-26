@@ -46,7 +46,7 @@ def creacion_cliente(request):
         telefono_form = TelefonoForm(prefix='telefono')
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
- 
+
 
 
 def creacion_cadete(request):
@@ -80,7 +80,7 @@ def creacion_cadete(request):
         telefono_form = TelefonoForm(prefix='telefono')
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
- 
+
 
 def persona_detalle(request, pk):
     persona = get_object_or_404(Persona, pk=pk)

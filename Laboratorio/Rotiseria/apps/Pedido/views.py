@@ -3,6 +3,7 @@ from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 
 from apps.Pedido.forms import PlatoForm
+from apps.Pedido.models import Plato
 
 # Create your views here.
 
@@ -17,4 +18,7 @@ def creacion_menu(request):
     else:
         plato_form = PlatoForm(prefix='menu')
     return render(request,'Pedido/RegistroDeMenu.html',{'plato_form': plato_form})
- 
+
+def promociones(request):
+    lista_platos = Plato.objects.all()
+    return render(request,'Pedido/promociones.html',{'platos': lista_platos})
