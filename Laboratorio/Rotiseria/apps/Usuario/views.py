@@ -38,7 +38,7 @@ def creacion_cliente(request):
             p.save()
 
             messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
+            'Se ha agregado correctamente la persona {}'.format(p.id))
             return redirect(reverse('Usuario:persona_detalle', args={p.id}))
     else:
         domicilio_form = DomicilioForm(prefix='domicilio')
@@ -87,3 +87,15 @@ def persona_detalle(request, pk):
     return render(request,
                   'Usuario/detalle.html',
                   {'persona': persona})
+
+
+def persona_delete(request):
+    if request.method == 'POST':
+        if 'id' in request.POST:
+            persona = get_object_or_404(Persona, pk=request.POST['id'])
+            print(persona)
+            persona.delete()
+            messages.success(request,
+            'Se ha eliminado la persona {}'.format(persona))
+    return render(request,
+                  'Usuario/detalle.html')

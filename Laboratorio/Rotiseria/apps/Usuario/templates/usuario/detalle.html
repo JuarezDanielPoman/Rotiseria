@@ -2,35 +2,34 @@
 {% block titulo %}Detalle de Persona{% endblock %}
 {% block contenido %}
 
-<h1 class="text-center" style="color: black;">Persona: {{ persona.nombre }}</h1>
-{% if messages %}
+<h1 class="text-center" style="color: black;">Persona: {{persona.messages}}
+   {{ persona.nombre }}</h1>
+
+<div class="d-flex justify-content-center">
+    <div class="card col-sm-7 p-3 formulario"> 
+        <div class="mb-2">
+          {% if messages %}
     {% for message in messages %}
         {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
     {% endfor %}
 {% endif %}
-<div class="d-flex justify-content-center">
-    <div class="card col-sm-7 p-3 formulario"> 
-        <div class="mb-2">
 <p><strong>Persona ingresada</strong></p>
-<ul>
-  {% for persona in persona.all %}
-    <li>{{ persona }}</li>
-  {% endfor %}
-</ul>
+<p>{{persona}}</p>
 <p><strong>Nombre : </strong>{{ persona.nombre}}</p>
 <p><strong>Apellido:</strong> {{ persona.apellido}}</p>
 <p><strong>Fecha de Nacimiento:</strong>{{ persona.fecha_nacimiento}}</p>
 <p><strong>Email:</strong>{{ persona.email}}</p>
 <p><strong>Domicilio:</strong>{{ persona.domicilio}}</p>
 <p><strong>Telefono :</strong>{{ persona.telefono}}</p>
+{{persona.id}} 
 
-
-<form action="#" method="POST">
-   
-  {% csrf_token %}
-  <input type="hidden" name="id_persona" value="#">
-  <button class="btn btn-Secondary"><a href="#">Editar</a></button>
-  <input class="btn btn-Secondary" type="submit" value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
+{{persona.messages}}
+{{messages}}
+<form action="{% url 'Usuario:persona_delete' %}" enctype="multipart/form-data" method="POST">
+  
+ {% csrf_token %}
+  <input type="hidden" name="id" value="{{ persona.id }}"> 
+  <input class="btn btn-primary mb-2" type="submit" name="Eliminar" value="Eliminar datos" />
 </form>
 </div>
     </div>
