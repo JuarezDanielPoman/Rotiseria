@@ -101,7 +101,7 @@ def persona_delete(request):
                   'Usuario/detalle.html')
 
 
-def programa_edit(request, pk):
+def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -123,14 +123,13 @@ def programa_edit(request, pk):
             p.telefono_id=t.id
             p.save()
 
-            print(request.post['persona'])
             messages.success(request,
             'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
-            return redirect(reverse('Usuario:detalle', args={p.id}))
+            return redirect(reverse('Usuario:persona_detalle', args={p.id}))
     else:
         domicilio_form = DomicilioForm(prefix='domicilio')
         persona_form = PersonaForm(prefix='persona')
         telefono_form = TelefonoForm(prefix='telefono')
         zona_form = ZonaDomicilioForm(prefix='zona')
-    return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
+    return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
