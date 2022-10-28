@@ -1,21 +1,13 @@
-{% extends "base/base.html" %}
-{% block titulo %}Home de Promociones{% endblock %}
+{% extends "pedido/promociones.html" %}
+{% block titulo %}Home{% endblock %}
 {% block contenido %}
 {% load static %}
 
-<div class="slider">
-    <ul>
-        <li><img src="{% static 'assets/1.png' %}" alt=""></li>
-        <li><img src="{% static 'assets/2.png' %}" alt=""></li>
-        <li><img src="{% static 'assets/3.png' %}" alt=""></li>
-        <li><img src="{% static 'assets/4.jpg' %}" alt=""></li>
-    </ul>
-</div>
-
-<div id="presentacion" class="jumbotron bg-jumbotron d-flex flex-column justify-content-center align-items-center text-white text-center">
+    <!-- Presentacion -->
+    <div id="presentacion" class="jumbotron bg-jumbotron d-flex flex-column justify-content-center align-items-center text-white text-center">
         
         <h1 class="display-3 text-capitalize w-70 titulo-promociones ">BIENVENIDOS AL MEJOR SABOR</h1>
-        <p class="lead w-75 titulo-presentacion ">Proba todas las delicias que tenemos para vos, en los diferentes rubros de comidas. Vegetariana, Celiaca, para Diabeticos y comidas en general. 
+        <p class="lead w-75 titulo-presentacion">Proba todas las delicias que tenemos para vos, en los diferentes rubros de comidas. Vegetariana, Celiaca, para Diabeticos y comidas en general. 
                     todo, todo lo que buscas lo encontra <a href="#">aqui</a>, en "EL BUEN GUSTO ROTISERIA".
                     ¡Hace tu pedido! y aprovecha todos los descuentos que tenemos para vos. &#128521 
                 </p>
@@ -23,24 +15,35 @@
         
         <div class="row">
             <div class="col-md-auto">
-                <a id="explorar" class="boton-explorar hvr-wobble-vertical" href="#menu-tarjeta" role="button">Explorar menu</a>
+                <a id="explorar" class="boton-explorar hvr-wobble-vertical" href="{% url 'Pedido:promociones' %}" role="button">Explorar menu</a>
                 <a class="boton-registrar hvr-pulse-grow" data-toggle="modal" data-target="#ventanaModalLogin" href="#" role="button">Ingresar</a>
             </div>
         </div>
-</div>
+    </div>
+    
+    
+    <!-- slaider -->
+    <div class="slider">
+        <ul>
+            <li><img src="{% static 'assets/1.png' %}" alt=""></li>
+            <li><img src="{% static 'assets/2.png' %}" alt=""></li>
+            <li><img src="{% static 'assets/3.png' %}" alt=""></li>
+            <li><img src="{% static 'assets/4.jpg' %}" alt=""></li>
+        </ul>
+    </div>
+
     <!-- Seccion de Platos  -->
     <div class="contenedor">
-        
         <section id="menu-tarjeta" style="background-image: url('../assets/fondocuerporotiseria.jpg'); background-size: 100%; padding: auto; margin: 0px;">
             
             <!-- Titulp de Seccion -->
-            <div class="text-center mb-3">
+            <!-- <div class="text-center mb-3">
                 <h2 class="hvr-grow-shadow titulo-promociones mb-2">PROMOCIONES</h2><br>
                 <h3 class="hvr-float-shadow titulo-platos">Platos del día</h3>
-            </div>
+            </div> -->
             
             <!-- Tarjetas de promociones -->
-            <div class="container mb-5 mt-3" id="lista-productos">
+            <!-- <div class="container mb-5 mt-3" id="lista-productos">
 
                 <div class="wrap column-4 columns mt-3">
     
@@ -191,9 +194,11 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> -->
         </section>
-        <!-- Jumbotron acerca de -->    
+    </div>
+    
+    <!-- Jumbotron acerca de -->    
     <div class="container mt-10">   
         <div class="jumbotron"id="acerca-de-roti" >
             <div class="row"> 
@@ -210,6 +215,7 @@
             </div>
         </div>
     </div>
+    
+    <a href="#fondo-pagina" id="boton-arriba"><i class="fa-solid fa-circle-up"></i></a>
 
-    </div>
 {% endblock %}

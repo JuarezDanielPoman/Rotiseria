@@ -14,8 +14,8 @@ function cargarEvento() {
     contenidoPrincipal.addEventListener('click', addProducto);
     contenedorTablaCarrito.addEventListener('click', eliminarProducto);
     vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
-    realizarPedidoBtn.addEventListener('click',procesarPedido)
-    tablaListaCompra.addEventListener('click',procesarPedido)
+    // realizarPedidoBtn.addEventListener('click',procesarPedido)
+    // tablaListaCompra.addEventListener('click',procesarPedido)
     //document.addEventListener('DOMContentLoaded',insertarElementosTablaPedidoCliente)
 }
 
@@ -128,18 +128,14 @@ function vaciarCarrito(e) {
 }
 
 function procesarPedido(e){
-    e.preventDefault()
 
     if (listacomprarProductos.length == 0) {
+        e.preventDefault()
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'El carrito esta vacio, debes agregar un producto',
         })
-    }else{
-
-        location.href="RegistroPedidoCliente.html"
-
     }
 }
 

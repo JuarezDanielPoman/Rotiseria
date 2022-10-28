@@ -76,10 +76,7 @@
 
                 <li class="menu__item"> <a href="#acerca-de-roti" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-circle-info"></i> Acerca de</a> </li>
                 <li class="menu__item"> <a href="#footer" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-phone"></i> Contacto</a> </li>
-                <li class="menu__item">
-                    
-                    <!-- <a id="carrito-menu" href="#" class="hvr-underline-from-center menu__link"><i class="hvr-icon fa-solid fa-cart-shopping"></i> Carrito</a>  -->
-                </li>
+                
                 <li class="nav-item dropdown" id="carrito-menu">
                     <!-- PUEDO UZARLO CON UNA IMAGEN -->
                     <img src="{% static 'assets/carrito.png' %}" class="nav-link dropdown-toggle img-fluid" height="70px" width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
@@ -89,22 +86,27 @@
                         aria-expanded="false"><i class="hvr-icon fa-solid fa-cart-shopping"></i> Carrito</a> -->
                     
                     <!-- CARRITO DE COMPRAS -->
-                    <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
-                        <table id="lista-carrito" class="table text-center">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-
-                        <a href="#" id="vaciar-carrito" class="btn btn-danger btn-block">Vaciar Carrito</a>
-                        <a href="#" id="procesar-pedido" class="btn btn-success btn-block">Realizar Pedido</a>
-                    </div>
+                    <form action="{% url 'Pedido:RegistroPedidoCliente' %}" method="post">{% csrf_token %}
+                        
+                        <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
+                            <table id="lista-carrito" class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+    
+                            <a href="#" id="vaciar-carrito" class="btn btn-danger btn-block">Vaciar Carrito</a>
+                            <!-- <a href="{% url 'Pedido:RegistroPedidoCliente' %}"  class="btn btn-success btn-block">Realizar Pedido</a> -->
+                            <button type="submit" class="btn btn-success btn-block">Realizar Pedido</button>
+                        </div>
+                    </form>
+                    
                 </li>
             </ul>
 
@@ -112,12 +114,13 @@
 
 
     </header>
+    
+    
     <section>
         {% block contenido %}
         {% endblock %}
     </section>
-    
-    
+
     <!-- Seccion Modal Ingredientes -->
     <section>
         <div class="modal" tabindex="-1" role="dialog" id="ventanaModalInfo">
@@ -189,7 +192,6 @@
         </div>
     </section>
 
-    <a href="#fondo-pagina" id="boton-arriba"><i class="fa-solid fa-circle-up"></i></a>
 
     <!-- Pie de página -->
     <footer class="bg-dark text-center text-white contacto mt-5" id="footer">

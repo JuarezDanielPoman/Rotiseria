@@ -1,5 +1,6 @@
 from audioop import reverse
 from pyexpat.errors import messages
+from urllib import request
 from django.shortcuts import redirect, render
 
 from apps.Pedido.forms import PlatoForm
@@ -22,3 +23,7 @@ def creacion_menu(request):
 def promociones(request):
     lista_platos = Plato.objects.all()
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
+
+def RegistroPedidoCliente(request):
+    lista_pedido = Plato.objects.all()
+    return render(request,'Pedido/RegistroPedidoCliente.html',{'pedido': lista_pedido})

@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block titulo %}{% endblock %}</title>
+    <!-- estilos al menu -->
+    <link rel="stylesheet" href="{% static 'css/estiloNav.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <!-- estilos generales -->
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    
+    <!-- Efecto a componentes -->
+    <link href="{% static 'css/hover.css' %}" rel="stylesheet" media="all">
+    
+    <!-- estilo a las tarjeta de menu -->
+    <link rel="stylesheet" href="{% static 'css/tarjeta.css' %}">
+    
+    <!-- iconos --cls
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> -->
+    
+
+    <!-- Tipo de letra -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- estilo iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body id="fondo-pagina">
+    <header>
+        <div class="p-5 text-center bg-image rounded-3 encabezado">
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white">
+                        <div id="logo">
+                            <img src="{% static 'assets/Logo.png' %}" alt="logo">
+                        </div>                        
+                        <h4 class="mb-3">Probá y disfrutá de la mejor comida de Catamarca.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <span class="nav-bar" id="btnMenu"><i class="fas fa-bars"></i> Menú</span>
+
+        <nav class="main-nav">
+
+            <ul class="menu" id="menu">
+                
+                <li class="menu__item"> <a href="../templates/Administrador.html" class="hvr-underline-from-center  menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-house"></i> Inicio</a> </li>
+                <li class="menu__item container-submenu"> 
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-person"></i> Clientes <i class="hvr-icon fa-solid fa-angle-down"></i></a>
+                    <ul class="submenu">
+                        <li id="cliente" class="menu__item"><a id="cliente" href="{% url 'Usuario:RegistroDeClientes' %}" class="hvr-icon-down menu__link">Registrar</a></li>
+
+                   </ul>
+                </li> 
+                <li class="menu__item container-submenu"> 
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-person-digging"></i> Empleados <i class="hvr-icon fa-solid fa-angle-down"></i></a>
+                    <ul class="submenu">
+                        <li id="cadete" class="menu__item"><a id="cadete" href="{% url 'Usuario:RegistroDeCadetes' %}" class="hvr-icon-down menu__link">Registrar</a></li>
+                        <li id="lista-empleado" class="menu__item"><a  href="#" class="hvr-icon-down menu__link">Listar</a></li>
+                   </ul>
+                </li>
+
+                <li class="menu__item container-submenu"> 
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-utensils"></i> Menus <i class="hvr-icon fa-solid fa-angle-down"></i></a>
+                    <ul class="submenu">
+                        <li id="menu" class="menu__item"><a id="menu" href="../templates/RegistroDeMenu.html" class="hvr-icon-down menu__link">Registrar</a></li>
+                        <li id="menu" class="menu__item"><a id="menu" href="../templates/ModificarMenu.html" class="hvr-icon-down menu__link">Modificar</a></li>
+                   </ul>
+                </li>
+                <li class="menu__item container-submenu"> 
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-file-pen"></i> Pedido <i class="hvr-icon fa-solid fa-angle-down"></i></a>
+                    <ul class="submenu">
+                        <li id="pedido" class="menu__item"><a href="../templates/RegistroDePedidos.html" class="hvr-icon-down menu__link">Registrar</a></li>
+                        <li id="lista-pedido" class="menu__item"><a href="../templates/ListaDePedidos.html" class="hvr-icon-down menu__link">Listar</a></li>
+                   </ul>
+                </li>                
+                <li class="menu__item container-submenu"> 
+                    <a href="../templates/Estadistica.html" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-chart-column"></i> Estadisticas</i></a>
+                </li>
+            </ul>
+
+        </nav>
+
+
+    </header>
+    
+    <section class="mt-5">
+        {% block contenido %}
+        {% endblock %}
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="bg-dark text-center text-white contacto mt-5" id="footer">
+        <!-- Grid container -->
+        <div class="container p-4">
+            
+            <div class="mb-4">
+                <h5>En esta WebApp podras disfrutar de diferentes funcionalidades.</h5>
+            </div>
+
+            <h6>Comunicate con nosotros</h6>
+            <div class="mb-4">
+            
+                <!-- WhatsApp -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"></i>
+                    <img src="{% static 'assets/bxl-whatsapp.svg' %}" alt="">
+                </a>
+                <!-- Telefono -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"></i>
+                    <img src="{% static 'assets/telefono.png' %}" alt="">
+                </a>
+                
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"></i>
+                    <img src="{% static 'assets/bxl-facebook.svg' %}" alt="">
+                </a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"></i>
+                    <img src="{% static 'assets/bxl-twitter.svg' %}" alt="">
+                </a>
+
+                <!-- Instagram -->
+                <a class=" btn btn-outline-light btn-floating m-1" href="#!" role="button"></i>
+                    <img src="{% static 'assets/bxl-instagram.svg' %}" alt="">
+                </a>
+
+            </div>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2021 Copyright:
+          <a class="text-white" href="#">softwareTecno.com.ar</a>
+          <p>Catamarca-Argentina</p>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+    <!-- script iconos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.js" integrity="sha512-8XtSBQOB+R4dpcpQBpYC5Q7ti7y/MjIF0l/1ZiSd4xM04Dr052S/Py981Pzmwo2HrXCR2JhYE1MYR15aZGMnig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/Menu.js' %}"></script>
+    <script src="{% static 'js/botonArriba.js' %}"></script>
+</body>
+</html>
