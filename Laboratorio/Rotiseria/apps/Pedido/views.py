@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
-from apps.Pedido.forms import PlatoForm
+from apps.Pedido.forms import PlatoForm,PedidoForm
 from apps.Pedido.models import Plato
 
 # Create your views here.
@@ -33,3 +33,15 @@ def menu_detalle(request, pk):
     return render(request,
                   'Pedido/detalle.html',
                   {'plato': plato})
+
+def creacion_pedido(request):
+    if (request.method == 'POST'):
+        pedido_form = PedidoForm(request.POST, prefix='pedido')
+        if pedido_form.is_valid():
+            p=pedido_form.save(commit=True)
+            messages.success(request,
+            'Se ha agregado correctamente el plato {}'.format(p))
+            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_pedido}))
+    else:
+        pedido_form = PedidoForm(prefix='pedido')
+    return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})

@@ -1,7 +1,7 @@
 
 from tkinter import Menu
 from django import forms
-
+from apps.Pedido.models import Pedido
 from apps.Pedido.models import Plato
 
 
@@ -18,3 +18,9 @@ class PlatoForm(forms.ModelForm):
         }
 
         
+
+class PedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ('persona','hora_entrega_desde','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
+        prefix = 'pedido'
