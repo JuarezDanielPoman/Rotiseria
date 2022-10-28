@@ -1,0 +1,58 @@
+{%  extends 'base/baseAdministrador.html' %}
+{% block titulo %}EMPLEADOS{% endblock %}
+{% load static %}
+{% block contenido %}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <h2 class="d-flex justify-content-center mb-3">Listado de empleados</h2>
+           
+                <div class="form-group row">
+                    <label for="cliente" class="col-form-label text-white">Buscar:</label>
+                    <div class="col-12 col-md-10">
+                        <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre del cadete" name="destinatario">
+                    </div>
+                </div>
+    
+                <div id="carrito" class="form-group table-responsive" >
+                    <table class="table bg-white">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col">Imagen</th> -->
+                                <th scope="col">CUIL</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Fecha de ingreso</th>
+                                <th scope="col">Fecha del carnet</th>
+                                <th scope="col">Nro Patente</th>
+                            </tr>
+    
+                        </thead>
+                        <tbody class="body">
+                            {% for e in cadetes %}
+                                <tr>
+                                    <td>{{e.cuil}}</td>
+                                    <td>{{e.nombre}}</td>
+                                    <td>{{e.apellido}}</td>
+                                    <td>{{e.fecha_ingreso}}</td>
+                                    <td>{{e.fecha_vigencia_carnet}}</td>
+                                    <td>{{e.numero_patente}}</td>
+                                </tr>
+                            {% endfor%}
+                        </tbody>
+                    </table>
+                </div>
+    
+    
+    
+        </div>
+    
+    
+    </div>
+</div>
+
+
+
+
+{% endblock contenido %}  

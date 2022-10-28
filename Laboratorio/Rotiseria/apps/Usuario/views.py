@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
 from apps.Usuario.forms import CadeteForm
-from apps.Usuario.models import Persona
+from apps.Usuario.models import Persona, cadete
 from apps.Usuario.forms import ZonaDomicilioForm
 from apps.Usuario.forms import PersonaForm
 from apps.Usuario.forms import DomicilioForm
@@ -47,8 +47,6 @@ def creacion_cliente(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
-
-
 def creacion_cadete(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -81,13 +79,11 @@ def creacion_cadete(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
-
 def persona_detalle(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     return render(request,
                   'Usuario/detalle.html',
                   {'persona': persona})
-
 
 def persona_delete(request):
     if request.method == 'POST':
@@ -99,7 +95,6 @@ def persona_delete(request):
             'Se ha eliminado la persona {}'.format(persona))
     return render(request,
                   'Usuario/detalle.html')
-
 
 def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
@@ -132,4 +127,8 @@ def persona_edit(request, pk):
         telefono_form = TelefonoForm(prefix='telefono')
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
+
+def lista_cadetes(request):
+    listaCadetes = cadete.objects.all()
+    return render(request,'Usuario/ListaDeCadetes.html',{'cadetes': listaCadetes})
 
