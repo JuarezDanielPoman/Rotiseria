@@ -1,0 +1,37 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Persona{% endblock %}
+{% block contenido %}
+<h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
+    {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-center">
+    <div class="card col-sm-7 p-3 formulario"> 
+        <div class="mb-2">
+<p><strong>Plato ingresado</strong></p>
+<ul>
+  {% for plato in plato.all %}
+    <li>{{ plato }}</li>
+  {% endfor %}
+</ul>
+<p><strong>Nombre Plato: </strong>{{ plato.nombre_plato}}</p>
+<p><strong>Precio de plato:</strong> {{ plato.precio_plato}}</p>
+<p><strong>Vigencia Plato:</strong>{{ plato.vigencia_plato}}</p>
+<p><strong>Estado de promocion:</strong>{{ plato.estado_promocion}}</p>
+<p><strong>vigencia Plato:</strong>{{ plato.tipo_plato}}</p>
+<p><strong>vigencia Plato:</strong>{{ plato.especialidad}}</p>
+
+
+<form action="#" method="POST">
+   
+  {% csrf_token %}
+  <input type="hidden" name="id_plato" value="#">
+  <button class="btn btn-Secondary"><a href="#">Editar</a></button>
+  <input class="btn btn-Secondary" type="submit" value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
+</form>
+</div>
+    </div>
+        </div>
+{% endblock %}
