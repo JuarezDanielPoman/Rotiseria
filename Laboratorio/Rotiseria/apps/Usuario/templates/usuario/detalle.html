@@ -29,6 +29,7 @@
   
  {% csrf_token %}
   <input type="hidden" name="id" value="{{ persona.id }}"> 
+  <button><a href="{% url 'Usuario:persona_edit' persona.id %}">Editar</a></button>
   <input class="btn btn-primary mb-2" type="submit" name="Eliminar" value="Eliminar datos" />
   <button class="btn btn-danger mb-2"><a href="{% url 'Usuario:RegistroDeClientes' %}">Confirmar</a></button>
 </form>
