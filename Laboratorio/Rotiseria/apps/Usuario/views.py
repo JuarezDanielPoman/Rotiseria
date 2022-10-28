@@ -100,7 +100,7 @@ def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
-        persona_form = CadeteForm(request.POST, prefix='persona',instance=persona)
+        persona_form = PersonaForm(request.POST, prefix='persona',instance=persona)
         telefono_form = TelefonoForm(request.POST, prefix='telefono')
         zona_form = ZonaDomicilioForm(request.POST, prefix='zona')
         if domicilio_form.is_valid() and persona_form.is_valid() and telefono_form.is_valid() and zona_form.is_valid():

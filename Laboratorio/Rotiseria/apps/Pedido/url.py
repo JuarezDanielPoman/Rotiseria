@@ -7,7 +7,7 @@ from apps.Pedido.views import RegistroPedidoCliente,menu_detalle,creacion_menu, 
 app_name='Pedido'
 
 urlpatterns=[
-path('RegistroDeMenu',creacion_menu,name='RegistroDeClientes'),
+path('RegistroDeMenu',creacion_menu,name='RegistroDeMenu'),
 path('RegistroPedidoCliente/',RegistroPedidoCliente, name='RegistroPedidoCliente'),
 path('promociones',promociones, name="promociones"),
 path('<int:pk>/', menu_detalle, name='menu_detalle'),

@@ -2930,7 +2930,7 @@
 }
 /* Icon Down */
 .hvr-icon-down {
-  display: inline-block;
+  display: block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
