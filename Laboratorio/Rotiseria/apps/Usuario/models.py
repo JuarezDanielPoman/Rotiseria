@@ -6,6 +6,8 @@ from re import S
 from secrets import choice
 from tkinter import CASCADE
 from django.db import models
+from django.contrib.auth.models import User
+
 
 
 # Create your models here.
@@ -46,6 +48,7 @@ class Persona(models.Model):
     email = models.CharField(max_length=300,blank= True)
     domicilio = models.ForeignKey(Domicilio, on_delete=models.CASCADE, default=None)
     telefono = models.ForeignKey(Telefono, on_delete=models.CASCADE, default=None)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,blank=True,null=True,unique=True)
 
     def __str__(self):
         texto = "{0} - {1} - {2} - {3} - {4} - {5}"
@@ -57,7 +60,7 @@ class cadete(Persona):
     fecha_vigencia_carnet = models.DateField(blank=True)
     numero_patente = models.CharField(max_length=7,blank=True)
     fecha_ingreso = models.DateField(blank=True)
-    
+
     def __str__(self):
         texto = "{0} - Ingreso laboral: {1} - Vigencia carnet: {2} - Patente: {3} - Zona: {4}"
         return texto.format(self.cuil, self.fecha_ingreso, self.fecha_vigencia_carnet, self.numero_patente, self.domicilio.zona)

@@ -89,7 +89,6 @@ def persona_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
             persona = get_object_or_404(Persona, pk=request.POST['id'])
-            print(persona)
             persona.delete()
             messages.success(request,
             'Se ha eliminado la persona {}'.format(persona))
@@ -131,4 +130,18 @@ def persona_edit(request, pk):
 def lista_cadetes(request):
     listaCadetes = cadete.objects.all()
     return render(request,'Usuario/ListaDeCadetes.html',{'cadetes': listaCadetes})
+
+
+def lista_personas(request):
+    listaPersonas = Persona.objects.all()
+    return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
+
+
+def buscar_personas(request):
+    if request.method == 'GET':
+        nombrebuscado = request.GET.get('buscar',)
+        buscar_persona=Persona.objects.filter(apellido=nombrebuscado)
+        print(nombrebuscado)
+        print(buscar_persona)
+        return render(request,'Usuario/ListaDePersonas.html',{'personas':buscar_persona})
 

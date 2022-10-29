@@ -1,0 +1,74 @@
+{%  extends 'base/baseAdministrador.html' %}
+{% block titulo %}Personas{% endblock %}
+{% load static %}
+{% block contenido %}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <h2 class="d-flex justify-content-center mb-3">Listado de personas</h2>
+           
+                <div class="form-group row">
+                    <label for="cliente" class="col-form-label text-white">Buscar:</label>
+                    <div class="col-12 col-md-10">
+            <form action="{% url 'Usuario:buscar_personas' %}" method="GET">
+             <div id="custom-search-input">
+                    <input type="text" class="form-control" id="persona" placeholder="Ingresa nombre de persona" name="destinatario">
+                    <div class="input-group-">
+                    <i class="icon icon-search"></i>
+                    <button type="summit" class="btn btn-success" name="buscar">Buscar</button>                        
+
+                </div>   
+            </div>         
+            </form>                    
+                </div>
+                </div>
+    
+                <div id="carrito" class="form-group table-responsive" >
+                    <table class="table bg-white">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col">Imagen</th> -->
+                                <th scope="col">CUIL</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Fecha de Nacimiento</th>
+                                <th scope="col">Correo Electronico</th>
+                            </tr>
+    
+                        </thead>
+                        <tbody class="body">
+                            {% for p in personas %}
+                                <tr>
+                                    <td>{{p.cuil}}</td>
+                                    <td>{{p.nombre}}</td>
+                                    <td>{{p.apellido}}</td>
+                                    <td>{{p.fecha_nacimiento}}</td>
+                                    <td>{{p.email}}</td>
+                                </tr>
+                            {% endfor%}
+                            {% for b in buscado %}
+                                <tr>
+                                    <td>{{b.cuil}}</td>
+                                    <td>{{b.nombre}}</td>
+                                    <td>{{b.apellido}}</td>
+                                    <td>{{b.fecha_nacimiento}}</td>
+                                    <td>{{b.email}}</td>
+                                </tr>
+                            {% endfor%}
+                        </tbody>
+                    </table>
+                </div>
+    
+    
+    
+        </div>
+    
+    
+    </div>
+</div>
+
+
+
+
+{% endblock contenido %}  

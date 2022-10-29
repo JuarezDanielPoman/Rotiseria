@@ -5,7 +5,13 @@
 {% load static %}
 
 <div class="container">
-
+<!--     
+    {% if user.is_authenticated %}
+    <p>Bienvenido, {{ user.username }}.</p>
+    {% else %}
+    <p>Bienvenido, nuevo usuario. Por favor, inicie sesión.</p>
+    {% endif %}
+     -->
     <div class="row mt-3">
             <div class="col">
                 <h2 class="d-flex justify-content-center mb-3">Listado de compras</h2>

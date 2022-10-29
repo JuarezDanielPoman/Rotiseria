@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.contrib.auth.decorators import permission_required
 from apps.Pedido.forms import PlatoForm,PedidoForm
 from apps.Pedido.models import Plato
 
@@ -34,6 +34,7 @@ def menu_detalle(request, pk):
                   'Pedido/detalle.html',
                   {'plato': plato})
 
+#@permission_required(Usuario.add_persona', raise_exception=True)
 def creacion_pedido(request):
     if (request.method == 'POST'):
         pedido_form = PedidoForm(request.POST, prefix='pedido')
