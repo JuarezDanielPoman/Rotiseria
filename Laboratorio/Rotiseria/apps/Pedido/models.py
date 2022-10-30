@@ -2,7 +2,7 @@ from email.policy import default
 from enum import unique
 from random import choices
 from django.db import models
-from apps.Usuario.models import Persona,cadete
+from apps.Usuario.models import Persona
 from tkinter import CASCADE
 from cgitb import text
 
