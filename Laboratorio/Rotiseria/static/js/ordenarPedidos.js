@@ -1,16 +1,16 @@
 
-var p = document.getElementById("estado");
-p.addEventListener('click',controlestado);
-controlestado();
+// var p = document.getElementById("estado");
+// p.addEventListener('click',controlestado);
+// controlestado();
 
-function controlestado(){
-if(p.value=='D' || p.value=='C'){
-    $("#ventanaModalPedido").modal();
-    console.log(p.value);
-    console.log($("#ventanaModalPedido").modal('show'));
-}
-console.log(p.value);
-}
+// function controlestado(){
+// if(p.value=='D' || p.value=='C'){
+//     $("#ventanaModalPedido").modal();
+//     console.log(p.value);
+//     console.log($("#ventanaModalPedido").modal('show'));
+// }
+// console.log(p.value);
+// }
 
 
 
@@ -33,17 +33,20 @@ function ordenarTocandoColumna(n) {
             y =  fila[i+1].getElementsByTagName("TD")[n]
 
             if (dir == "asc") {
+                if(x != null && y!= null ){
+                
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     debeCambiar = true;
                     break; 
-                }
+                }}
             }else{
                 if (dir == "desc") {
+                    if(x != null && y!= null ){
                     if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                         debeCambiar = true;
                         break; 
                     }
-                }
+                }}
             }
 
         }
@@ -69,10 +72,12 @@ obtenerValoresHora(tablaPedidos,4)
 function obtenerValoresHora(tabla, numeroColumna) {
     let listaDeHoras =[]; 
 
-    for (let i = 1, columna; i < tabla.rows.length; i++) {
+    for (let i = 2, columna; i < tabla.rows.length; i++) {
         columna = tabla.rows[i].cells[numeroColumna];
-        listaDeHoras[i]=columna.innerHTML; 
+        if(columna != null ){
 
+        listaDeHoras[i]=columna.innerHTML; 
+        }
     }
     console.log('Lista de horas: ',listaDeHoras)
 
@@ -87,7 +92,7 @@ function compararHoraEntrega(listaDeHoras) {
     var horaEnMinutosActual = horaEnMinutosLocal + minutosLocal; 
     var tabla = document.getElementById('tabla-pedidos-pendientes');
 
-    for (let i = 1; i <= listaDeHoras.length; i++) {
+    for (let i = 2; i <= listaDeHoras.length; i++) {
         var horaTabla = Number(listaDeHoras[i].substring(0,2));
         var minutosTabla = Number(listaDeHoras[i].substring(3,5));
         var horaEnMinutosTabla = (horaTabla * 60) + minutosTabla

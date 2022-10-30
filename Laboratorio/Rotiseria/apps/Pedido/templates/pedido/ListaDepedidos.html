@@ -27,11 +27,11 @@
                 <tr>
                     {% for p in pedidos %}
                     <tr>
-                        <td>{{p.id}}</td>
+                        <td>{{p.cod_pedido}}</td>
                         <td>{{p.persona}}</td>
                         <td>{{p.modo_entrega}}</td>
                         <td>{{p.estado_entrega}}</td>
-                        <td>{{p.hora_entrega_hasta}}</td>
+                        <td>{{p.hora_entrega_hasta|time:"H:i"}}</td>
                     </tr>
                 {% endfor%}                         
             </tbody>
@@ -40,4 +40,5 @@
     </div>
 </section>
     <script src="{% static 'js/ordenarPedidos.js' %}"></script>
+
     {% endblock %}
