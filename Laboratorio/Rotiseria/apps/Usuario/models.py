@@ -8,6 +8,13 @@ from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 
+from apps.Pedido.models import Pedido
+
+#from apps.Pedido.models import Pedido
+
+
+
+
 
 
 # Create your models here.
@@ -60,6 +67,7 @@ class cadete(Persona):
     fecha_vigencia_carnet = models.DateField(blank=True)
     numero_patente = models.CharField(max_length=7,blank=True)
     fecha_ingreso = models.DateField(blank=True)
+    pedido_cadete = models.ManyToManyField(Pedido)
 
     def __str__(self):
         texto = "{0} - Ingreso laboral: {1} - Vigencia carnet: {2} - Patente: {3} - Zona: {4}"

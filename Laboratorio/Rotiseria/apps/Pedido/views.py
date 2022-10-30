@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import permission_required
 from apps.Pedido.forms import PlatoForm,PedidoForm
-from apps.Pedido.models import Plato
+from apps.Pedido.models import Plato,Pedido
 
 # Create your views here.
 
@@ -46,3 +46,8 @@ def creacion_pedido(request):
     else:
         pedido_form = PedidoForm(prefix='pedido')
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
+
+
+def lista_pedidos(request):
+    listaPedidos = Pedido.objects.all()
+    return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})

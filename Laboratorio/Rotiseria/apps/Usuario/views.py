@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -10,6 +11,8 @@ from apps.Usuario.forms import ZonaDomicilioForm
 from apps.Usuario.forms import PersonaForm
 from apps.Usuario.forms import DomicilioForm
 from apps.Usuario.forms import TelefonoForm
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 
@@ -145,3 +148,24 @@ def buscar_personas(request):
         print(buscar_persona)
         return render(request,'Usuario/ListaDePersonas.html',{'personas':buscar_persona})
 
+def buscar_cadetes(request):
+    busqueda = request.POST.get("buscar")
+    product_list = cadete.objects.order_by('nombre')
+    page = request.GET.get('page', 1)
+
+    if busqueda:
+        product_list = cadete.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(descripcion__icontains = busqueda)
+        ).distinct()
+    
+    try:
+        paginator = Paginator(product_list, 12)
+        product_list = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {'entity': product_list,
+            'paginator': paginator
+    }
+    return render(request, 'index.html', data)

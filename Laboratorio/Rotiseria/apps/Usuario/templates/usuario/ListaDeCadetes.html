@@ -8,13 +8,23 @@
         <div class="col">
             <h2 class="d-flex justify-content-center mb-3">Listado de empleados</h2>
            
-                <div class="form-group row">
-                    <label for="cliente" class="col-form-label text-white">Buscar:</label>
-                    <div class="col-12 col-md-10">
-                        <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre del cadete" name="destinatario">
-                    </div>
-                </div>
-    
+              
+            <div class="form-group row">
+                <label for="cliente" class="col-form-label text-white">Buscar:</label>
+                <div class="col-12 col-md-10">
+        <form action="#" method="GET">
+         <div id="custom-search-input">
+                <input type="text" class="form-control" id="cadete" placeholder="Ingresa nombre de cadete" name="destinatario">
+                <div class="input-group-">
+                <i class="icon icon-search"></i>
+                <button type="summit" class="btn btn-success" name="buscar" value="{{ request.POST.buscar }}">Buscar</button>                        
+
+            </div>   
+        </div>         
+        </form>                    
+            </div>
+            </div>
+
                 <div id="carrito" class="form-group table-responsive" >
                     <table class="table bg-white">
                         <thead>
