@@ -67,7 +67,6 @@ class cadete(Persona):
     fecha_vigencia_carnet = models.DateField(blank=True)
     numero_patente = models.CharField(max_length=7,blank=True)
     fecha_ingreso = models.DateField(blank=True)
-    pedido_cadete = models.ManyToManyField('Pedido.Pedido')
 
     def __str__(self):
         texto = "{0} - Ingreso laboral: {1} - Vigencia carnet: {2} - Patente: {3} - Zona: {4}"
