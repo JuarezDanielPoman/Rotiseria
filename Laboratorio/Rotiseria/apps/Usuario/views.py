@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
-from apps.Usuario.forms import CadeteForm
+from apps.Usuario.forms import CadeteForm, CustomUserCreationForm
 from apps.Usuario.models import Persona, cadete
 from apps.Usuario.forms import ZonaDomicilioForm
 from apps.Usuario.forms import PersonaForm
@@ -25,12 +25,32 @@ from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('Usuario:logout'))
-    return render(request, 'Usuario/usuario.html')
+        #return HttpResponseRedirect(reverse('Usuario:logout'))
+        messages.error(request, 'Usuario y/o contraseña incorrecta')
+        #return render(request,'base/home.html')
+    
+    return render(request, 'base/home.html')
+
+def registrarUsuario(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
+            login(request, user)
+            return redirect('base/home.html')
+        else:
+            data['form'] = formulario
+    return render(request,'Usuario/CrearUsuario.html',data)
+
 
 def logout_view(request):
     logout(request) 
-    return render(request, 'base/baseCadete.html', { 'msj': 'Deslogueado' })
+    return render(request, 'base/home.html')
 
 def login_view(request):
     if request.method == "POST":   
@@ -45,10 +65,13 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user: 
             login(request, user)
-            return HttpResponseRedirect(reverse('baseCadete'))
+            messages.success(request, 'Bienvenido, {user.username}')
+            return render(request, 'base/home.html')
+            #return HttpResponseRedirect(reverse('baseCadete'))
         else:
-            return render(request, 'Usuario/Usuario.html', { 'msj': 'Credenciales incorrectas' })
-    return render(request, 'Usuario/login.html')
+            messages.error(request, 'Usuario y/o contraseña incorrecta')
+            return render(request, 'base/home.html')
+    return render(request, 'base/home.html')
 
 def creacion_cliente(request):
     if (request.method == 'POST'):

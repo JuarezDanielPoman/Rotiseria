@@ -25,7 +25,7 @@ def promociones(request):
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
 
 def RegistroPedidoCliente(request):
-    #form.id
+    #formulario
     lista_pedido = Plato.objects.all()
     return render(request,'Pedido/RegistroPedidoCliente.html',{'pedido': lista_pedido})
 

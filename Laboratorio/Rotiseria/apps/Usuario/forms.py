@@ -1,7 +1,9 @@
 
+from dataclasses import field
 import email
 from email.policy import default
 from multiprocessing import context
+from pyexpat import model
 from re import A
 from tkinter import Widget
 from xml.dom.minidom import AttributeList
@@ -9,6 +11,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import NumberInput, TextInput
 from .models import Domicilio, Persona,Telefono,ZonaDomicilio,cadete
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class DomicilioForm(forms.ModelForm):   
     class Meta:
@@ -82,18 +86,7 @@ class CadeteForm(forms.ModelForm):
 
         }
 
-
-    """
-    def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            instance=self.instance
-            if instance.pk:
-                if Persona.objects.filter(domicilio=instance).exists():
-                    self.initial['domicilio'] = Persona.objects.get(domicilio=instance)
-    """   
-"""
-from django.forms.models import inlineformset_factory
-ChildFormset = inlineformset_factory(
-    Domicilio,Persona , fields=('domicilio',)
-)
-"""
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ["username", "first_name","last_name","email","password1","password2"]
