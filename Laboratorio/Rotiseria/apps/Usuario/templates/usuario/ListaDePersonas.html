@@ -63,6 +63,7 @@
                                     <td>{{b.fecha_nacimiento}}</td>
                                     <td>{{b.email}}</td>
                                     <td>
+                                        {% csrf_token %}
                                         <button class="btn btn-danger">Editar</button>
                                         <button class="btn btn-secondary">Eliminar</button>
                                     </td>
