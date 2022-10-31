@@ -36,8 +36,11 @@
                         <td>{{p.estado_entrega}}</td>
                         <td>{{p.hora_entrega_hasta|time:"H:i"}}</td>
                         <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
                             <button class="btn-sample btn btn-danger">Editar</button>
                             <button class="btn btn-secondary">Eliminar</button>
+                        </form>
                         </td>
                     </tr>
                     {% endif%}                         

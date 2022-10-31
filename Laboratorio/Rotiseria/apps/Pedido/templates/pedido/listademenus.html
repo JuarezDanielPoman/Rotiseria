@@ -39,8 +39,11 @@
                         <td>{{p.tipo_plato}}</td>
                         <td>{{p.especialidad}}</td>
                         <td>
+                            <form method="post">
+                                {% csrf_token %}
                             <button class="btn-sample btn btn-danger">Editar</button>
                             <button class="btn btn-secondary">Eliminar</button>
+                        </form>
                         </td>
                     </tr>
                 {% endfor%}                         

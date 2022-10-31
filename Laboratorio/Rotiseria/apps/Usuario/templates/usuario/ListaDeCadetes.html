@@ -51,8 +51,11 @@
                                     <td>{{e.fecha_vigencia_carnet}}</td>
                                     <td>{{e.numero_patente}}</td>
                                     <td>
+                                        <form method="post">
+                                            {% csrf_token %}
                                         <button class="btn-sample btn btn-danger">Editar</button>
                                         <button class="btn btn-secondary">Eliminar</button>
+                                       </form>
                                     </td>
                                 </tr>
                             {% endfor%}
