@@ -36,6 +36,8 @@
                                 <th scope="col">Fecha de ingreso</th>
                                 <th scope="col">Fecha del carnet</th>
                                 <th scope="col">Nro Patente</th>
+                                <th colspan="2">Opciones</th>
+
                             </tr>
     
                         </thead>
@@ -48,6 +50,10 @@
                                     <td>{{e.fecha_ingreso}}</td>
                                     <td>{{e.fecha_vigencia_carnet}}</td>
                                     <td>{{e.numero_patente}}</td>
+                                    <td>
+                                        <button class="btn-sample btn btn-danger">Editar</button>
+                                        <button class="btn btn-secondary">Eliminar</button>
+                                    </td>
                                 </tr>
                             {% endfor%}
                         </tbody>

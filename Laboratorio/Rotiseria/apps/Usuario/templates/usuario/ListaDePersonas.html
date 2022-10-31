@@ -25,7 +25,7 @@
                 </div>
                 
                 <div id="carrito" class="form-group table-responsive" >
-                    <table class="table bg-white">
+                    <table class="table table-dark">
                         <thead>
                             <tr>
                                 <!-- <th scope="col">Imagen</th> -->
@@ -34,6 +34,7 @@
                                 <th scope="col">Apellido</th>
                                 <th scope="col">Fecha de Nacimiento</th>
                                 <th scope="col">Correo Electronico</th>
+                                <th colspan="2">Opciones</th>
                             </tr>
     
                         </thead>
@@ -45,6 +46,10 @@
                                     <td>{{p.apellido}}</td>
                                     <td>{{p.fecha_nacimiento}}</td>
                                     <td>{{p.email}}</td>
+                                    <td>
+                            <button class="btn-sample btn btn-danger">Editar</button>
+                            <button class="btn btn-secondary">Eliminar</button>
+                        </td>
                                 </tr>
                             {% endfor%}
                             {% for b in buscado %}
@@ -54,6 +59,10 @@
                                     <td>{{b.apellido}}</td>
                                     <td>{{b.fecha_nacimiento}}</td>
                                     <td>{{b.email}}</td>
+                                    <td>
+                                        <button class="btn btn-danger">Editar</button>
+                                        <button class="btn btn-secondary">Eliminar</button>
+                                    </td>
                                 </tr>
                             {% endfor%}
                         </tbody>
