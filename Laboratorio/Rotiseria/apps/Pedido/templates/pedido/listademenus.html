@@ -23,6 +23,7 @@
                     <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Promocion</th>
                     <th onclick="ordenarTocandoColumna(5)" class="cabera-tabla">Tipo de Plato</th>
                     <th onclick="ordenarTocandoColumna(6)" class="cabera-tabla">Especialidad</th>
+                    <th colspan="2">Opciones</th>
 
                 </tr>                   
             </thead>
@@ -37,7 +38,13 @@
                         <td>{{p.estado_promocion}}</td>
                         <td>{{p.tipo_plato}}</td>
                         <td>{{p.especialidad}}</td>
-
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                            <button class="btn-sample btn btn-danger">Editar</button>
+                            <button class="btn btn-secondary">Eliminar</button>
+                        </form>
+                        </td>
                     </tr>
                 {% endfor%}                         
             </tbody>

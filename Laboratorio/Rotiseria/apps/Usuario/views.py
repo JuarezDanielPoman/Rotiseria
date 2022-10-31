@@ -194,13 +194,22 @@ def lista_personas(request):
     return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
 
+# def buscar_personas(request):
+#     if request.method == 'GET':
+#         nombrebuscado = request.GET.get('buscar',)
+#         buscar_persona=Persona.objects.filter(apellido=nombrebuscado)
+#         print(nombrebuscado)
+#         print(buscar_persona)
+#         return render(request,'Usuario/ListaDePersonas.html',{'personas':buscar_persona})
+
 def buscar_personas(request):
-    if request.method == 'GET':
-        nombrebuscado = request.GET.get('buscar',)
-        buscar_persona=Persona.objects.filter(apellido=nombrebuscado)
-        print(nombrebuscado)
-        print(buscar_persona)
-        return render(request,'Usuario/ListaDePersonas.html',{'personas':buscar_persona})
+    programas = Persona.objects.all()
+
+    if 'buscar' in request.GET:
+        buscar_persona = programas.filter(nombre__icontains=request.GET['buscar'])
+    print(request.GET['buscar'])
+    return render(request, 'Usuario/ListaDePersonas.html',
+                  {'personas': buscar_persona})
 
 def buscar_cadetes(request):
     busqueda = request.POST.get("buscar")
