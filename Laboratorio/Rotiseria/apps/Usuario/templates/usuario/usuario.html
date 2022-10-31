@@ -1,0 +1,15 @@
+{% extends 'base/baseCadete.html' %}
+{% block titulo %}Inicio Sesión{% endblock %}
+{% block contenido %}
+
+<h1>Bienvenido, {{ request.user.first_name }}</h1>
+
+<div class="d-flex justify-content-center">
+    <div class="card col-sm-7 p-3 formulario"> 
+        <div class="mb-2">
+<p>Username: {{ request.user.username }}</p>
+<p>Email: {{ request.user.email }}</p>
+</div>
+</div>
+</div>
+{% endblock %} 

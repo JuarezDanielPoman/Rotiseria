@@ -1,4 +1,5 @@
-from django.http import Http404
+from urllib import request
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -13,11 +14,41 @@ from apps.Usuario.forms import DomicilioForm
 from apps.Usuario.forms import TelefonoForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib.auth import *
+from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth import authenticate, login, logout
 
 
 
 
 # Create your views here.
+
+def index(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('Usuario:logout'))
+    return render(request, 'Usuario/usuario.html')
+
+def logout_view(request):
+    logout(request) 
+    return render(request, 'base/baseCadete.html', { 'msj': 'Deslogueado' })
+
+def login_view(request):
+    if request.method == "POST":   
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            print(username)
+            print(password)
+        except MultiValueDictKeyError:
+            username = 'Error'
+            password = 'Error'
+        user = authenticate(request, username=username, password=password)
+        if user: 
+            login(request, user)
+            return HttpResponseRedirect(reverse('baseCadete'))
+        else:
+            return render(request, 'Usuario/Usuario.html', { 'msj': 'Credenciales incorrectas' })
+    return render(request, 'Usuario/login.html')
 
 def creacion_cliente(request):
     if (request.method == 'POST'):
@@ -169,3 +200,15 @@ def buscar_cadetes(request):
             'paginator': paginator
     }
     return render(request, 'index.html', data)
+
+
+# def login_view(request):
+#     if request.method == "POST":
+#         username = request.POST["username"]
+#         password = request.POST["password"]
+#         user = authenticate(request, username=username, password=password)
+#         if user: login(request, user)
+#             return HttpResponseRedirect(reverse("usuarios:index"))
+#         else:
+#             return render(request, "usuarios/login.html", { “msj": “Credenciales incorrectas" })
+#     return render(request, "usuarios/login.html")

@@ -72,39 +72,9 @@
                     </ul>
                 </li>
 
-                <li class="menu__item"> <a href="#acerca-de-roti" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-circle-info"></i> Acerca de</a> </li>
+                <li class="menu__item"> <a href="{% url 'Administrador' %}" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-circle-info"></i> Acerca de</a> </li>
                 <li class="menu__item"> <a href="#footer" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-phone"></i> Contacto</a> </li>
-                
-                <li class="nav-item dropdown" id="carrito-menu">
-                    <!-- PUEDO UZARLO CON UNA IMAGEN -->
-                    <img src="{% static 'assets/carrito.png' %}" class="nav-link dropdown-toggle img-fluid" height="70px" width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
-                    
-                    <!-- PUEDO UZARLO CON ETIQUETA A -->
-                    <!-- <a href="#" class="nav-link dropdown-toggle hvr-underline-from-center menu__link" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"><i class="hvr-icon fa-solid fa-cart-shopping"></i> Carrito</a> -->
-                    
-                    <!-- CARRITO DE COMPRAS -->
-                    <form action="{% url 'Pedido:RegistroPedidoCliente' %}" method="post">{% csrf_token %}
-                        
-                        <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
-                            <table id="lista-carrito" class="table text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-    
-                            <a href="#" id="vaciar-carrito" class="btn btn-danger btn-block">Vaciar Carrito</a>
-                            <!-- <a href="{% url 'Pedido:RegistroPedidoCliente' %}"  class="btn btn-success btn-block">Realizar Pedido</a> -->
-                            <button type="submit" class="btn btn-success btn-block">Realizar Pedido</button>
-                        </div>
-                    </form>
-                    
+            
                 </li>
             </ul>
 
@@ -119,32 +89,7 @@
         {% endblock %}
     </section>
 
-    <!-- Seccion Modal Ingredientes -->
-    <section>
-        <div class="modal" tabindex="-1" role="dialog" id="ventanaModalInfo">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Tarta de Verduras</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class="card col-auto">
-                        <h4>Ingredientes: </h4>
-                        <ul>
-                            <li>Acelga</li>
-                            <li>Cebolla</li>
-                            <li>Zanahoria</li>
-                            <li>Aceite de oliva</li>
-                        </ul>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    </section>
+    
 
     <!-- Seccion Login -->
     <section id="seccion-login">
@@ -158,19 +103,18 @@
                     <div class="modal-body">
                         <div class="card col-auto p-3 formulario"> 
                             <div class="mb-2">
-                                <form action="#" method="post">
-                                    <fieldset>
+                                <form action="{% url 'Usuario:login' %}" method="post">
+                               <fieldset>
                                         <div class="col-auto mb-2">
                                             <label><i class="fa-solid fa-user"></i> Usuario</label>
-                                            <input type="text" class="form-control mb-2 text-center" name="usuario" id="usuario-login" required placeholder="Ingrese su usuario">
+                                            <input type="text" class="form-control mb-2 text-center" name="username" id="usuario-login" required placeholder="Ingrese su usuario">
                                         </div>
                                         <div class="col-auto mb-2">
                                             <label><i class="fa-solid fa-lock"></i> Contraseña</label>
                                             <input type="password"  class="form-control mb-2 text-center" name="password" id="password-login" required placeholder="Ingrese su contraseña">
-                                                
+   
                                         </div>
                                     </fieldset>
-                                </form>
                           </div>
                         </div>
                         <div class="alert alert-danger">
@@ -180,12 +124,16 @@
                     </div>
             
                     <div class="modal-footer">
+                     {% csrf_token %}
                         <a href="#">¿olvidaste tu contraseña?</a>
-                        <span><a href="../templates/CrearUsuario.html" class="btn btn-warning"><i class="fa-solid fa-user-plus"></i>Registrar</a></span>
-                        <button class="btn btn-success" type="button">INGRESAR</button>
+                        <span><a href="{% url 'Usuario:logout' %}">Log Out</a> 
+                        </span>
+                        <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR" />
+                    
                     </div>
                 </div>
-                
+            </form>
+
             </div>    
         </div>
     </section>

@@ -160,19 +160,18 @@
                     <div class="modal-body">
                         <div class="card col-auto p-3 formulario"> 
                             <div class="mb-2">
-                                <form action="#" method="post">
-                                    <fieldset>
+                                <form action="{% url 'Usuario:login' %}" method="post">
+                               <fieldset>
                                         <div class="col-auto mb-2">
                                             <label><i class="fa-solid fa-user"></i> Usuario</label>
-                                            <input type="text" class="form-control mb-2 text-center" name="usuario" id="usuario-login" required placeholder="Ingrese su usuario">
+                                            <input type="text" class="form-control mb-2 text-center" name="username" id="usuario-login" required placeholder="Ingrese su usuario">
                                         </div>
                                         <div class="col-auto mb-2">
                                             <label><i class="fa-solid fa-lock"></i> Contraseña</label>
                                             <input type="password"  class="form-control mb-2 text-center" name="password" id="password-login" required placeholder="Ingrese su contraseña">
-                                                
+   
                                         </div>
                                     </fieldset>
-                                </form>
                           </div>
                         </div>
                         <div class="alert alert-danger">
@@ -182,12 +181,16 @@
                     </div>
             
                     <div class="modal-footer">
+                     {% csrf_token %}
                         <a href="#">¿olvidaste tu contraseña?</a>
-                        <span><a href="../templates/CrearUsuario.html" class="btn btn-warning"><i class="fa-solid fa-user-plus"></i>Registrar</a></span>
-                        <button class="btn btn-success" type="button">INGRESAR</button>
+                        <span><a href="{% url 'Usuario:logout' %}">Log Out</a> 
+                        </span>
+                        <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR" />
+                    
                     </div>
                 </div>
-                
+            </form>
+
             </div>    
         </div>
     </section>
