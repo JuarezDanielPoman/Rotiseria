@@ -2,7 +2,7 @@ from email.policy import default
 from enum import unique
 from random import choices
 from django.db import models
-from apps.Usuario.models import Persona
+from apps.Usuario.models import Persona,cadete
 from tkinter import CASCADE
 from cgitb import text
 
@@ -10,6 +10,7 @@ from cgitb import text
 class EstadoEntrega(models.Model):
     estado_entrega = models.AutoField(primary_key=True)
     descripcion_estado = models.CharField(max_length=200,blank=True)
+   #cadete = models.ForeignKey(cadete,null=False,on_delete=models.CASCADE) 
 
     def __str__(self):
         texto = "{0}"
@@ -62,7 +63,8 @@ class Pedido(models.Model):
     hora_entrega_hasta = models.TimeField(blank= True)
     estado_entrega = models.ForeignKey(EstadoEntrega, on_delete=models.CASCADE)
     platos = models.ManyToManyField(Plato)
-    modo_entrega = models.ForeignKey(ModalidadEntrega,on_delete=models.CASCADE)
+    modo_entrega = models.ForeignKey(ModalidadEntrega,on_delete=models.CASCADE) 
+    cadete = models.ForeignKey(cadete,related_name='cadete',blank=True,null=True,on_delete=models.CASCADE)
 
 
     def __str__(self):

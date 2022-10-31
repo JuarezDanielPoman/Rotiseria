@@ -66,6 +66,7 @@
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-person"></i> Clientes <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
                         <li id="cliente" class="menu__item"><a id="cliente" href="{% url 'Usuario:RegistroDeClientes' %}" class="hvr-icon-down menu__link">Registrar</a></li>
+                        <li id="lista-personas" class="menu__item"><a  href="{% url 'Usuario:lista_de_personas' %}" class="hvr-icon-down menu__link">Listar</a></li>
 
                    </ul>
                 </li> 
@@ -80,19 +81,19 @@
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-utensils"></i> Menus <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
-                        <li id="menu" class="menu__item"><a id="menu" href="../templates/RegistroDeMenu.html" class="hvr-icon-down menu__link">Registrar</a></li>
-                        <li id="menu" class="menu__item"><a id="menu" href="../templates/ModificarMenu.html" class="hvr-icon-down menu__link">Modificar</a></li>
+                        <li id="menu" class="menu__item"><a id="menu" href="{% url 'Pedido:RegistroDeMenu' %}" class="hvr-icon-down menu__link">Registrar</a></li>
+                        <li id="menu" class="menu__item"><a id="menu" href="{% url 'Pedido:listademenus' %}" class="hvr-icon-down menu__link">listar</a></li>
                    </ul>
                 </li>
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-file-pen"></i> Pedido <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
-                        <li id="pedido" class="menu__item"><a href="../templates/RegistroDePedidos.html" class="hvr-icon-down menu__link">Registrar</a></li>
-                        <li id="lista-pedido" class="menu__item"><a href="../templates/ListaDePedidos.html" class="hvr-icon-down menu__link">Listar</a></li>
+                        <li id="pedido" class="menu__item"><a href="{% url 'Pedido:RegistroDePedido' %}" class="hvr-icon-down menu__link">Registrar</a></li>
+                        <li id="lista-pedido" class="menu__item"><a href="{% url 'Pedido:ListaDepedidos' %}" class="hvr-icon-down menu__link">Listar</a></li>
                    </ul>
                 </li>                
                 <li class="menu__item container-submenu"> 
-                    <a href="../templates/Estadistica.html" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-chart-column"></i> Estadisticas</i></a>
+                    <a href="../../Estadistica" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-chart-column"></i> Estadisticas</i></a>
                 </li>
             </ul>
 

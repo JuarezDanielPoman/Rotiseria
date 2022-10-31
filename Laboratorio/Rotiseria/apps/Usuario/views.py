@@ -1,3 +1,5 @@
+from urllib import request
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -10,11 +12,43 @@ from apps.Usuario.forms import ZonaDomicilioForm
 from apps.Usuario.forms import PersonaForm
 from apps.Usuario.forms import DomicilioForm
 from apps.Usuario.forms import TelefonoForm
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.contrib.auth import *
+from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth import authenticate, login, logout
 
 
 
 
 # Create your views here.
+
+def index(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('Usuario:logout'))
+    return render(request, 'Usuario/usuario.html')
+
+def logout_view(request):
+    logout(request) 
+    return render(request, 'base/baseCadete.html', { 'msj': 'Deslogueado' })
+
+def login_view(request):
+    if request.method == "POST":   
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            print(username)
+            print(password)
+        except MultiValueDictKeyError:
+            username = 'Error'
+            password = 'Error'
+        user = authenticate(request, username=username, password=password)
+        if user: 
+            login(request, user)
+            return HttpResponseRedirect(reverse('baseCadete'))
+        else:
+            return render(request, 'Usuario/Usuario.html', { 'msj': 'Credenciales incorrectas' })
+    return render(request, 'Usuario/login.html')
 
 def creacion_cliente(request):
     if (request.method == 'POST'):
@@ -89,7 +123,6 @@ def persona_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
             persona = get_object_or_404(Persona, pk=request.POST['id'])
-            print(persona)
             persona.delete()
             messages.success(request,
             'Se ha eliminado la persona {}'.format(persona))
@@ -100,7 +133,7 @@ def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
-        persona_form = CadeteForm(request.POST, prefix='persona',instance=persona)
+        persona_form = PersonaForm(request.POST, prefix='persona',instance=persona)
         telefono_form = TelefonoForm(request.POST, prefix='telefono')
         zona_form = ZonaDomicilioForm(request.POST, prefix='zona')
         if domicilio_form.is_valid() and persona_form.is_valid() and telefono_form.is_valid() and zona_form.is_valid():
@@ -132,3 +165,50 @@ def lista_cadetes(request):
     listaCadetes = cadete.objects.all()
     return render(request,'Usuario/ListaDeCadetes.html',{'cadetes': listaCadetes})
 
+
+def lista_personas(request):
+    listaPersonas = Persona.objects.all()
+    return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
+
+
+def buscar_personas(request):
+    if request.method == 'GET':
+        nombrebuscado = request.GET.get('buscar',)
+        buscar_persona=Persona.objects.filter(apellido=nombrebuscado)
+        print(nombrebuscado)
+        print(buscar_persona)
+        return render(request,'Usuario/ListaDePersonas.html',{'personas':buscar_persona})
+
+def buscar_cadetes(request):
+    busqueda = request.POST.get("buscar")
+    product_list = cadete.objects.order_by('nombre')
+    page = request.GET.get('page', 1)
+
+    if busqueda:
+        product_list = cadete.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(descripcion__icontains = busqueda)
+        ).distinct()
+    
+    try:
+        paginator = Paginator(product_list, 12)
+        product_list = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {'entity': product_list,
+            'paginator': paginator
+    }
+    return render(request, 'index.html', data)
+
+
+# def login_view(request):
+#     if request.method == "POST":
+#         username = request.POST["username"]
+#         password = request.POST["password"]
+#         user = authenticate(request, username=username, password=password)
+#         if user: login(request, user)
+#             return HttpResponseRedirect(reverse("usuarios:index"))
+#         else:
+#             return render(request, "usuarios/login.html", { “msj": “Credenciales incorrectas" })
+#     return render(request, "usuarios/login.html")
