@@ -131,10 +131,6 @@
     color: #e9fc13;
 }
 
-#usuario-menu{
-    left: 800px;
-}
-
 #carrito-menu:hover{
     background-color:#4cb0e7;
     color: #000000;
@@ -182,8 +178,5 @@
         /* float:right;  */
         left: 0px;
         /* color: #ed157a; */
-    }
-    #usuario-menu{
-        left: 0px;
     }
 }

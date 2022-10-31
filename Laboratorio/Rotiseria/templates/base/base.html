@@ -46,10 +46,10 @@
             <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
                 <div class="d-flex justify-content-center align-items-center h-100">
                     <div class="text-white">
-                <div id="logo">
-                <img src="{% static 'assets/Logo.png' %}" alt="logo">
-                </div>                        
-            <h4 class="mb-3">Probá y disfrutá de la mejor comida de Catamarca.</h4>
+                        <div id="logo">
+                            <img src="{% static 'assets/Logo.png' %}" alt="logo">
+                        </div>                        
+                        <h4 class="mb-3">Probá y disfrutá de la mejor comida de Catamarca.</h4>
                     </div>
                 </div>
             </div>
@@ -60,10 +60,10 @@
         <nav class="main-nav">
 
             <ul class="menu" id="menu">
+                <!-- Home -->
+                <li class="menu__item"> <a href="{% url 'home' %}" class="hvr-underline-from-center  menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-house"></i> Inicio</a> </li>
                 
-                <li class="menu__item"> <a href="../templates/index1.html" class="hvr-underline-from-center  menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-house"></i> Inicio</a> </li>
-                <li class="menu__item"> <a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalLogin"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li>
-
+                <!-- Categoria Menu -->
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-shop"></i> Menú <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
@@ -73,17 +73,41 @@
                         <li id="generales" class="menu__item"><a id="enlacegenerales" href="#" class="hvr-icon-pulse menu__link"><i id="iconog" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i><i class="fa-solid fa-burger"></i> Generales</a></li>
                     </ul>
                 </li>
-
+                
+                <!-- Acerca de -->
                 <li class="menu__item"> <a href="#acerca-de-roti" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-circle-info"></i> Acerca de</a> </li>
+                
+                <!-- Contacto -->
                 <li class="menu__item"> <a href="#footer" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-phone"></i> Contacto</a> </li>
                 
+                {% if user.is_authenticated %}
+                <!-- Si se encuentra autenticado mostramos-->
+                <!-- Boton carrito -->
+                <li class="menu__item">
+                    <a href="#" class="menu__link btn-outline-white">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total}}</span>
+                    </a>
+                </li>
+                
+                <li class="menu__item container-submenu">
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b> {{ user.username }}</b></a>
+                    <ul class="submenu">
+                        <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                        <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                    </ul>
+                </li>
+
+                
+                {% else %}
+                <!-- Si no esta autenticado -->
+                <!-- Login -->
+                <li class="menu__item"> <a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalLogin"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li>
+
+                <!-- Carrito - Viejo -->
                 <li class="nav-item dropdown" id="carrito-menu">
-                    <!-- PUEDO UZARLO CON UNA IMAGEN -->
+                    <!--  IMAGEN -->
                     <img src="{% static 'assets/carrito.png' %}" class="nav-link dropdown-toggle img-fluid" height="70px" width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
-                    
-                    <!-- PUEDO UZARLO CON ETIQUETA A -->
-                    <!-- <a href="#" class="nav-link dropdown-toggle hvr-underline-from-center menu__link" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"><i class="hvr-icon fa-solid fa-cart-shopping"></i> Carrito</a> -->
                     
                     <!-- CARRITO DE COMPRAS -->
                     <form action="{% url 'Pedido:RegistroPedidoCliente' %}" method="post">{% csrf_token %}
@@ -95,6 +119,7 @@
                                         <th>Nombre</th>
                                         <th>Precio</th>
                                         <th>Cantidad</th>
+                                        <th>id</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -108,6 +133,7 @@
                     </form>
                     
                 </li>
+                {% endif %}
             </ul>
 
         </nav>
@@ -173,7 +199,7 @@
                                         </div>
                                     </fieldset>
                                 </form>
-                          </div>
+                            </div>
                         </div>
                         <div class="alert alert-danger">
                             <h6> <strong>Usuario y/o contraseña incorrecta</strong></h6>
@@ -184,7 +210,7 @@
                     <div class="modal-footer">
                         <a href="#">¿olvidaste tu contraseña?</a>
                         <span><a href="../templates/CrearUsuario.html" class="btn btn-warning"><i class="fa-solid fa-user-plus"></i>Registrar</a></span>
-                        <button class="btn btn-success" type="button">INGRESAR</button>
+                        <button class="btn btn-success" type="submit">INGRESAR</button>
                     </div>
                 </div>
                 

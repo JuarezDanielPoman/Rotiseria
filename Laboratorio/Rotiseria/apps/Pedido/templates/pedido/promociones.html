@@ -6,40 +6,119 @@
 
 
     <!-- Seccion de Platos  -->
-    <div class="contenedor">
-        
-        <section id="menu-tarjeta" style="background-image: url('../assets/fondocuerporotiseria.jpg'); background-size: 100%; padding: auto; margin: 0px;">
+    <div  class="min-vh-100 d-flex flex-colum pb-3 mt-3">
+        <div class="container">
             
-            <!-- Titulp de Seccion -->
-            <div class="text-center mb-3">
-                <h2 class="hvr-grow-shadow titulo-promociones mb-2">PROMOCIONES</h2><br>
-                <h3 class="hvr-float-shadow titulo-platos">Platos del día</h3>
+            <!-- Header -->
+            <header class="bg-dark py-3 rounded-bottom">
+                <div class="text-center mb-3">
+                    <h2 class="hvr-grow-shadow titulo-promociones mb-2 ">PROMOCIONES</h2><br>
+                    <h3 class="hvr-float-shadow titulo-platos text-white ">Platos del día</h3>
+                </div>
+            </header>
+
+            <!-- Seccion Buscar -->
+            <div class="pt-3">
+                <form class="d-flex d-md-inlne-block form-inline justify-content-end" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-1 small text-center" name="buscador" placeholder="buscar" value="{{ request.POST.buscador }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-info mx-1" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
             
-            <div class="container mb-5 mt-3" id="lista-productos">
-                    <!-- fila -->
-                    <div class="tarjeta-rest hvr-glow">
-                        {% for p in platos %}
-                        <div class="wrap-text_tarjeta-rest">
-                                    <h3 class="titulo_tarjeta text-center">{{p.nombre_plato}} </h3>
-                                    <p>¡Hecha para que la disfrutes con mucho sabor!
+            <!-- Seccion Card -->
+            <section class="py-2">
+                <div class="container px-4 px-lg-5 mt-2">
+                    <div  class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center ">
+                        {% if platos %} {% for p in platos %}  
+                        <div class="col my-3">
+                            <div class="card fondo-card text-center py-3">
+                                <!-- Product image-->
+                                {% if p.imagen %}
+                                <img class="mx-auto d-block img-fluid" src="{{ producto.imagen.url }}" alt="producto" width="60px%" /> {% else %}
+                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="sinImagen" /> {% endif %}
+                                
+                                <!-- Product details-->
+                                {% load humanize %}
+                                <div class="card-body p-3 wrap-text_tarjeta-rest">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{ p.nombre_plato }}</h5>
+                                        <!-- Product price-->
+                                    
                                         <div class="cta-wrap_tarjeta-rest">
                                             <div class="precio_tarjeta-rest">
-                                                <span class="hvr-glow">${{p.precio_plato}}</span>
+                                                <span class="hvr-glow">${{p.precio_plato | intcomma}}</span>
                                             </div>   
                                         </div>
-                                    </p>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <!-- Product actions-->
+                                <div class="card-footer p-2 pt-2 border-top-0 wrap-text_tarjeta-rest">
                                     <div class="botones-tarjeta">
                                         <a class="btn btn-success hvr-grow agregar-carrito" data-id="{{p.codigo_plato}}"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
-                                        <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
+                                        <a class="btn btn-info hvr-grow"  data-toggle="modal" data-target="#ventanaModalInfo" href="#"><i class="icono-plus fa-thin fa-plus"></i></a>
+                                        <!-- <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button> -->
                                     </div>
+                                </div>
+                            </div>
                         </div>
-                        {% endfor %}
-                    </div>        
-            
-            </div>
-        </section>
+                        {% endfor %} {% else %}
+                        <div class="text-center">
+                            <h3 class="alert-danger"> ¡No tenemos platos en promocion, disculpe!</h3>
+                        </div>
+                        {% endif %}
+                    </div>
+                <div>
+            </section>
+        </div>
+        
+        <!-- <div class="contenedor">
+        
+            <section id="menu-tarjeta" style="background-image: url('../assets/fondocuerporotiseria.jpg'); background-size: 100%; padding: auto; margin: 0px;">
+                
+                
+                <div class="text-center mb-3">
+                    <h2 class="hvr-grow-shadow titulo-promociones mb-2">PROMOCIONES</h2><br>
+                    <h3 class="hvr-float-shadow titulo-platos">Platos del día</h3>
+                </div>
+                
+                <div class="container mb-5 mt-3" id="lista-productos">
+
+                        <div class="tarjeta-rest hvr-glow">
+                        {% if entity %}  {% for p in platos %}
+                            <div class="wrap-text_tarjeta-rest">
+                                        <h3 class="titulo_tarjeta text-center">{{p.nombre_plato}} </h3>
+                                        <p>¡Hecha para que la disfrutes con mucho sabor!
+                                            <div class="cta-wrap_tarjeta-rest">
+                                                <div class="precio_tarjeta-rest">
+                                                    <span class="hvr-glow">${{p.precio_plato}}</span>
+                                                </div>   
+                                            </div>
+                                        </p>
+                                        <div class="botones-tarjeta">
+                                            <a class="btn btn-success hvr-grow agregar-carrito" data-id="{{p.codigo_plato}}"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
+                                            <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
+                                        </div>
+                            </div>
+                            {% endfor %} {% else %}
+                                <div class="text-center text-warning">
+                                    <h3> ¡No tenemos platos en promocion, disculpe!</h3>
+                                </div>
+                            {% endif %}
+                        </div>        
+                        
+                </div>
+            </section>
+        </div> -->
     </div>
+    
     
     <a href="#fondo-pagina" id="boton-arriba"><i class="fa-solid fa-circle-up"></i></a>
 {% endblock %}

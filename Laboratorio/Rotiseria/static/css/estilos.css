@@ -99,18 +99,16 @@ html{
   border: 1px solid rgb(7, 7, 7);
   border-radius: 6px;
   box-shadow: 5px 5px 9px #da681c
+  /* background-color: #0A0A0A; */
 }
 
-/* .card{
-  /* margin-right: 500px; 
+.card{
+  margin-right: 500px; 
   margin-left: 1000px;
   width: 20rem; 
   height: 25rem;
-} */
-/* 
-.fondo-card{
-  background-color: white;
-} */
+} 
+
 
 /* .card-title{
   text-align: center;

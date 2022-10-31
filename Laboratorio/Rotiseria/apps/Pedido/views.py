@@ -1,9 +1,11 @@
+from xmlrpc.client import DateTime
 from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from apps.Pedido.forms import PlatoForm
-from apps.Pedido.models import Plato
+from apps.Pedido.models import EstadoEntrega, Pedido, Plato
+from apps.Usuario.models import Persona
 
 # Create your views here.
 
@@ -24,6 +26,7 @@ def promociones(request):
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
 
 def RegistroPedidoCliente(request):
+    #form.id
     lista_pedido = Plato.objects.all()
     return render(request,'Pedido/RegistroPedidoCliente.html',{'pedido': lista_pedido})
 

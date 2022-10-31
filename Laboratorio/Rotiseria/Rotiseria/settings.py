@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.Pedido',
     'apps.Usuario',
+    'django.contrib.humanize',
+    'bootstrap4',
+    'crispy_forms',
+    'django_bootstrap_icons',
     ]
 
 MIDDLEWARE = [
@@ -64,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.Pedido.context_processors.importe_total',
             ],
         },
     },
