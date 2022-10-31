@@ -56,3 +56,8 @@ def lista_pedidos(request):
 def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
+
+
+def lista_menus(request):
+    listamenus = Plato.objects.all()
+    return render(request,'Pedido/listademenus.html',{'menus': listamenus})

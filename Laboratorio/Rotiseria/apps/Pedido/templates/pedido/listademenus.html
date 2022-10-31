@@ -1,0 +1,50 @@
+{% extends "base/baseAdministrador.html" %}
+{% block titulo %}Lista de Menus disponibles{% endblock %}
+
+{% block contenido %}
+{% load static %}
+
+<section class="container">
+    <h3 class="text-center mt-5">LISTA DE MENUS DISPONIBLES</h3>
+    <form action="#" method="get">
+        <input type="text" name="charSearch" size="20" class="formulario" value="">
+        <span class="headerList_searchButton">
+        <input class="btn-sample" type="submit" value="Buscar" class="btn button"></span></form>
+    
+    <div class="table-responsive mt-5">
+        <table id="tabla-pedidos-pendientes" class="table table-dark table-striped table-bordered table-hover text-center">
+            <caption style="color: black;background:#5d62bd">Listado de pedidos pendientes </caption>
+            <thead class="table-primary color-tabla-text">
+                <tr>
+                    <th onclick="ordenarTocandoColumna(0)" class="cabera-tabla">#</th>
+                    <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Nombre</th>
+                    <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Precio</th> 
+                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">vigencia_plato</th>     
+                    <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Promocion</th>
+                    <th onclick="ordenarTocandoColumna(5)" class="cabera-tabla">Tipo de Plato</th>
+                    <th onclick="ordenarTocandoColumna(6)" class="cabera-tabla">Especialidad</th>
+
+                </tr>                   
+            </thead>
+            <tbody>
+                <tr>
+                    {% for p in menus %}
+                    <tr>
+                        <td>{{p.codigo_plato}}</td>
+                        <td>{{p.nombre_plato}}</td>
+                        <td>{{p.precio_plato}}</td>
+                        <td>{{p.vigencia_plato}}</td>
+                        <td>{{p.estado_promocion}}</td>
+                        <td>{{p.tipo_plato}}</td>
+                        <td>{{p.especialidad}}</td>
+
+                    </tr>
+                {% endfor%}                         
+            </tbody>
+            <!--<tfoot><td>Total de pedidos</td></tfoot>-->
+        </table>
+    </div>
+</section>
+    <script src="{% static 'js/ordenartablas.js' %}"></script>
+
+    {% endblock %}
