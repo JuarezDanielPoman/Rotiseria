@@ -83,13 +83,14 @@
                 {% if user.is_authenticated %}
                 <!-- Si se encuentra autenticado mostramos-->
                 <!-- Boton carrito -->
+
                 <li class="menu__item">
                     <a href="{% url 'Pedido:CarritoPedidoCliente' %}" class="menu__link btn-outline-white">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total }}</span>
                     </a>
                 </li>
-                
+
                 <li class="menu__item container-submenu">
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b> {{ user.username }}</b></a>
                     <ul class="submenu">
@@ -98,7 +99,7 @@
                     </ul>
                 </li>
 
-                
+
                 {% else %}
                 <!-- Si no esta autenticado -->
                 <!-- Login -->

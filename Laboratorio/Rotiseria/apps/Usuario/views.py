@@ -46,7 +46,7 @@ def registrarUsuario(request):
             formulario.save()
             user = authenticate(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
             login(request, user)
-            return redirect('base/home.html')
+            return render(request, 'base/home.html')
         else:
             data['form'] = formulario
     return render(request,'Usuario/CrearUsuario.html',data)
@@ -61,6 +61,7 @@ def login_view(request):
         try:
             username = request.POST['username']
             password = request.POST['password']
+
             print(username)
             print(password)
         except MultiValueDictKeyError:
