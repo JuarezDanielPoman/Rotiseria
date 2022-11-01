@@ -267,9 +267,8 @@ def buscar_cadetes(request):
 def estadisticas(request):
             pedidos = Pedido.objects.all()
             platos = Plato.objects.all()
-            # for data in pedidos:
-            #     data.cant = len(Pedido.objects.filter(curso = data.codigo_pedido))
-            return render(request,'base/Estadistica.html',{'estadistica':pedidos,'platos':platos})
+            cadetes = cadete.objects.all()
+            return render(request,'base/Estadistica.html',{'estadistica':pedidos,'platos':platos,'cadetes':cadetes})
          
 # @login_required
 # def estadisticas(request):
