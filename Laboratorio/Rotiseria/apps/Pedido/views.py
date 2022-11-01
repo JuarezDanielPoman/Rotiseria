@@ -26,7 +26,11 @@ def promociones(request):
 
 def RegistroPedidoCliente(request):
     #formulario
-    lista_pedido = Plato.objects.all()
+    lista_platos =[]
+
+    plato = request.POST['producto1']
+    lista_platos.append(int(plato))
+    lista_pedido = Plato.objects.filter(codigo_plato__in=lista_platos)
     return render(request,'Pedido/RegistroPedidoCliente.html',{'pedido': lista_pedido})
 
 

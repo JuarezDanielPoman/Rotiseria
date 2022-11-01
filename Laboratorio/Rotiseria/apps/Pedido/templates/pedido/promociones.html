@@ -33,7 +33,7 @@
             <!-- Seccion Card -->
             <section class="py-2">
                 <div class="container px-4 px-lg-5 mt-2">
-                    <div  class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center ">
+                    <div  class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center " id="lista-productos">
                         {% if platos %} {% for p in platos %}  
                         <div class="col my-3">
                             <div class="card fondo-card text-center py-3">
@@ -79,46 +79,38 @@
             </section>
         </div>
         
-        <!-- <div class="contenedor">
         
-            <section id="menu-tarjeta" style="background-image: url('../assets/fondocuerporotiseria.jpg'); background-size: 100%; padding: auto; margin: 0px;">
-                
-                
-                <div class="text-center mb-3">
-                    <h2 class="hvr-grow-shadow titulo-promociones mb-2">PROMOCIONES</h2><br>
-                    <h3 class="hvr-float-shadow titulo-platos">Platos del día</h3>
-                </div>
-                
-                <div class="container mb-5 mt-3" id="lista-productos">
-
-                        <div class="tarjeta-rest hvr-glow">
-                        {% if entity %}  {% for p in platos %}
-                            <div class="wrap-text_tarjeta-rest">
-                                        <h3 class="titulo_tarjeta text-center">{{p.nombre_plato}} </h3>
-                                        <p>¡Hecha para que la disfrutes con mucho sabor!
-                                            <div class="cta-wrap_tarjeta-rest">
-                                                <div class="precio_tarjeta-rest">
-                                                    <span class="hvr-glow">${{p.precio_plato}}</span>
-                                                </div>   
-                                            </div>
-                                        </p>
-                                        <div class="botones-tarjeta">
-                                            <a class="btn btn-success hvr-grow agregar-carrito" data-id="{{p.codigo_plato}}"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
-                                            <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
-                                        </div>
-                            </div>
-                            {% endfor %} {% else %}
-                                <div class="text-center text-warning">
-                                    <h3> ¡No tenemos platos en promocion, disculpe!</h3>
-                                </div>
-                            {% endif %}
-                        </div>        
-                        
-                </div>
-            </section>
-        </div> -->
     </div>
     
+    <!-- Tarjeta anterior -->
+    <!-- <div class="contenedor">
+        
+                <section id="menu-tarjeta" style="background-image: url('../assets/fondocuerporotiseria.jpg'); background-size: 100%; padding: auto; margin: 0px;">
+                    
+                    <div class="container mb-5 mt-3" id="lista-productos">
+    
+                            <div class="tarjeta-rest hvr-glow">
+                            {% for p in platos %}
+                                <div class="wrap-text_tarjeta-rest">
+                                            <h3 class="titulo_tarjeta text-center">{{p.nombre_plato}} </h3>
+                                            <p>¡Hecha para que la disfrutes con mucho sabor!
+                                                <div class="cta-wrap_tarjeta-rest">
+                                                    <div class="precio_tarjeta-rest">
+                                                        <span class="hvr-glow">${{p.precio_plato}}</span>
+                                                    </div>   
+                                                </div>
+                                            </p>
+                                            <div class="botones-tarjeta">
+                                                <a class="btn btn-success hvr-grow agregar-carrito" data-id="{{p.codigo_plato}}"> <i class="fa-solid fa-cart-plus"></i> Añadir</a>
+                                                <button class="btn btn-info hvr-grow" data-toggle="modal" data-target="#ventanaModalInfo"><i class="icono-plus fa-thin fa-plus"></i></button>
+                                            </div>
+                                </div>
+                                {% endfor %}
+                            </div>        
+                            
+                    </div>
+                </section>
+            </div>  -->
     
     <a href="#fondo-pagina" id="boton-arriba"><i class="fa-solid fa-circle-up"></i></a>
 {% endblock %}
