@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from apps.Usuario.views import index
+from apps.Usuario.views import index,estadisticas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Estadistica/', TemplateView.as_view(template_name='base/Estadistica.html'), name='estadistica'),
+    path('Estadistica/', estadisticas, name='estadistica'),
     path('', TemplateView.as_view(template_name='base/home.html'), name='home'),
     path('Usuario/',include('apps.Usuario.url',namespace='Usuario')),
     path('Pedido/',include('apps.Pedido.url',namespace='Pedido')),

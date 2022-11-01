@@ -44,8 +44,8 @@ class Plato(models.Model):
     especialidad = models.ForeignKey(Especialidad,on_delete=models.CASCADE)
 
     def __str__(self):
-        texto = "{0} - {1} - {2}"
-        return texto.format(self.nombre_plato, self.especialidad.descripcion_especialidad, self.tipo_plato.descripcion_tipo_plato)
+        texto = "{0} - {1} - {2}- {3}"
+        return texto.format(self.nombre_plato, self.especialidad.descripcion_especialidad,self.precio_plato,self.tipo_plato.descripcion_tipo_plato)
 
 class ModalidadEntrega(models.Model):
     modoentrega = models.AutoField(primary_key=True)
@@ -70,3 +70,5 @@ class Pedido(models.Model):
     def __str__(self):
         texto = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
         return texto.format(self.persona.nombre, self.platos, self.estado_entrega, self.modo_entrega,self.fecha_pedido, self.hora_entrega_desde, self.hora_entrega_hasta,)
+
+   
