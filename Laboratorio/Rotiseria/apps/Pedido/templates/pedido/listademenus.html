@@ -39,11 +39,12 @@
                         <td>{{p.tipo_plato}}</td>
                         <td>{{p.especialidad}}</td>
                         <td>
-                            <form method="post">
+                            <form action="{% url 'Pedido:menu_delete' %}" method="post">
                                 {% csrf_token %}
+                            <input type="hidden" name="codigo_plato" value="{{ p.codigo_plato }}"> 
                             <button class="btn-sample btn btn-danger">Editar</button>
-                            <button class="btn btn-secondary">Eliminar</button>
-                        </form>
+                            <button type="summit" class="btn btn-secondary">Eliminar</button>
+                           </form>
                         </td>
                     </tr>
                 {% endfor%}                         

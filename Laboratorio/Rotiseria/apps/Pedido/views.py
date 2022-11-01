@@ -1,3 +1,4 @@
+from tkinter import Menu
 from xmlrpc.client import DateTime
 from django.urls import reverse
 from django.contrib import messages
@@ -46,7 +47,7 @@ def creacion_pedido(request):
             p=pedido_form.save(commit=True)
             messages.success(request,
             'Se ha agregado correctamente el plato {}'.format(p))
-            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_pedido}))
+            return redirect(reverse('Pedido:menu_detalle', args={p.cod_pedido}))
     else:
         pedido_form = PedidoForm(prefix='pedido')
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
@@ -61,10 +62,6 @@ def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
-
-def lista_menus(request):
-    listamenus = Plato.objects.all()
-    return render(request,'Pedido/listademenus.html',{'menus': listamenus})
 
 #@permission_required(Usuario.add_persona', raise_exception=True)
 def creacion_pedido(request):
@@ -93,3 +90,15 @@ def lista_pedidos_cadetes(request):
 def lista_menus(request):
     listamenus = Plato.objects.all()
     return render(request,'Pedido/listademenus.html',{'menus': listamenus})
+
+def menu_delete(request):
+    if request.method == 'POST':
+        if 'codigo_plato' in request.POST:
+            menu = get_object_or_404(Plato, pk=request.POST['codigo_plato'])
+            menu.delete()
+            messages.success(request,
+            'Se ha eliminado la persona {}'.format(menu))
+    menus = Plato.objects.all()
+    return render(request,
+                  'Pedido/listademenus.html',{'menus': menus})
+

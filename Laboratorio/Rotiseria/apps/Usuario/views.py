@@ -152,6 +152,28 @@ def persona_delete(request):
     return render(request,
                   'Usuario/detalle.html')
 
+def persona_delete_lista(request):
+    if request.method == 'POST':
+        if 'id' in request.POST:
+            persona = get_object_or_404(Persona, pk=request.POST['id'])
+            persona.delete()
+            messages.success(request,
+            'Se ha eliminado la persona {}'.format(persona))
+    listaPersonas = Persona.objects.all()
+    return render(request,
+                  'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
+
+def cadete_delete(request):
+    if request.method == 'POST':
+        if 'id' in request.POST:
+            persona = get_object_or_404(cadete, pk=request.POST['id'])
+            persona.delete()
+            messages.success(request,
+            'Se ha eliminado la persona {}'.format(persona))
+    listaPersonas = cadete.objects.all()
+    return render(request,
+                  'Usuario/ListaDeCadetes.html',{'cadetes': listaPersonas})
+
 def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
@@ -193,14 +215,6 @@ def lista_personas(request):
     listaPersonas = Persona.objects.all()
     return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
-
-# def buscar_personas(request):
-#     if request.method == 'GET':
-#         nombrebuscado = request.GET.get('buscar',)
-#         buscar_persona=Persona.objects.filter(apellido=nombrebuscado)
-#         print(nombrebuscado)
-#         print(buscar_persona)
-#         return render(request,'Usuario/ListaDePersonas.html',{'personas':buscar_persona})
 
 def buscar_personas(request):
     programas = Persona.objects.all()
