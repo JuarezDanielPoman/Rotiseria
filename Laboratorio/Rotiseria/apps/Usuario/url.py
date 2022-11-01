@@ -2,9 +2,8 @@
 from django import views
 from django.urls import path, re_path
 from django.urls.resolvers import URLPattern
-
 from .views import creacion_cadete,persona_delete_lista,cadete_delete,logout_view,buscar_cadetes,login_view, buscar_personas,lista_cadetes,lista_personas,persona_edit, creacion_cliente, persona_delete, persona_detalle, registrarUsuario
-
+from django.contrib.auth.views import LoginView
 app_name='Usuario'
 
 urlpatterns=[
@@ -17,7 +16,8 @@ urlpatterns=[
     path('ListaDePersonas', lista_personas, name='lista_de_personas'),
     path('buscar/', buscar_personas, name='buscar_personas'),
     path('buscar/', buscar_cadetes, name='buscar_cadetes'),
-    path('login', login_view, name='login'), 
+    path('login', login_view, name='login'),
+    #path('login', LoginView.as_view(template_name='base/login.html'), name='login'),
     path("logout", logout_view, name="logout"),
     path('delete/', cadete_delete, name='cadete_delete'),
     path('deletepersona/', persona_delete_lista, name='persona_delete_lista'),

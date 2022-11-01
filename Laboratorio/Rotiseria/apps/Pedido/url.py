@@ -1,14 +1,13 @@
 from django import views
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from apps.Pedido.views import menu_delete,lista_menus,creacion_pedido,lista_pedidos_cadetes,lista_pedidos,RegistroPedidoCliente,menu_detalle,creacion_menu, promociones
+from apps.Pedido.views import CarritoPedidoCliente,agregar_plato_carrito, eliminar_plato_carrito, limpiar_carrito,menu_delete,lista_menus,creacion_pedido,lista_pedidos_cadetes,lista_pedidos,menu_detalle,creacion_menu, procesar_compra, promociones, restar_plato_carrito
 
 
 app_name='Pedido'
 
 urlpatterns=[
 path('RegistroDeMenu',creacion_menu,name='RegistroDeMenu'),
-path('RegistroPedidoCliente/',RegistroPedidoCliente, name='RegistroPedidoCliente'),
 path('promociones',promociones, name="promociones"),
 path('<int:pk>/', menu_detalle, name='menu_detalle'),
 path('RegistroDePedido/',creacion_pedido, name='RegistroDePedido'),
@@ -17,4 +16,11 @@ path('listapedidoscadetes',lista_pedidos_cadetes, name="listapedidoscadetes"),
 path('listademenus',lista_menus, name="listademenus"),
 path('delete/',menu_delete, name="menu_delete"),
 
+#carrito
+path('CarritoPedidoCliente',CarritoPedidoCliente, name='CarritoPedidoCliente'),
+path('addplato/<int:pk>', agregar_plato_carrito, name='addplato'),
+path('deleteplato/<int:pk>',eliminar_plato_carrito, name='delplato'),
+path('subplato/<int:pk>',restar_plato_carrito, name='subplato'),
+path('clear',limpiar_carrito, name='cls'),
+path('compra',procesar_compra, name='procesarcompra'),
 ]

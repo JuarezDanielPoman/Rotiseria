@@ -37,7 +37,7 @@ class Especialidad(models.Model):
 class Plato(models.Model):
     codigo_plato = models.AutoField(primary_key=True)
     nombre_plato = models.CharField(max_length=200,blank=True)
-    precio_plato = models.IntegerField( default=None)
+    precio_plato = models.IntegerField(default=None)
     vigencia_plato = models.BooleanField(default=True)
     estado_promocion = models.BooleanField(default=False)
     tipo_plato = models.ForeignKey(TipoPlato,on_delete=models.CASCADE)
@@ -76,6 +76,3 @@ class Pedido(models.Model):
     def __str__(self):
         texto = "{0} - {1} - {2} - {3} - {4} - {5} - {6}"
         return texto.format(self.persona.nombre, self.platos, self.estado_entrega, self.modo_entrega,self.fecha_pedido, self.hora_entrega_desde, self.hora_entrega_hasta,)
-
-    
-        
