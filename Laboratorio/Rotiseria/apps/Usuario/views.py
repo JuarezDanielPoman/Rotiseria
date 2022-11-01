@@ -17,6 +17,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth import *
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -73,6 +75,7 @@ def login_view(request):
             return render(request, 'base/home.html')
     return render(request, 'base/home.html')
 
+@login_required(login_url='Usuario:login')
 def creacion_cliente(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -104,6 +107,7 @@ def creacion_cliente(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
+@login_required(login_url='Usuario:login')
 def creacion_cadete(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -136,12 +140,14 @@ def creacion_cadete(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
+@login_required(login_url='Usuario:login')
 def persona_detalle(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     return render(request,
                   'Usuario/detalle.html',
                   {'persona': persona})
 
+@login_required(login_url='Usuario:login')
 def persona_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -152,6 +158,7 @@ def persona_delete(request):
     return render(request,
                   'Usuario/detalle.html')
 
+@login_required(login_url='Usuario:login')
 def persona_delete_lista(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -163,6 +170,7 @@ def persona_delete_lista(request):
     return render(request,
                   'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
+@login_required(login_url='Usuario:login')
 def cadete_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -174,6 +182,7 @@ def cadete_delete(request):
     return render(request,
                   'Usuario/ListaDeCadetes.html',{'cadetes': listaPersonas})
 
+@login_required(login_url='Usuario:login')
 def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
@@ -206,16 +215,17 @@ def persona_edit(request, pk):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
+@login_required(login_url='Usuario:login')
 def lista_cadetes(request):
     listaCadetes = cadete.objects.all()
     return render(request,'Usuario/ListaDeCadetes.html',{'cadetes': listaCadetes})
 
-
+@login_required(login_url='Usuario:login')
 def lista_personas(request):
     listaPersonas = Persona.objects.all()
     return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
-
+@login_required(login_url='Usuario:login')
 def buscar_personas(request):
     programas = Persona.objects.all()
 
@@ -224,7 +234,8 @@ def buscar_personas(request):
     print(request.GET['buscar'])
     return render(request, 'Usuario/ListaDePersonas.html',
                   {'personas': buscar_persona})
-
+                  
+@login_required(login_url='Usuario:login')
 def buscar_cadetes(request):
     busqueda = request.POST.get("buscar")
     product_list = cadete.objects.order_by('nombre')

@@ -6,9 +6,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import permission_required
 from apps.Pedido.forms import PlatoForm,PedidoForm
 from apps.Pedido.models import Plato,Pedido
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required(login_url='Usuario:login')
 def creacion_menu(request):
     if (request.method == 'POST'):
         plato_form = PlatoForm(request.POST, prefix='menu')
@@ -25,17 +26,19 @@ def promociones(request):
     lista_platos = Plato.objects.all()
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
 
+@login_required(login_url='Usuario:login')
 def RegistroPedidoCliente(request):
     #formulario
     lista_pedido = Plato.objects.all()
     return render(request,'Pedido/RegistroPedidoCliente.html',{'pedido': lista_pedido})
 
-
+@login_required(login_url='Usuario:login')
 def menu_detalle(request, pk):
     plato = get_object_or_404(Plato, pk=pk)
     return render(request,'Pedido/detalle.html',{'plato': plato})
 
 #@permission_required(Usuario.add_persona', raise_exception=True)
+@login_required(login_url='Usuario:login')
 def creacion_pedido(request):
     if (request.method == 'POST'):
         pedido_form = PedidoForm(request.POST, prefix='pedido')
@@ -48,18 +51,19 @@ def creacion_pedido(request):
         pedido_form = PedidoForm(prefix='pedido')
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
 
-
+@login_required(login_url='Usuario:login')
 def lista_pedidos(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
 
-
+@login_required(login_url='Usuario:login')
 def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
 
 #@permission_required(Usuario.add_persona', raise_exception=True)
+@login_required(login_url='Usuario:login')
 def creacion_pedido(request):
     if (request.method == 'POST'):
         pedido_form = PedidoForm(request.POST, prefix='pedido')
@@ -72,21 +76,22 @@ def creacion_pedido(request):
         pedido_form = PedidoForm(prefix='pedido')
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
 
-
+@login_required(login_url='Usuario:login')
 def lista_pedidos(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
 
-
+@login_required(login_url='Usuario:login')
 def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
-
+@login_required(login_url='Usuario:login')
 def lista_menus(request):
     listamenus = Plato.objects.all()
     return render(request,'Pedido/listademenus.html',{'menus': listamenus})
 
+@login_required(login_url='Usuario:login')
 def menu_delete(request):
     if request.method == 'POST':
         if 'codigo_plato' in request.POST:
