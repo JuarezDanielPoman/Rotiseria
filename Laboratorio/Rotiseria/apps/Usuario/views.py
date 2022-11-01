@@ -36,20 +36,52 @@ def index(request):
     return render(request, 'base/home.html')
 
 def registrarUsuario(request):
-    data = {
-        'form': CustomUserCreationForm()
-    }
-
+    
+    domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
+    persona_form = PersonaForm(request.POST, prefix='persona')
+    telefono_form = TelefonoForm(request.POST, prefix='telefono')
+    zona_form = ZonaDomicilioForm(request.POST, prefix='zona')
+    formulario = CustomUserCreationForm(request.POST,prefix='formulario')
     if request.method == 'POST':
-        formulario = CustomUserCreationForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
+        if formulario.is_valid() and domicilio_form.is_valid() and persona_form.is_valid() and telefono_form.is_valid() and zona_form.is_valid():
+            p=persona_form.save(commit=False)
+            f=formulario.save(commit=False)
+            d=domicilio_form.save(commit=False)
+            t=telefono_form.save(commit=False)
+            z=zona_form.save(commit=False)
+            p.user_id=f.id
+            p.user_username=f.username
+            p.user_password=f.password
+            f.first_name=p.nombre
+            f.last_name=p.apellido
+            f.email=p.email
+            p.user_email=f.email
+           
+            
+            # print(f.username)
+            # print(f.password)
+            
+            
+            t.save()
+            z.save()
+            
+            d.zona_id=z.cod_zona
+            d.save()
+            
+            p.domicilio_id=d.cod_domicilio
+            p.telefono_id=t.id
+            p.save()
+            f.save()
             user = authenticate(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
             login(request, user)
             return render(request, 'base/home.html')
         else:
-            data['form'] = formulario
-    return render(request,'Usuario/CrearUsuario.html',data)
+            domicilio_form = DomicilioForm(prefix='domicilio')
+            persona_form = PersonaForm(prefix='persona')
+            telefono_form = TelefonoForm(prefix='telefono')
+            zona_form = ZonaDomicilioForm(prefix='zona')
+            formulario = CustomUserCreationForm(prefix='formulario')
+    return render(request,'Usuario/CrearUsuario.html',{'usuario':formulario,'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
 
 def logout_view(request):

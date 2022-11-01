@@ -8,9 +8,25 @@
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
                 <form action="#" method="post">
-                    {{form.messages}}
-                    {{form.as_p}}
-                    {{data.username}}
+                    {{usuario.errors}}
+                    {{domicilio_form.errors}}
+                    {{zona_form.errors}}
+                    {{telefono_form.errors}}
+                    {{persona_form.errors}}
+
+                     <br>
+                    <label>Nombre de usuario</label>
+                    {{usuario.username}} <br>
+                    <label>Contraseña</label>
+                     {{usuario.password1}}<br>
+                     <label >Confirmar contraseña</label>
+                    {{usuario.password2}}<br> 
+                    {{persona_form.as_p}}
+                   
+                    {{domicilio_form.as_p}}
+                    {{zona_form.as_p}}
+                    {{telefono_form.as_p}}
+
 
                     <!-- <fieldset>
                         <legend class="text-center"> <span>REGISTRAR USUSARIO</span></legend>
