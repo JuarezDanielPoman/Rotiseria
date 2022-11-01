@@ -111,10 +111,10 @@ html{
   border: 1px solid rgb(7, 7, 7);
   border-radius: 6px;
   box-shadow: 5px 5px 9px #da681c
-   background-color: #0A0A0A; 
+  background-color: #0A0A0A; 
 }
 
-.card{
+/* .card{
   margin-right: 500px; 
   margin-left: 1000px;
   width: 20rem; 

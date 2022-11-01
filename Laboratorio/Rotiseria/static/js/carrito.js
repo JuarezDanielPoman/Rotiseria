@@ -89,7 +89,9 @@ function leerContenido(producto) {
 //SEGUNDA FORMA DE INSERTAR PRODUCTO AL CARRITO
 function insertarCarritoArray() {
     limpiarLista();
+    let i=1;
     listacomprarProductos.forEach(producto =>{
+      
         const {titulo,precio,id,cantidad} = producto;
         const row = document.createElement('tr');
     row.innerHTML = `
@@ -105,9 +107,13 @@ function insertarCarritoArray() {
         </td>
         <td>
             <a href="#" class="borrar-producto" data-id="${id}"><i class="fas fa-trash-alt"></i></a>
+            <input type="hidden" name="producto${i}" value="${id}" />
         </td>
-
+        
+        
+        
     `;
+        i=i+1;
         contenedorTablaCarrito.appendChild(row)
         // console.log(contenedorTablaCarrito)
     });
