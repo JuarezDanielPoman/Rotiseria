@@ -76,6 +76,7 @@ def login_view(request):
     return render(request, 'base/home.html')
 
 @login_required(login_url='Usuario:login')
+@permission_required('Persona.add_programa', raise_exception=True)
 def creacion_cliente(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -234,7 +235,7 @@ def buscar_personas(request):
     print(request.GET['buscar'])
     return render(request, 'Usuario/ListaDePersonas.html',
                   {'personas': buscar_persona})
-                  
+
 @login_required(login_url='Usuario:login')
 def buscar_cadetes(request):
     busqueda = request.POST.get("buscar")

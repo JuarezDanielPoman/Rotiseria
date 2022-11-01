@@ -7,6 +7,8 @@
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
                 <!--<div class="abs-center">-->
+                    {% if perms.Persona.add_programa %}
+
                 <form id="formulario-pedido" enctype="multipart/form-data" method="POST">
                         <fieldset>
                         <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
@@ -116,6 +118,8 @@
                     <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
                 </div>
              </form>
+             {% endif %}
+
        </div>
      </div> 
     </div>     
