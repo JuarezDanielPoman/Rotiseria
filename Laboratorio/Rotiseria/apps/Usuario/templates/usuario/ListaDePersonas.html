@@ -47,11 +47,12 @@
                                     <td>{{p.fecha_nacimiento}}</td>
                                     <td>{{p.email}}</td>
                                     <td>
-                           <form method="post">
-                            {% csrf_token %}
-                                <button class="btn-sample btn btn-danger">Editar</button>
-                                <button class="btn btn-secondary">Eliminar</button>
-                           </form>
+                                        <form action="{% url 'Usuario:persona_delete_lista' %}" method="post">
+                                            {% csrf_token %}
+                                        <input type="hidden" name="id" value="{{ p.id }}"> 
+                                        <button class="btn-sample btn btn-danger">Editar</button>
+                                        <button type="summit" class="btn btn-secondary">Eliminar</button>
+                                       </form>
                         </td>
                                 </tr>
                             {% endfor%}

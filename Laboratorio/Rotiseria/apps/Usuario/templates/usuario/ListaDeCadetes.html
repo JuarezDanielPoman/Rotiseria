@@ -14,7 +14,7 @@
                 <div class="col-12 col-md-10">
         <form action="#" method="GET">
          <div id="custom-search-input">
-                <input type="text" class="form-control" id="cadete" placeholder="Ingresa nombre de cadete" name="destinatario">
+                <input type="text" class="form-control" id="cadete" placeholder="Ingresa nombre de cadete" name="buscar">
                 <div class="input-group-">
                 <i class="icon icon-search"></i>
                 <button type="summit" class="btn btn-success" name="buscar" value="{{ request.POST.buscar }}">Buscar</button>                        
@@ -51,10 +51,11 @@
                                     <td>{{e.fecha_vigencia_carnet}}</td>
                                     <td>{{e.numero_patente}}</td>
                                     <td>
-                                        <form method="post">
+                                        <form action="{% url 'Usuario:cadete_delete'%}" method="post">
                                             {% csrf_token %}
+                                        <input type="hidden" name="id" value="{{ e.id }}"> 
                                         <button class="btn-sample btn btn-danger">Editar</button>
-                                        <button class="btn btn-secondary">Eliminar</button>
+                                        <button type="summit" class="btn btn-secondary">Eliminar</button>
                                        </form>
                                     </td>
                                 </tr>

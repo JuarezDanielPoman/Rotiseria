@@ -1,8 +1,8 @@
-
 from tkinter import Menu
 from django import forms
 from apps.Pedido.models import Pedido
 from apps.Pedido.models import Plato
+from django import forms
 
 
 class PlatoForm(forms.ModelForm):
