@@ -37,7 +37,9 @@
                             {{pl.precio_plato}}
 
                             {% endfor%}
+
                             </td>
+                           
                         </tr>
 
                     {% endif%}
@@ -90,14 +92,14 @@
             <input list="nombre" placeholder="Ingrese el cadete">  
             <datalist id="nombre">
                 <option value="" selected>Seleccione</option>
-                <option value="1"></option>
-                <option value="2"></option>
-                <option value="3"></option>
-                <option value="4"></option> 
+                <td>
+                    {% for c in cadetes %}
+                    <option value="{{c.id}}">{{c.apellido}}</option>
+                    
+                    {%endfor%}
+                </td>
             </datalist>
-          
-           
-               
+          <input type="button" class="btn btn-dark" value="Buscar">
 </div>
 
         <!-- grafica Barras -->

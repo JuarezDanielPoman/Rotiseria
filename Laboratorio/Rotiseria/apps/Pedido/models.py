@@ -47,6 +47,10 @@ class Plato(models.Model):
         texto = "{0} - {1} - {2}- {3}"
         return texto.format(self.nombre_plato, self.especialidad.descripcion_especialidad,self.precio_plato,self.tipo_plato.descripcion_tipo_plato)
 
+    def resultado(self):
+        resultado += self.precio_plato
+        return resultado
+
 class ModalidadEntrega(models.Model):
     modoentrega = models.AutoField(primary_key=True)
     descripcion_modo_entrega = models.CharField(max_length=200,blank=True)
@@ -54,7 +58,9 @@ class ModalidadEntrega(models.Model):
     def __str__(self):
         texto = "{0}"
         return texto.format(self.descripcion_modo_entrega)
-
+     
+        
+        
 class Pedido(models.Model):
     cod_pedido = models.AutoField(primary_key=True)
     fecha_pedido = models.DateTimeField(auto_now_add=True)
