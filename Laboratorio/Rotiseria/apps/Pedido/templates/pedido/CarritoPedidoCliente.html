@@ -1,0 +1,172 @@
+{% extends "base/base.html" %}
+
+{% block titulo %}REALIZAR PEDIDO{% endblock %}
+{% block contenido %}
+{% load static %}
+{% block js %}
+    <script>
+        function alertProcesarPedido() {
+            Swal.fire({
+            "title": "Felicitaciones!!!",
+            "text": "Gracias por su compra.",
+            "icon": "success"
+        })
+        }
+    </script>
+{% endblock %}
+
+<div class="container">
+
+    <div class="row mt-3">
+            <div class="col">
+                <h2 class="d-flex justify-content-center mb-3">Listado de compras</h2>
+                <form action="{% url 'Pedido:procesarcompra' %}" method="post">{% csrf_token %}
+                    <div class="form-group row">
+                        <label for="cliente" class="col-form-label text-white">Cliente :</label>
+                        <div class="col-12 col-md-10">
+                            <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre cliente" name="destinatario">
+                        </div>
+                    </div>
+
+                    <div id="carrito" class="form-group table-responsive" >
+                        <table class="table bg-white" id="lista-compra" >
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">Imagen</th> -->
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Sub Total</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+
+                            </thead>
+                            
+                            <tbody class="body">
+                                    {% if request.session.carrito.items %} 
+                                    {% for key, value in request.session.carrito.items %}
+                                    <tr>
+                                        <td>{{value.nombre}}</td>
+                                        <td>{{value.precio}}</td>
+                                        {% load bootstrap_icons %}
+                                        <td>
+                                            {{ value.cantidad }}
+                                            <a href="{% url 'Pedido:subplato' value.plato_id %}" class="btn btn-secondary btn-sm" type="button"><i class="fa-solid fa-minus"></i></a>
+                                            <a href="{% url 'Pedido:addplato' value.plato_id %}" class="btn btn-secondary btn-sm" type="button"><i class="fa-solid fa-plus"></i></i></a>
+                                        </td>
+                                        <td>{{value.subtotal}}</td>
+                                        <td>
+                                            <a href="{% url 'Pedido:delplato' value.plato_id %}"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                
+                                {% endfor %} {% else %}
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="alert alert-danger text-center ">
+
+                                            No se agregaron productos al carrito
+
+                                        </div>
+                                </tr>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">SUB TOTAL :</th>
+                                    <th scope="col">
+                                        <p id="subtotal">${{ sub_total }}</p>
+                                    </th>
+                                    
+                                </tr>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">IVA :</th>
+                                    <th scope="col">
+                                        <p id="iva">21%</p>
+                                    </th>
+                                    
+                                </tr>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">TOTAL :</th>
+                                    <th scope="col">
+                                        <p>${{ importe_total }}</p>
+                                    </th>
+                                
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-4 mb-2">
+                            <a href="{% url 'Pedido:promociones' %}" class="btn btn-info btn-block">Seguir comprando</a>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <a href="{% url 'Pedido:cls' %}" class="btn btn-danger btn-block">Cancelar</a>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <button class="btn btn-success btn-block" onclick="alertProcesarPedido()" type="submit">Realizar compra</button>
+                            <!-- <a href="{% url 'Pedido:procesarcompra' %}" onclick="alertProcesarPedido()" class="btn btn-success btn-block">Realizar compra</a> -->
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+    </div>
+
+
+    <!-- seccion de verificar datos -->
+    <section>
+        <div class="text-right">
+            <button class="btn btn-warning" data-toggle="modal" data-target="#ventanaModal">Tipo de pedido</button>
+        </div>
+        
+        <div class="modal fade" id="ventanaModal" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="titulo-ventana" class="text-center">Tipo de entrega del pedido</h5>
+                        <button class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                    </div>
+            
+                    <div class="modal-body">
+                        <div class="card col-auto p-3 formulario"> 
+                            <div id="pedido" class="mb-2">
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <div class="col-auto mb-2">
+                                            <label for="tipo_pedido">Tipo de pedido</label>
+                                            <select id="tipo_pedido" onclick="muestraopciondelivery()" class="form-control mb-2 text-center" required name="tipo_pedido">
+                                                <option value="" selected>Seleccione</option>
+                                                <option value="1">Delivery</option> 
+                                                <option value="2">Paso por el local</option> 
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="alert alert-success">
+                            <h6> <strong>Tus datos se han guardado exitosamente</strong></h6>
+                        </div>
+                    </div>
+            
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="button">Cerrar</button>
+                        <!--tada-dismiss="modal" Este codigo ya no admite en el validator-->
+                        <button class="btn btn-success" type="button">Aceptar</button>
+
+                    </div>
+                </div>
+                
+            </div>    
+        </div>
+    </section>
+</div>
+{% endblock %}

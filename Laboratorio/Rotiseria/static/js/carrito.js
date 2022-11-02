@@ -5,6 +5,8 @@ let vaciarCarritoBtn = document.getElementById('vaciar-carrito')
 let realizarPedidoBtn = document.getElementById('procesar-pedido');
 let tablaListaCompra = document.querySelector('#lista-compra tbody');
 
+let procesarcompra = document.getElementById('procesar-compra');
+
 let listacomprarProductos =[];
 
 //funciones
@@ -13,10 +15,8 @@ cargarEvento()
 function cargarEvento() {
     contenidoPrincipal.addEventListener('click', addProducto);
     contenedorTablaCarrito.addEventListener('click', eliminarProducto);
-    vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
-    // realizarPedidoBtn.addEventListener('click',procesarPedido)
-    // tablaListaCompra.addEventListener('click',procesarPedido)
-    //document.addEventListener('DOMContentLoaded',insertarElementosTablaPedidoCliente)
+    vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
+    procesarcompra.addEventListener('click', procesarCompra);
 }
 
 function addProducto(e) {
@@ -143,5 +143,15 @@ function procesarPedido(e){
             text: 'El carrito esta vacio, debes agregar un producto',
         })
     }
+}
+
+function procesarCompra(e) {
+    console.log('entro a JAVA SCRIPTS PROCESAR COMPRA')
+    e.preventDefault()
+        Swal.fire({
+            "title": "Felicitaciones!!!",
+            "text": "Gracias por su compra.",
+            "icon": "success"
+        })
 }
 

@@ -105,13 +105,17 @@ html{
   text-decoration: none;
   text-decoration-color: white;
 }
-/* 
-.row .fondo-card{
+
+.fondo-card{
   margin: 15px;
   border: 1px solid rgb(7, 7, 7);
   border-radius: 6px;
-  box-shadow: 5px 5px 9px #da681c
-  background-color: #0A0A0A; 
+  box-shadow: 5px 5px 9px #da681c;
+  /* background-color: #000000; */
+  margin-right: 20px; 
+  margin-left: 40px;
+  width: 20rem; 
+  height: 30rem;
 }
 
 /* .card{

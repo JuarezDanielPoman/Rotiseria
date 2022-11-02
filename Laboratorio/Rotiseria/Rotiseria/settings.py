@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.Pedido.context_processors.importe_total',
+                'apps.Pedido.context_processors.sub_total',
             ],
         },
     },

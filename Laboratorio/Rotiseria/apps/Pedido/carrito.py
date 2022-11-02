@@ -4,7 +4,7 @@ class Carrito:
         self.session = request.session
         carrito = self.session.get("carrito")
         if not carrito:
-            carrito = self.session["carrito"]={}
+            carrito = self.session["carrito"] = {}
         self.carrito = carrito
 
     def agregar(self, plato):
@@ -14,20 +14,21 @@ class Carrito:
                 "plato_id": plato.codigo_plato,
                 "nombre": plato.nombre_plato,
                 "precio": plato.precio_plato,
-                "cantidad": 1
+                "cantidad": 1,
+                "subtotal": plato.precio_plato,
             }
         else:
             for key, value in self.carrito.items():
                 if key == id:
                     value["cantidad"] += 1
-                    value["precio"] += plato.precio_plato
+                    value["subtotal"] = value["precio"] + plato.precio_plato
                     break
-        self.guardar(self)
-    
+        self.guardar()
+
     def guardar(self):
         self.session["carrito"] = self.carrito
         self.session.modified=True
-    
+
     def eliminar(self, plato):
         id = str(plato.codigo_plato)
         if id in self.carrito:
@@ -42,7 +43,7 @@ class Carrito:
                 value["precio"] -= 1
                 if value["cantidad"]<1:
                     self.eliminar(plato)
-                break
+                    break
         self.guardar()
     
     def limpiar(self):

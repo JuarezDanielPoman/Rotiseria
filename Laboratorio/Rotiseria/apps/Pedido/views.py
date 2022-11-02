@@ -4,9 +4,14 @@ from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import permission_required
-from apps.Pedido.forms import PlatoForm,PedidoForm
-from apps.Pedido.models import Plato,Pedido
 
+from .forms import PlatoForm, PedidoForm
+from .models import Plato, Pedido
+from .carrito import Carrito
+
+#from .apps import PlatoForm,PedidoForm
+#from apps.Pedido.models import Plato,Pedido
+#from apps.Pedido.carrito import Carrito
 # Create your views here.
 
 def creacion_menu(request):
@@ -25,15 +30,43 @@ def promociones(request):
     lista_platos = Plato.objects.all()
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
 
-def RegistroPedidoCliente(request):
-    #formulario
-    lista_platos =[]
+#Vistas para el Carrito
+def CarritoPedidoCliente(request):
+    return render(request,'Pedido/CarritoPedidoCliente.html',{'carrito': request.session['carrito']})
 
-    plato = request.POST['producto1']
-    lista_platos.append(int(plato))
-    lista_pedido = Plato.objects.filter(codigo_plato__in=lista_platos)
-    return render(request,'Pedido/RegistroPedidoCliente.html',{'pedido': lista_pedido})
+def agregar_plato_carrito(request, pk):
+    print("Entra a agregar")
+    carrito = Carrito(request)
+    plato = Plato.objects.get(codigo_plato=pk)
+    print("Plato: ", plato)
+    carrito.agregar(plato)
+    return redirect(to='Pedido:CarritoPedidoCliente')
+    #return(request,'Pedido/CarritoPedidoCliente.html',{'carrito': request.session['carrito']})
 
+def eliminar_plato_carrito(request, pk):
+    carrito = Carrito(request)
+    plato = Plato.objects.get(codigo_plato=pk)
+    carrito.eliminar(plato)
+    return redirect(to='Pedido:CarritoPedidoCliente')
+
+
+def restar_plato_carrito(request, pk):
+    carrito = Carrito(request)
+    plato = Plato.objects.get(codigo_plato=pk)
+    carrito.restar(plato)
+    return redirect(to='Pedido:CarritoPedidoCliente')
+
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect(to='Pedido:CarritoPedidoCliente')
+
+def procesar_compra(request):
+    carrito = Carrito(request)
+    #lista_platos_carrito = request.session.carrito.items
+    #print('LISTA DE PLATOS:',lista_platos_carrito)
+    carrito.limpiar()
+    return redirect(to='Pedido:promociones')
 
 def menu_detalle(request, pk):
     plato = get_object_or_404(Plato, pk=pk)

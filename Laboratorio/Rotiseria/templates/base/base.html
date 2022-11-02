@@ -84,9 +84,9 @@
                 <!-- Si se encuentra autenticado mostramos-->
                 <!-- Boton carrito -->
                 <li class="menu__item">
-                    <a href="#" class="menu__link btn-outline-white">
+                    <a href="{% url 'Pedido:CarritoPedidoCliente' %}" class="menu__link btn-outline-white">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total}}</span>
+                        <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total }}</span>
                     </a>
                 </li>
                 
@@ -103,35 +103,8 @@
                 <!-- Si no esta autenticado -->
                 <!-- Login -->
                 <li class="menu__item"> <a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalLogin"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li>
+                <!-- <li class="menu__item"> <a href="{% url 'Usuario:login' %}" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li> -->
 
-                <!-- Carrito - Viejo -->
-                <li class="nav-item dropdown" id="carrito-menu">
-                    <!--  IMAGEN -->
-                    <img src="{% static 'assets/carrito.png' %}" class="nav-link dropdown-toggle img-fluid" height="70px" width="70px" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
-                    
-                    <!-- CARRITO DE COMPRAS -->
-                    <form action="{% url 'Pedido:RegistroPedidoCliente' %}" method="post">{% csrf_token %}
-                        
-                        <div id="carrito" class="dropdown-menu" aria-labelledby="navbarCollapse">
-                            <table id="lista-carrito" class="table text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-    
-                            <a href="#" id="vaciar-carrito" class="btn btn-danger btn-block">Vaciar Carrito</a>
-                            <!-- <a href="{% url 'Pedido:RegistroPedidoCliente' %}"  class="btn btn-success btn-block">Realizar Pedido</a> -->
-                            <button type="submit" class="btn btn-success btn-block">Realizar Pedido</button>
-                        </div>
-                    </form>
-                    
-                </li>
                 {% endif %}
             </ul>
 
@@ -185,8 +158,8 @@
                     <div class="modal-body">
                         <div class="card col-auto p-3 formulario"> 
                             <div class="mb-2">
-                                <form action="{% url 'Usuario:login' %}" method="post">
-                               <fieldset>
+                                <form action="{% url 'Usuario:login' %}" method="post">{% csrf_token %}
+                                    <fieldset>
                                         <div class="col-auto mb-2">
                                             <label><i class="fa-solid fa-user"></i> Usuario</label>
                                             <input type="text" class="form-control mb-2 text-center" name="username" id="usuario-login" required placeholder="Ingrese su usuario">
@@ -283,5 +256,28 @@
     <!-- Alerts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Mensajes-->
+    {% if messages %} 
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <script>
+                    Swal.fire({
+                        "title": "Disculpe!!!",
+                        "text": "{{ message }} {{ user.username }}",
+                        "icon": "error"
+                    })
+                </script>
+            {% endif %}
+            {% if message.tags == 'success' %}
+                <script>
+                    Swal.fire({
+                        "title": "Bienvenido!!!",
+                        "text": "{{ message }} {{ user.username }}",
+                        "icon": "success"
+                    })
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

@@ -37,7 +37,7 @@ class Especialidad(models.Model):
 class Plato(models.Model):
     codigo_plato = models.AutoField(primary_key=True)
     nombre_plato = models.CharField(max_length=200,blank=True)
-    precio_plato = models.DecimalField(max_digits=8, decimal_places=2, default=None)
+    precio_plato = models.IntegerField(default=None)
     vigencia_plato = models.BooleanField(default=True)
     estado_promocion = models.BooleanField(default=False)
     tipo_plato = models.ForeignKey(TipoPlato,on_delete=models.CASCADE)
