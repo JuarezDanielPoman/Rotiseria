@@ -1,6 +1,7 @@
 {% extends "base/baseAdministrador.html" %}
 {% block titulo %}Detalle de Persona{% endblock %}
 {% block contenido %}
+{% load static %}
     
     <section class="container">
         <h2 class="text-center mt-3">ESTADISTICAS</h2>
@@ -9,8 +10,44 @@
         <input type="date" id="fecha">
         <br><br>
         <div class="table-responsive">
-            
-            <table id="ventasdiarias" class="table table-striped table-bordered bg-white table-hover text-center">
+            <table id="ventasdiarias" class="table table-dark">
+                <thead>
+                    <tr>
+                        <!-- <th scope="col">Imagen</th> -->
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora desde</th>
+                        <th scope="col">Hora hasta</th>
+                        <th scope="col">Estado entrega</th>
+                        <th scope="col">Plato</th>
+                    </tr>
+
+                </thead>
+                <tbody class="body">
+                    {% for p in estadistica%}
+                    {% if p.estado_entrega.descripcion_estado == 'Entregado' %}
+                        <tr>
+                            <td>{{p.cod_pedido}}</td>
+                            <td>{{p.fecha_pedido}}</td>
+                            <td>{{p.hora_entrega_desde}}</td>
+                            <td>{{p.hora_entrega_hasta}}</td>
+                            <td>{{p.estado_entrega}}</td>
+                            <td> 
+                            {% for pl in p.platos.all %}
+                            {{pl.precio_plato}}
+
+                            {% endfor%}
+                            </td>
+                        </tr>
+
+                    {% endif%}
+                    {% endfor%}
+
+                
+                </tbody>
+            </table>
+
+            <!-- <table id="ventasdiarias" class="table table-striped table-bordered bg-white table-hover text-center">
                 <caption>Listado de ventas diarias </caption>
                 <thead class="table-primary color-tabla-text">
                     <tr>
@@ -46,7 +83,7 @@
                     </tr>
 
                 </tbody>
-            </table> 
+            </table>  -->
             
             
             <label>Seleccione el cadete del que desea ver sus pedidos</label><br>
@@ -59,11 +96,12 @@
                 <option value="4"></option> 
             </datalist>
           
-            
-        </div>
+           
+               
+</div>
 
         <!-- grafica Barras -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xl-6">
                 <div class="card mb-4 mt-3">
                     <div class="card-header">
@@ -76,7 +114,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         <div class="table-responsive">
             <table id="entregadasporcadete" class="table table-striped bg-white table-bordered table-hover text-center">
@@ -124,4 +162,6 @@
         </div>
 
     </section>
+    <script src="{% static 'js/Estadistica.js' %}"></script>
+
 {% endblock %}

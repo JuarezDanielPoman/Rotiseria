@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
+from apps.Pedido.models import Plato
+from apps.Pedido.models import Pedido
 from apps.Usuario.forms import CadeteForm, CustomUserCreationForm
 from apps.Usuario.models import Persona, cadete
 from apps.Usuario.forms import ZonaDomicilioForm
@@ -17,6 +19,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth import *
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -73,6 +77,8 @@ def login_view(request):
             return render(request, 'base/home.html')
     return render(request, 'base/home.html')
 
+@login_required(login_url='Usuario:login')
+@permission_required('Persona.add_programa', raise_exception=True)
 def creacion_cliente(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -104,6 +110,7 @@ def creacion_cliente(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
+@login_required(login_url='Usuario:login')
 def creacion_cadete(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -136,12 +143,14 @@ def creacion_cadete(request):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
+@login_required(login_url='Usuario:login')
 def persona_detalle(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     return render(request,
                   'Usuario/detalle.html',
                   {'persona': persona})
 
+@login_required(login_url='Usuario:login')
 def persona_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -152,6 +161,7 @@ def persona_delete(request):
     return render(request,
                   'Usuario/detalle.html')
 
+@login_required(login_url='Usuario:login')
 def persona_delete_lista(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -163,6 +173,7 @@ def persona_delete_lista(request):
     return render(request,
                   'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
+@login_required(login_url='Usuario:login')
 def cadete_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -174,6 +185,7 @@ def cadete_delete(request):
     return render(request,
                   'Usuario/ListaDeCadetes.html',{'cadetes': listaPersonas})
 
+@login_required(login_url='Usuario:login')
 def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
@@ -206,16 +218,17 @@ def persona_edit(request, pk):
         zona_form = ZonaDomicilioForm(prefix='zona')
     return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
+@login_required(login_url='Usuario:login')
 def lista_cadetes(request):
     listaCadetes = cadete.objects.all()
     return render(request,'Usuario/ListaDeCadetes.html',{'cadetes': listaCadetes})
 
-
+@login_required(login_url='Usuario:login')
 def lista_personas(request):
     listaPersonas = Persona.objects.all()
     return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
-
+@login_required(login_url='Usuario:login')
 def buscar_personas(request):
     programas = Persona.objects.all()
 
@@ -225,6 +238,7 @@ def buscar_personas(request):
     return render(request, 'Usuario/ListaDePersonas.html',
                   {'personas': buscar_persona})
 
+@login_required(login_url='Usuario:login')
 def buscar_cadetes(request):
     busqueda = request.POST.get("buscar")
     product_list = cadete.objects.order_by('nombre')
@@ -248,13 +262,56 @@ def buscar_cadetes(request):
     return render(request, 'index.html', data)
 
 
-# def login_view(request):
-#     if request.method == "POST":
-#         username = request.POST["username"]
-#         password = request.POST["password"]
-#         user = authenticate(request, username=username, password=password)
-#         if user: login(request, user)
-#             return HttpResponseRedirect(reverse("usuarios:index"))
-#         else:
-#             return render(request, "usuarios/login.html", { “msj": “Credenciales incorrectas" })
-#     return render(request, "usuarios/login.html")
+    
+@login_required
+def estadisticas(request):
+            pedidos = Pedido.objects.all()
+            platos = Plato.objects.all()
+            # for data in pedidos:
+            #     data.cant = len(Pedido.objects.filter(curso = data.codigo_pedido))
+            return render(request,'base/Estadistica.html',{'estadistica':pedidos,'platos':platos})
+         
+# @login_required
+# def estadisticas(request):
+#     return render(request, 'cursos/estadisticas.html', {'cursos':curso.objects.all()})
+    
+# @login_required
+# def estadisticas_1(request):
+#     #if request.method == 'POST':
+#             Cursos = curso.objects.all()
+#             #Curso = get_object_or_404(curso,pk=request.POST['id_curso'])
+            
+#             #cantinscriptos = []
+#             for data in Cursos:
+#                 #cantinscriptos.append(len(Inscriptos.objects.filter(curso = data.id)))
+#                 data.cant = len(Inscriptos.objects.filter(curso = data.id))
+                 
+#             #print(cantinscriptos)
+#             return render(request,'cursos/estadisticascantinscriptos.html',{'cursos':Cursos})
+#             # nombre_curso = Curso.nombrecurso
+#             # Curso.delete()
+#             # messages.success(request, 'Se ha eliminado exitosamente el curso {}'.format(nombre_curso))
+#         # else:
+#             # messages.error(request, 'Debe indicar qué Programa se desea eliminar')
+
+# @login_required
+# def estadisticas_2(request):
+#     Cursos = curso.objects.all()
+    
+#     for data in Cursos:
+#         data.cant = len(Inscriptos.objects.filter(curso = data.id))
+#         data.cantP= len(PagoEfectivo.objects.filter(curso = data.id)) + len(PagoTarjeta.objects.filter(curso = data.id)) + len(PagoTransferencia.objects.filter(curso = data.id)) 
+#         data.cantD= data.cant - data.cantP
+    
+#     return render(request,'cursos/estadisticascantpago.html',{'cursos':Cursos})    
+
+
+# @login_required
+# def estadisticas_3(request):
+#     if request.method == 'POST':
+#         fechaini = request.POST.get('id_anioinicio',None)
+#         fechafin = request.POST.get('id_aniofin',None)
+#         intervalo= curso.objects.filter(fechaini__range=(fechaini, fechafin))
+#     return render (request,'cursos/listaCursosAnio.html',{'intervalo':intervalo,'fechaini':fechaini,'fechafin':fechafin})
+
+  

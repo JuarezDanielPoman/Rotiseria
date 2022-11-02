@@ -1,9 +1,11 @@
 
 var total=0;
-let celdasPrecio=document.querySelectorAll( ' td + td + td + td'); 
+let celdasPrecio=document.querySelectorAll( ' td + td + td + td + td '); 
 console.log(celdasPrecio.length);
 for ( let i = 0 ;i<document.getElementById("ventasdiarias").rows.length-1;++i) {
-total += parseInt(celdasPrecio[i].firstChild.data) ;
+total += parseInt(celdasPrecio[i].firstChild.data );
+console.log(total);
+
 }
 
 
