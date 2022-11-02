@@ -63,7 +63,6 @@ def limpiar_carrito(request):
     carrito.limpiar()
     return redirect(to='Pedido:CarritoPedidoCliente')
 
-@login_required(login_url='Usuario:login')
 def procesar_compra(request):
     carrito = Carrito(request)
     #lista_platos_carrito = request.session.carrito.items
