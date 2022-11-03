@@ -27,13 +27,12 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def index(request):
-    if not request.user.is_authenticated:
-        #return HttpResponseRedirect(reverse('Usuario:logout'))
-        messages.error(request, 'Usuario y/o contraseña incorrecta')
-        #return render(request,'base/home.html')
-    
+def index(request):    
     return render(request, 'base/home.html')
+
+#def administrador(request):
+#    return render(request, 'base/baseAdministrador.html')
+
 
 def registrarUsuario(request):
     data = {
@@ -67,7 +66,7 @@ def login_view(request):
             username = 'Error'
             password = 'Error'
         user = authenticate(request, username=username, password=password)
-        if user: 
+        if user:
             login(request, user)
             messages.success(request, 'Hola, ')
             return render(request, 'base/home.html')

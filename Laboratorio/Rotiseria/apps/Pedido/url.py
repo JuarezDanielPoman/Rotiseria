@@ -1,12 +1,13 @@
 from django import views
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from apps.Pedido.views import CarritoPedidoCliente,agregar_plato_carrito, eliminar_plato_carrito, limpiar_carrito,menu_delete,lista_menus,creacion_pedido,lista_pedidos_cadetes,lista_pedidos,menu_detalle,creacion_menu, procesar_compra, promociones, restar_plato_carrito
+from apps.Pedido.views import CarritoPedidoCliente,agregar_plato_carrito, eliminar_plato_carrito, limpiar_carrito, listarCategoriaPlato,menu_delete,lista_menus,creacion_pedido,lista_pedidos_cadetes,lista_pedidos,menu_detalle,creacion_menu, procesar_compra, promociones, restar_plato_carrito
 
 
 app_name='Pedido'
 
 urlpatterns=[
+path('categoria',listarCategoriaPlato,name="categorias"),
 path('RegistroDeMenu',creacion_menu,name='RegistroDeMenu'),
 path('promociones',promociones, name="promociones"),
 path('<int:pk>/', menu_detalle, name='menu_detalle'),

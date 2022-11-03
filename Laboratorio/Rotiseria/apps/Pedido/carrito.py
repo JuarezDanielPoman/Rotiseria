@@ -25,6 +25,12 @@ class Carrito:
                     break
         self.guardar()
 
+    def lista(self):
+        lista_platos_carrito = []
+        for key, value in self.carrito.items():
+            lista_platos_carrito.append(key)
+        return lista_platos_carrito
+
     def guardar(self):
         self.session["carrito"] = self.carrito
         self.session.modified=True

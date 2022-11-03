@@ -16,17 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from apps.Pedido.views import listarCategoriaPlato
 
 from apps.Usuario.views import index,estadisticas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Estadistica/', estadisticas, name='estadistica'),
     path('', TemplateView.as_view(template_name='base/home.html'), name='home'),
     path('Usuario/',include('apps.Usuario.url',namespace='Usuario')),
     path('Pedido/',include('apps.Pedido.url',namespace='Pedido')),
     path('index', index, name='baseCadete'),
     path('Administrador',TemplateView.as_view(template_name='base/baseAdministrador.html'), name='Administrador'),
-
+    path('Estadistica/', estadisticas, name='estadistica'),
 ]
 

@@ -65,12 +65,11 @@
                 
                 <!-- Categoria Menu -->
                 <li class="menu__item container-submenu"> 
-                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-shop"></i> Menú <i class="hvr-icon fa-solid fa-angle-down"></i></a>
+                    <a href="{% url 'Pedido:categorias' %}" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-shop"></i> Menú <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
-                        <li id="diabeticos" class="menu__item"><a id="enlacediabeticos" href="../templates/ListaDeMenu.html" class="hvr-icon-pulse menu__link"><i id="iconod" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i><i class="fa-solid fa-heart"></i> Diabeticos</a></li>
-                        <li id="celiacos" class="menu__item "><a id="enlaceceliacos" href="#" class="hvr-icon-pulse menu__link"><i id="icono" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i><i class="fa-solid fa-bread-slice"></i> Celiacos</a></li>
-                        <li id="vegetarianos" class="menu__item"><a href="#" id="enlacevegetarianos" class="hvr-icon-pulse menu__link"><i id="iconov" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i><i class="fa-brands fa-envira"></i> Vegetariano</a></li>
-                        <li id="generales" class="menu__item"><a id="enlacegenerales" href="#" class="hvr-icon-pulse menu__link"><i id="iconog" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i><i class="fa-solid fa-burger"></i> Generales</a></li>
+                        {% for c in categorias %}
+                            <li  class="menu__item"><a href="#" class="hvr-icon-pulse menu__link"> {{c.descripcion_especialidad}}</a></li>
+                        {% endfor %}
                     </ul>
                 </li>
                 
@@ -82,23 +81,35 @@
                 
                 {% if user.is_authenticated %}
                 <!-- Si se encuentra autenticado mostramos-->
-                <!-- Boton carrito -->
-                <li class="menu__item">
-                    <a href="{% url 'Pedido:CarritoPedidoCliente' %}" class="menu__link btn-outline-white">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total }}</span>
-                    </a>
-                </li>
-                
-                <li class="menu__item container-submenu">
-                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b> {{ user.username }}</b></a>
-                    <ul class="submenu">
-                        <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
-                        <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
-                    </ul>
-                </li>
-
-                
+                <!-- SI ES STAFF -->
+                    {% if user.is_staff == False %}
+                    <!-- Boton carrito -->
+                    <li class="menu__item">
+                        <a href="{% url 'Pedido:CarritoPedidoCliente' %}" class="menu__link btn-outline-white">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total }}</span>
+                        </a>
+                    </li>
+                    
+                    <li class="menu__item container-submenu">
+                        <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b> {{ user.username }}</b></a>
+                        <ul class="submenu">
+                            <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                            <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                        </ul>
+                    </li>
+                    {% endif%}
+                    
+                    {% if user.is_staff == True %}
+                    <li class="menu__item container-submenu">
+                        <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b>{{ user.username }}</b></a>
+                        <ul class="submenu">
+                            <li class="menu__item"> <a href="{% url 'Administrador' %}" class="hvr-icon-pulse menu__link">Administración</a> </li>
+                            <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                            <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                        </ul>
+                    </li>
+                    {% endif%}
                 {% else %}
                 <!-- Si no esta autenticado -->
                 <!-- Login -->

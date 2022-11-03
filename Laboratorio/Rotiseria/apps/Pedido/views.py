@@ -9,29 +9,24 @@ from apps.Pedido.models import Plato,Pedido
 from django.contrib.auth.decorators import login_required
 
 from .forms import PlatoForm, PedidoForm
-from .models import Plato, Pedido
+from .models import Especialidad, Plato, Pedido
 from .carrito import Carrito
 
 #from .apps import PlatoForm,PedidoForm
 #from apps.Pedido.models import Plato,Pedido
 #from apps.Pedido.carrito import Carrito
 # Create your views here.
-@login_required(login_url='Usuario:login')
-def creacion_menu(request):
-    if (request.method == 'POST'):
-        plato_form = PlatoForm(request.POST, prefix='menu')
-        if plato_form.is_valid():
-            p=plato_form.save(commit=True)
-            messages.success(request,
-            'Se ha agregado correctamente el plato {}'.format(p))
-            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_plato}))
-    else:
-        plato_form = PlatoForm(prefix='menu')
-    return render(request,'Pedido/RegistroDeMenu.html',{'plato_form': plato_form})
+
 
 def promociones(request):
     lista_platos = Plato.objects.all()
+    print(lista_platos)
     return render(request,'Pedido/promociones.html',{'platos': lista_platos})
+
+def listarCategoriaPlato(request):
+    lista_categoria = Especialidad.objects.all()
+    print(lista_categoria)
+    return render(request,'base/home.html',{'categorias': lista_categoria})
 
 #Vistas para el Carrito
 @login_required(login_url='Usuario:login')
@@ -65,10 +60,26 @@ def limpiar_carrito(request):
 
 def procesar_compra(request):
     carrito = Carrito(request)
-    #lista_platos_carrito = request.session.carrito.items
-    #print('LISTA DE PLATOS:',lista_platos_carrito)
+    lista = carrito.lista()
+    for x in lista:
+        print('LISTA DE PLATOS:',x)
+    
     carrito.limpiar()
     return redirect(to='Pedido:promociones')
+
+
+@login_required(login_url='Usuario:login')
+def creacion_menu(request):
+    if (request.method == 'POST'):
+        plato_form = PlatoForm(request.POST, prefix='menu')
+        if plato_form.is_valid():
+            p=plato_form.save(commit=True)
+            messages.success(request,
+            'Se ha agregado correctamente el plato {}'.format(p))
+            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_plato}))
+    else:
+        plato_form = PlatoForm(prefix='menu')
+    return render(request,'Pedido/RegistroDeMenu.html',{'plato_form': plato_form})
 
 @login_required(login_url='Usuario:login')
 def menu_detalle(request, pk):

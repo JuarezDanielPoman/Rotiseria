@@ -61,25 +61,25 @@
 
             <ul class="menu" id="menu">
                 
-                <li class="menu__item"> <a href="../templates/Administrador.html" class="hvr-underline-from-center  menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-house"></i> Inicio</a> </li>
+                <li class="menu__item"> <a href="{% url 'home' %}" class="hvr-underline-from-center  menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-house"></i> Inicio</a> </li>
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-person"></i> Clientes <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
                         <li id="cliente" class="menu__item"><a id="cliente" href="{% url 'Usuario:RegistroDeClientes' %}" class="hvr-icon-down menu__link">Registrar</a></li>
                         <li id="lista-personas" class="menu__item"><a  href="{% url 'Usuario:lista_de_personas' %}" class="hvr-icon-down menu__link">Listar</a></li>
 
-                   </ul>
+                    </ul>
                 </li> 
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-person-digging"></i> Empleados <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
                         <li id="cadete" class="menu__item"><a id="cadete" href="{% url 'Usuario:RegistroDeCadetes' %}" class="hvr-icon-down menu__link">Registrar</a></li>
                         <li id="lista-empleado" class="menu__item"><a  href="{% url 'Usuario:lista_de_cadetes' %}" class="hvr-icon-down menu__link">Listar</a></li>
-                   </ul>
+                    </ul>
                 </li>
 
                 <li class="menu__item container-submenu"> 
-                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-utensils"></i> Menus <i class="hvr-icon fa-solid fa-angle-down"></i></a>
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-utensils"></i> Platos <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
                         <li id="menu" class="menu__item"><a id="menu" href="{% url 'Pedido:RegistroDeMenu' %}" class="hvr-icon-down menu__link">Registrar</a></li>
                         <li id="menu" class="menu__item"><a id="menu" href="{% url 'Pedido:listademenus' %}" class="hvr-icon-down menu__link">listar</a></li>
@@ -95,6 +95,13 @@
                 <li class="menu__item container-submenu"> 
                     <a href="{% url 'estadistica' %}" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-chart-column"></i> Estadisticas</i></a>
                 </li>
+                <li class="menu__item container-submenu">
+                    <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b>{{ user.username }}</b></a>
+                    <ul class="submenu">
+                        <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                        <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                    </ul>
+                </li>
             </ul>
 
         </nav>
@@ -104,6 +111,56 @@
     
     <section class="mt-5">
         {% block contenido %}
+            
+    <!-- Presentacion -->
+    <div id="presentacion" class="jumbotron bg-jumbotron d-flex flex-column justify-content-center align-items-center text-white text-center">
+        
+        <h1 class="display-3 text-capitalize w-70 titulo-promociones ">BIENVENIDOS AL MEJOR SABOR</h1>
+        <p class="lead w-75 titulo-presentacioncls">Proba todas las delicias que tenemos para vos, en los diferentes rubros de comidas. Vegetariana, Celiaca, para Diabeticos y comidas en general. 
+                    todo, todo lo que buscas lo encontra <a href="#">aqui</a>, en "EL BUEN GUSTO ROTISERIA".
+                    ¡Hace tu pedido! y aprovecha todos los descuentos que tenemos para vos. &#128521 
+                </p>
+        <hr class="my-4 bg-dark">
+        
+        <div class="row">
+            <div class="col-md-auto">
+                <a id="explorar" class="boton-explorar hvr-wobble-vertical" href="{% url 'Pedido:promociones' %}" role="button">Explorar menu</a>
+                <a class="boton-registrar hvr-pulse-grow" data-toggle="modal" data-target="#ventanaModalLogin" href="#" role="button">Ingresar</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- slaider -->
+    <div class="slider">
+        <ul>
+            <li><img src="{% static 'assets/1.png' %}" alt=""></li>
+            <li><img src="{% static 'assets/2.png' %}" alt=""></li>
+            <li><img src="{% static 'assets/3.png' %}" alt=""></li>
+            <li><img src="{% static 'assets/4.jpg' %}" alt=""></li>
+        </ul>
+    </div>
+    
+        <!-- Jumbotron acerca de -->    
+        <div class="container mt-10">   
+            <div class="jumbotron"id="acerca-de-roti" >
+                <div class="row"> 
+                    <div class="col-md-6 img">
+                        <img class="img-jumbutrom" src="{% static 'assets/jumbotrom.jpg' %}" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <span class="nosotros">Nosotros</span>
+                        <!-- <h1 class="display-4 h4-jumbotron">¿Quienes somos?</h1> -->
+                        <h2>Rotiseria "El mejor sabor"</h2>
+                        <p class="lead">La rotiseria el mejor sabor nació en 2020 cuando Lucas Zarate se quedo sin trabajo jaja Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde in est reprehenderit neque beatae quibusdam consequuntur nemo eaque eligendi porro earum, voluptatem, ut eos quasi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae nemo veritatis impedit repellendus et obcaecati cum excepturi quo corporis, minima sed reiciendis quod, nam veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, tenetur!</p>
+                        <hr class="my-4 bg-dark">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <a href="#fondo-pagina" id="boton-arriba"><i class="fa-solid fa-circle-up"></i></a>
+
         {% endblock %}
     </section>
 

@@ -7,6 +7,7 @@ from django.contrib.auth.views import LoginView
 app_name='Usuario'
 
 urlpatterns=[
+    #path('Administrador/',administrador, name='admin'),
     path('RegistroDeClientes',creacion_cliente,name='RegistroDeClientes'),
     path('RegistroDeCadetes',creacion_cadete,name='RegistroDeCadetes'),
     path('detalle/<int:pk>/', persona_detalle, name='persona_detalle'),
