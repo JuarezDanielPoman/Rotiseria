@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from apps.Usuario.models import Persona
 
 from .forms import PlatoForm, PedidoForm
-from .models import Especialidad, Plato, Pedido
+from .models import Especialidad, EstadoEntrega, ModalidadEntrega, Plato, Pedido
 from .carrito import Carrito
 
 #from .apps import PlatoForm,PedidoForm
@@ -58,30 +58,24 @@ def limpiar_carrito(request):
 
 def procesar_compra(request):
     carrito = Carrito(request)
-    lista = carrito.lista()
-    for id_plato in lista:
-        print('LISTA DE PLATOS:',id_plato)
+   
     
     id_user = request.POST['username']
     persona = Persona.objects.get(user_id=id_user)
     print('PERSONA:',persona.cuil)
 
-    #class Pedido(models.Model):
-    #cod_pedido = models.AutoField(primary_key=True)
-    #fecha_pedido = models.DateTimeField(auto_now_add=True)
-    #persona = models.ForeignKey(Persona,blank=False,null=False,on_delete=models.CASCADE)
-    #hora_entrega_desde = models.TimeField(auto_noe)
-    #hora_entrega_hasta = models.TimeField(blank= True)
-    #estado_entrega = models.ForeignKey(EstadoEntrega, on_delete=models.CASCADE)
-    #platos = models.ManyToManyField(Plato)
-    #modo_entrega = models.ForeignKey(ModalidadEntrega,on_delete=models.CASCADE) 
-    #cadete = models.ForeignKey(cadete,related_name='cadete',blank=True,null=True,on_delete=models.CASCADE)
-    #curso = Curso.objects.create(codigo=codigo, nombre=nombre, creditos=creditos)
+    entrega = EstadoEntrega.objects.get(estado_entrega=1)
+    modalidad = ModalidadEntrega.objects.get(modoentrega=1)
 
-    pedido = Pedido.objects.create()
-    pedido.save(persona=persona,estado_entrega=1)
+    pedido = Pedido.objects.create(persona=persona,estado_entrega=entrega,modo_entrega=modalidad)
+    pedido.save()
 
+    lista = carrito.lista()
+    for id_plato in lista:
+        print('LISTA DE PLATOS:',id_plato)
+        pedido.platos.add(id_plato)
 
+    pedido.save()
     carrito.limpiar()
     return redirect(to='Pedido:promociones')
     
