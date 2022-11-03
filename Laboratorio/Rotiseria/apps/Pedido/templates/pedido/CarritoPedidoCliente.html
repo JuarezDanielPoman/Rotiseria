@@ -21,6 +21,7 @@
             <div class="col">
                 <h2 class="d-flex justify-content-center mb-3">Listado de compras</h2>
                 <form action="{% url 'Pedido:procesarcompra' %}" method="post">{% csrf_token %}
+                    <input type="hidden" name="username" value="{{ user.id }}">
                     <div class="form-group row">
                         <label for="cliente" class="col-form-label text-white">Cliente :</label>
                         <div class="col-12 col-md-10">
@@ -59,7 +60,7 @@
                                             <a href="{% url 'Pedido:delplato' value.plato_id %}"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
-                                
+                                    
                                 {% endfor %} {% else %}
                                 <tr>
                                     <td colspan="5">
