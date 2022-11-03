@@ -8,26 +8,25 @@
     <div class="d-flex justify-content-center">
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
-        <form action="#" method="POST">
-            <fieldset>
-                <legend class="text-center">INGRESE LOS DATOS</legend>
-                {{menu_form.errors}}
-                {% csrf_token %}
-                <div class="col-auto mb-2">
-                {{plato_form.as_p}}
-                </div>
-                
-              
-            </fieldset>
-            <div class="col-auto text-center">
-                <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
-                <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
-            </div>
-        </form>
+                <form action="#" method="POST">
+                    <fieldset>
+                        <legend class="text-center">INGRESE LOS DATOS</legend>
+                        {{menu_form.errors}}
+                        {% csrf_token %}
+                        <div class="col-auto mb-2">
+                        {{plato_form.as_p}}
+                        </div>
+                        
+                      
+                    </fieldset>
+                    <div class="col-auto text-center">
+                        <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
+                        <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
+                    </div>
+                </form>
+            </div>    
+          </div>  
     </div>    
-    </div>  
-</div>    
-
 </section>
 
 {% endblock contenido %}  

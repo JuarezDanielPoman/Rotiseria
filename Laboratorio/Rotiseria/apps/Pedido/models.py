@@ -58,9 +58,7 @@ class ModalidadEntrega(models.Model):
     def __str__(self):
         texto = "{0}"
         return texto.format(self.descripcion_modo_entrega)
-     
-        
-        
+
 class Pedido(models.Model):
     cod_pedido = models.AutoField(primary_key=True)
     fecha_pedido = models.DateTimeField(auto_now_add=True)
