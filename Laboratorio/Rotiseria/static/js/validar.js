@@ -26,7 +26,6 @@ function muestraopciondelivery(){
     }
     if(opcionselecciondada.value==2){
         document.getElementById("opcion").style.display = 'NONE';
-        console.log("Llego aca ")
     }
     //insertartelefonodomicilio.removeChild(telefonodomicilio);
 
