@@ -1,33 +1,34 @@
 {% extends 'base/base.html'%} 
 {% block titulo %}CREAR USUARIO{% endblock %}
 
-{% block content %}
+{% block contenido %}
 {% load static %}
-<!-- <div class="min-vh-100 d-flex flex-colum py-4">
-    <div class="container">
-        <div class="col-lg-6 col-md-6 col-sm-4 mx-auto bg-dark text-white animate__animated animate__bounceInDown animate__delay-0.4s">
-            <div class="card-header">
-                <h3 class="text-center">Registro de Usuarios</h3>
-                {% load crispy_forms_tags %}
-                <div class="card-body py-2">
-                    <form method="post" action="">
-                        {% csrf_token %} {{ form | crispy }}
 
-                        <div class="text-center pb-2">
-                            <button class="btn btn-danger" type='submit'>Registrarse</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-    
     <div class="d-flex justify-content-center mt-5">            
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
                 <form action="#" method="post">
-                    <fieldset>
+                    {{usuario.errors}}
+                    {{domicilio_form.errors}}
+                    {{zona_form.errors}}
+                    {{telefono_form.errors}}
+                    {{persona_form.errors}}
+
+                     <br>
+                    <label>Nombre de usuario</label>
+                    {{usuario.username}} <br>
+                    <label>Contraseña</label>
+                     {{usuario.password1}}<br>
+                     <label >Confirmar contraseña</label>
+                    {{usuario.password2}}<br> 
+                    {{persona_form.as_p}}
+                   
+                    {{domicilio_form.as_p}}
+                    {{zona_form.as_p}}
+                    {{telefono_form.as_p}}
+
+
+                    <!-- <fieldset>
                         <legend class="text-center"> <span>REGISTRAR USUSARIO</span></legend>
 
                         <div class="col-auto mb-2">
@@ -56,11 +57,11 @@
                             <input class="form-control mb-2" type="password" id="password"  name="password" required placeholder="Ingrese su contraseña">
                             </div>
                         </fieldset>  
-                    </fieldset>
-                    
+                    </fieldset> -->
+                    {% csrf_token %}
                     <div class="col-auto text-center">
                         <input class="btn btn-danger mb-2" type="reset" name="cancelar" value="CANCELAR" />
-                        <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="REGISTRARME" />
+                        <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
                     </div>
                 </form>
             </div>
