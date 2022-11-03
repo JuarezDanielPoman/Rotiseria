@@ -69,6 +69,7 @@ def procesar_compra(request):
 
 
 @login_required(login_url='Usuario:login')
+@permission_required('Plato.add_plato', raise_exception=True)
 def creacion_menu(request):
     if (request.method == 'POST'):
         plato_form = PlatoForm(request.POST, prefix='menu')
@@ -101,6 +102,7 @@ def creacion_pedido(request):
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
 
 @login_required(login_url='Usuario:login')
+
 def lista_pedidos(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
@@ -113,6 +115,7 @@ def lista_pedidos_cadetes(request):
 
 #@permission_required(Usuario.add_persona', raise_exception=True)
 @login_required(login_url='Usuario:login')
+@permission_required('Pedido.add_pedido', raise_exception=True)
 def creacion_pedido(request):
     if (request.method == 'POST'):
         pedido_form = PedidoForm(request.POST, prefix='pedido')
@@ -136,6 +139,7 @@ def lista_pedidos_cadetes(request):
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Pedido.view_menus', raise_exception=True)
 def lista_menus(request):
     listamenus = Plato.objects.all()
     return render(request,'Pedido/listademenus.html',{'menus': listamenus})

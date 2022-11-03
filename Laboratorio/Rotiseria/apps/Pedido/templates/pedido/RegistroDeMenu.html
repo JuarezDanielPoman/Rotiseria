@@ -2,7 +2,7 @@
 {% load static %}
 {% block contenido %}
 
-
+{% if perms.Platos.add_plato %}
 
 <section>
     <div class="d-flex justify-content-center">
@@ -79,3 +79,4 @@
       <option value="4">Diabetico</option> 
   </select><br/><br/>
 </div> -->
+{%endif%}

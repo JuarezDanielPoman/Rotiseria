@@ -110,7 +110,7 @@ def login_view(request):
     return render(request, 'base/home.html')
 
 @login_required(login_url='Usuario:login')
-@permission_required('Persona.add_programa', raise_exception=True)
+@permission_required('Persona.add_persona', raise_exception=True)
 def creacion_cliente(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -143,6 +143,7 @@ def creacion_cliente(request):
     return render(request,'Usuario/RegistroDeClientes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Persona.add_cadete', raise_exception=True)
 def creacion_cadete(request):
     if (request.method == 'POST'):
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
@@ -251,11 +252,13 @@ def persona_edit(request, pk):
     return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Persona.view_cadete', raise_exception=True)
 def lista_cadetes(request):
     listaCadetes = cadete.objects.all()
     return render(request,'Usuario/ListaDeCadetes.html',{'cadetes': listaCadetes})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Persona.view_persona', raise_exception=True)
 def lista_personas(request):
     listaPersonas = Persona.objects.all()
     return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
