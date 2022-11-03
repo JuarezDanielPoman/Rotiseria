@@ -91,4 +91,10 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ["username", "first_name","last_name","email","password1","password2"]
 
+        widgets = {
+            'username': forms.TextInput(attrs={'name':"username" , 'type':"text" , 'class':"form-control mb-2 text-center" , 'id':"username", 'placeholder':"Ingrese nombre de usuario"}),
+            'password1': forms.PasswordInput(attrs={'name':"password1" , 'class':"form-control mb-2 text-center" , 'id':"password1"}),
+            'password2': forms.PasswordInput(attrs={'name':"password2" , 'class':"form-control mb-2 text-center" , 'id':"password2"}),
+        }
+
 

@@ -22,5 +22,5 @@ class PlatoForm(forms.ModelForm):
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ('persona','hora_entrega_desde','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
+        fields = ('persona','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
         prefix = 'pedido'

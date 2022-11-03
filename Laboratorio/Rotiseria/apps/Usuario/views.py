@@ -48,19 +48,14 @@ def registrarUsuario(request):
             d=domicilio_form.save(commit=False)
             t=telefono_form.save(commit=False)
             z=zona_form.save(commit=False)
-            p.user_id=f.id
+            
             p.user_username=f.username
             p.user_password=f.password
             f.first_name=p.nombre
             f.last_name=p.apellido
             f.email=p.email
             p.user_email=f.email
-           
-            
-            # print(f.username)
-            # print(f.password)
-            
-            
+
             t.save()
             z.save()
             
@@ -69,8 +64,12 @@ def registrarUsuario(request):
             
             p.domicilio_id=d.cod_domicilio
             p.telefono_id=t.id
-            p.save()
+
             f.save()
+            
+            obtener_id_user = User.objects.get(id=f.id)
+            p.user_id=obtener_id_user.pk
+            p.save()
             user = authenticate(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
             login(request, user)
             return render(request, 'base/home.html')
