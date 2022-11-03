@@ -1,91 +1,31 @@
 var insertodiv = false;
-document.querySelector(".opcion").innerHTML='';
+
+document.getElementById("opcion").style.display = 'NONE';
 
 function muestraopciondelivery(){
-    
+
     let opcionselecciondada = document.getElementById("tipo_pedido");
     console.log(opcionselecciondada.value);
-    let insertartelefonodomicilio = document.querySelector('#pedido');
-    var telefonodomicilio=document.createElement('div');
+    document.querySelector('#pedido');
 
     if(opcionselecciondada.value==1 && insertodiv == false){
     
     
-    telefonodomicilio.innerHTML=`<div class="opcion">
-
-    <div class="col-auto mb-2">
+    document.getElementById("opcion").style.display = '';
     
-    <div>
-        <label>Fijo</label>
-        <input  type="radio" name="telefono-seleccionado" id="fijo" onclick="mostrarInputFijo()">
-    
-        <label>Celular</label>
-        <input type="radio" name="telefono-seleccionado" id="celular" onclick="mostrarInputCelular()">
-    </div>
-    <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-fijo" placeholder="Ingrese su telefono fijo">
-    <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-celular" placeholder="Ingrese su telefono celular">
-    </div>
-            
-    <div class="col-auto">
-        <label>Localidad</label><br>
-        <div class="hvr-icon-pulse form-group has-feedback">
-            <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-        <input class="form-control mb-2 text-center" list="lista-localidad" placeholder="Localidad">
-            <datalist id="lista-localidad">
-                <option value="CAPITAL-S.F.DEL VALLE DE CATAMARCA"></option>
-                <option value="BANDA DE VARELA- CAPITAL"></option>
-                <option value="LA CALERA "></option>
-            </datalist>
-        </div>
-    </div>
-    
-    <div class="col-auto">
-        <label for="zona-domicilicio">Zona</label><br>
-        <div class="hvr-icon-pulse form-group has-feedback">
-            <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-        <select class="form-control mb-2 text-center" name="zona-domicilio" id="zona-domicilicio">
-            <option value="" selected>Seleccione</option>
-            <option value="1">Norte</option>
-            <option value="2">Sur</option>
-            <option value="3">Este</option>
-            <option value="4">Oeste</option>
-        </select>
-        </div>
-    </div>
-    <div class="col-auto">
-        <label>Barrios</label><br>
-        <div class="hvr-icon-pulse form-group has-feedback">
-            <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-        <input class="form-control mb-2 text-center" list="lista-barrio" placeholder="Barrio">
-            <datalist id="lista-barrio">
-                <option value="10 VIVIENDA"></option>
-                <option value="11 DE MAYO"></option>
-                <option value="16 DE AGOSTO"></option>
-            </datalist>
-        </div>
-    </div>
-    <div class="col-auto">
-        <label for="calle_y_numero">Calle</label>
-        <div class="hvr-icon-pulse form-group has-feedback">
-            <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
-            <input type="text" class="form-control mb-2 text-center" required id="calle_y_numero" placeholder="Nombre y número de la calle">
-        </div>
-        </div>
-    `
     insertodiv = true;
     
-        insertartelefonodomicilio.appendChild(telefonodomicilio);
+        // insertartelefonodomicilio.appendChild(telefonodomicilio);
     
-    }else{if(opcionselecciondada.value!=1 && document.querySelector(".opcion").innerHTML!='' && insertodiv==true){
+    }else{if(opcionselecciondada.value!=1 && document.getElementById("opcion").style.display == 'none' && insertodiv==true){
        // insertartelefonodomicilio.parentNode.removeChild(telefonodomicilio);
-       document.querySelectorAll(".opcion").innerHTML='';
+       document.getElementById("opcion").style.display = '';
         insertodiv=false;
     }
     
     }
     if(opcionselecciondada.value==2){
-        document.querySelector(".opcion").innerHTML='';
-        document.querySelector(".opcion").remove();
+        document.getElementById("opcion").style.display = 'NONE';
         console.log("Llego aca ")
     }
     //insertartelefonodomicilio.removeChild(telefonodomicilio);

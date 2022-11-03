@@ -2,6 +2,7 @@
 {% load static %}
 {% block contenido %}
 
+{% if perms.Pedido.add_pedido %}
 
 <section>
     <div class="d-flex justify-content-center">
@@ -23,18 +24,14 @@
                 <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
             </div>
         </form>
+
     </div>    
     </div>  
 </div>    
 
 </section>
 
+{%endif%}
 
+{% endblock contenido %}
 
-
-
-
-
-
-
-{% endblock %}
