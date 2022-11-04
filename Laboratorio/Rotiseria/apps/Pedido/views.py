@@ -81,30 +81,6 @@ def procesar_compra(request):
 
 
 
-    # if(request.method == 'POST'):
-    #     pedido_form = PedidoForm(request.POST, prefix='pedido')
-    #     if(pedido_form.is_valid()):
-    #         id_user = request.POST['username']
-    #         persona = Persona.objects.get(user_id=id_user)
-    #         entrega = EstadoEntrega.objects.get(estado_entrega=1)
-    #         modalidad = ModalidadEntrega.objects.get(modoentrega=1)
-
-    #         pedido = Pedido.objects.create(persona=persona,estado_entrega=entrega,modo_entrega=modalidad)
-    #         pedido.save()
-
-    #         lista = carrito.lista()
-    #         for id_plato in lista:
-    #             print('LISTA DE PLATOS:',id_plato)
-    #             pedido.platos.add(id_plato)
-
-    #         pedido.save()
-    #         carrito.limpiar()
-    #         return redirect(to='Pedido:promociones')
-    # else:
-    #     pedido_form = PedidoForm(prefix='pedido')
-    #     return render(request,'Pedido:CarritoPedidoCliente',{'pedido_form': pedido_form})
-
-
 
 #VISTAS DE MUNÚS (PLATOS)
 @login_required(login_url='Usuario:login')
@@ -248,10 +224,8 @@ def pedido_edit(request, pk):
 
 @login_required(login_url='Usuario:login')
 def detalle_pedido(request, pk):
-       pedido = get_object_or_404(Pedido, pk=pk)
-       return render(request,
-                     'Pedido/detalle_pedido.html',
-                     {'pedido': pedido})
+    pedido = get_object_or_404(Pedido, pk=pk)
+    return render(request,'Pedido/detalle_pedido.html',{'pedido': pedido})
 
 
 @login_required(login_url='Usuario:login')
@@ -273,47 +247,6 @@ def pedidoadmin_edit(request, pk):
 
 @login_required(login_url='Usuario:login')
 def detalle_pedidoadmin(request, pk):
-       pedido = get_object_or_404(Pedido, pk=pk)
-       return render(request,
-                     'Pedido/detalle_pedidoadmin.html',
-                     {'pedido': pedido})
+    pedido = get_object_or_404(Pedido, pk=pk)
+    return render(request,'Pedido/detalle_pedidoadmin.html',{'pedido': pedido})
 
-# @login_required(login_url='Usuario:login')
-# def pedido_edit(request, pk):
-#     pedido = Pedido.objects.get(cod_pedido=pk)
-#     pedido_form = PedidoForm(prefix='pedido')
-#     return render(request,'Pedido/editar_pedido.html',{'pedido_form': pedido_form,'pedido':pedido})
-
-
-# @login_required(login_url='Usuario:login')
-# def detalle_pedido(request,pk):
-#     #AQUÍ REALIZA LA MODIFICACION DEL pedido
-#     id = request.POST['cod_plato']
-#     pedido = Pedido.objects.get(cod_pedido=id)
-
-#     try:
-#         horaentrega = request.POST['hora_entrega_hasta']
-#     except MultiValueDictKeyError:
-#             vigencia = 'Error'
-#     try:
-#         estado = request.POST['estado_entrega']
-#     except MultiValueDictKeyError:
-#             estado = 'Error'
-#     persona = request.POST['persona']
-#     fecha_pedido = request.POST['fecha_pedido']
-#     plato = request.POST['platos']
-#     modoentrega = request.POST['menu-especialidad']
-
-#     print('VERDADADERO:',vigencia)
-#     print('FALSO:',estado)
-
-    
-#     pedido.hora_entrega_hasta = horaentrega
-#     pedido.estado_entrega= estado
-#     pedido.persona = persona
-#     pedido.fecha_pedido = fecha_pedido
-#     pedido.platos = plato
-#     pedido.modo_entrega = modoentrega
-
-#     pedido.save()
-#     return redirect(to='Pedido:lista_pedidos')

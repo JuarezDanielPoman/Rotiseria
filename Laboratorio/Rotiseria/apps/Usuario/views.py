@@ -164,10 +164,9 @@ def creacion_cadete(request):
             p.telefono_id=t.id
             p.save()
 
-            print(request.post['persona'])
-            messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
-            return redirect(reverse('Usuario:detalle', args={p.id}))
+            #print(request.post['persona'])
+            messages.success(request,'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
+            return redirect(reverse('Usuario:persona_detalle', args={p.id}))
     else:
         domicilio_form = DomicilioForm(prefix='domicilio')
         persona_form = CadeteForm(prefix='persona')
@@ -178,9 +177,7 @@ def creacion_cadete(request):
 @login_required(login_url='Usuario:login')
 def persona_detalle(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
-    return render(request,
-                  'Usuario/detalle.html',
-                  {'persona': persona})
+    return render(request,'Usuario/detalle.html',{'persona': persona})
 
 @login_required(login_url='Usuario:login')
 def persona_delete(request):
@@ -211,11 +208,9 @@ def cadete_delete(request):
         if 'id' in request.POST:
             persona = get_object_or_404(cadete, pk=request.POST['id'])
             persona.delete()
-            messages.success(request,
-            'Se ha eliminado la persona {}'.format(persona))
-    listaPersonas = cadete.objects.all()
-    return render(request,
-                  'Usuario/ListaDeCadetes.html',{'cadetes': listaPersonas})
+            messages.success(request,'Se ha eliminado la persona {}'.format(persona))
+    #listaPersonas = cadete.objects.all()
+    return redirect(to='Usuario:lista_de_cadetes')
 
 
 
@@ -250,7 +245,7 @@ def persona_edit(request, pk):
         persona_form = PersonaForm(prefix='persona')
         telefono_form = TelefonoForm(prefix='telefono')
         zona_form = ZonaDomicilioForm(prefix='zona')
-    return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
+    return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form, 'persona':persona})
 
 @login_required(login_url='Usuario:login')
 @permission_required('Persona.view_cadete', raise_exception=True)

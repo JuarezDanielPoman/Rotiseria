@@ -1,7 +1,7 @@
 from django import views
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from apps.Pedido.views import lista_pedidosadmin
+from apps.Pedido.views import lista_pedidosadmin, menu_edit, menu_editado
 from apps.Pedido.views import detalle_pedidoadmin, pedidoadmin_edit
 from apps.Pedido.views import detalle_pedido
 from apps.Pedido.views import pedido_edit
@@ -20,7 +20,8 @@ path('ListaDepedidos',lista_pedidos, name="ListaDepedidos"),
 path('listapedidoscadetes',lista_pedidos_cadetes, name="listapedidoscadetes"),
 path('listademenus',lista_menus, name="listademenus"),
 path('delete/',menu_delete, name="menu_delete"),
-# path('editarPlato/<int:pk>',editar_plato, name='editar_plato'),
+path('editarPlato/<int:pk>',menu_edit, name='menu_edit'),
+path('editarMenu',menu_editado,name='menu_editado'),
 path('edit/<int:pk>',pedido_edit, name='edit_pedido'),
 path('view/<int:pk>',detalle_pedido, name='detalle_pedido'),
 path('editarpedido/<int:pk>',pedidoadmin_edit, name='pedidoadmin_edit'),
