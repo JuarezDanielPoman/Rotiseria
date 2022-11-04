@@ -60,26 +60,51 @@ def limpiar_carrito(request):
 
 def procesar_compra(request):
     carrito = Carrito(request)
-    id_user = request.POST['username']
-    persona = Persona.objects.get(user_id=id_user)
-    estadoentrega = EstadoEntrega.objects.get(estado_entrega=2)
-    modoentrega = ModalidadEntrega.objects.get(modoentrega=1)
-    print('PERSONA:',persona.cuil)
-
-    entrega = EstadoEntrega.objects.get(estado_entrega=1)
-    modalidad = ModalidadEntrega.objects.get(modoentrega=1)
-
-    pedido = Pedido.objects.create()
-    pedido.save(persona=persona,estado_entrega=1)
-
     lista = carrito.lista()
+
+    id_user = request.POST.get('username', None)
+    modo_entega = request.POST.get('modo-entrega',None)
+    modalidad = ModalidadEntrega.objects.get(modoentrega=modo_entega)
+    estado = EstadoEntrega.objects.get(estado_entrega=1)
+    print('MODALIDAD ENTREGA:',modo_entega)
+    
+    persona = Persona.objects.get(user_id=id_user)
+    pedido = Pedido.objects.create(persona=persona,estado_entrega=estado,modo_entrega=modalidad)
+    pedido.save()
+
     for id_plato in lista:
-        print('LISTA DE PLATOS:',id_plato)
         pedido.platos.add(id_plato)
 
     pedido.save()
     carrito.limpiar()
     return redirect(to='Pedido:promociones')
+
+
+
+    # if(request.method == 'POST'):
+    #     pedido_form = PedidoForm(request.POST, prefix='pedido')
+    #     if(pedido_form.is_valid()):
+    #         id_user = request.POST['username']
+    #         persona = Persona.objects.get(user_id=id_user)
+    #         entrega = EstadoEntrega.objects.get(estado_entrega=1)
+    #         modalidad = ModalidadEntrega.objects.get(modoentrega=1)
+
+    #         pedido = Pedido.objects.create(persona=persona,estado_entrega=entrega,modo_entrega=modalidad)
+    #         pedido.save()
+
+    #         lista = carrito.lista()
+    #         for id_plato in lista:
+    #             print('LISTA DE PLATOS:',id_plato)
+    #             pedido.platos.add(id_plato)
+
+    #         pedido.save()
+    #         carrito.limpiar()
+    #         return redirect(to='Pedido:promociones')
+    # else:
+    #     pedido_form = PedidoForm(prefix='pedido')
+    #     return render(request,'Pedido:CarritoPedidoCliente',{'pedido_form': pedido_form})
+
+
 
 #VISTAS DE MUNÚS (PLATOS)
 @login_required(login_url='Usuario:login')
@@ -158,8 +183,6 @@ def menu_editado(request):
 
     plato.save()
     return redirect(to='Administrador')
-
-
 
 @login_required(login_url='Usuario:login')
 @permission_required('Pedido.view_menus', raise_exception=True)

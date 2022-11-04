@@ -3,17 +3,7 @@
 {% block titulo %}REALIZAR PEDIDO{% endblock %}
 {% block contenido %}
 {% load static %}
-{% block js %}
-    <script>
-        function alertProcesarPedido() {
-            Swal.fire({
-            "title": "Felicitaciones!!!",
-            "text": "Gracias por su compra.",
-            "icon": "success"
-        })
-        }
-    </script>
-{% endblock %}
+
 
 <div class="container">
 
@@ -22,13 +12,7 @@
                 <h2 class="d-flex justify-content-center mb-3">Listado de compras</h2>
                 <form action="{% url 'Pedido:procesarcompra' %}" method="post">{% csrf_token %}
                     <input type="hidden" name="username" value="{{ user.id }}">
-                    <div class="form-group row">
-                        <label for="cliente" class="col-form-label text-white">Cliente :</label>
-                        <div class="col-12 col-md-10">
-                            <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre cliente" name="destinatario">
-                        </div>
-                    </div>
-
+                    
                     <div id="carrito" class="form-group table-responsive" >
                         <table class="table bg-white" id="lista-compra" >
                             <thead>
@@ -94,7 +78,17 @@
                                     <th scope="col">
                                         <p>${{ importe_total }}</p>
                                     </th>
-                                
+                                </tr>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right"></th>
+                                    <th>
+                                        <label for="tipo_pedido">Modalidad del pedido</label>
+                                            <select id="tipo_pedido" class="form-control mb-2 text-center" required name="modo-entrega">
+                                                <option value="" selected>Seleccione</option>
+                                                <option value="1">Retiro</option> 
+                                                <option value="2">Envio</option> 
+                                            </select>
+                                    </th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -114,121 +108,18 @@
                         </div>
                     </div>
                 </form>
-
-
             </div>
-
-
     </div>
-
-
-    <!-- seccion de verificar datos -->
-    <section>
-        <div class="text-right">
-            <button class="btn btn-warning" data-toggle="modal" data-target="#ventanaModal">Tipo de pedido</button>
-        </div>
-        
-        <div class="modal fade" id="ventanaModal" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 id="titulo-ventana" class="text-center">Tipo de entrega del pedido</h5>
-                        <button class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
-                    </div>
-            
-                    <div class="modal-body">
-                        <div class="card col-auto p-3 formulario"> 
-                            <div id="pedido" class="mb-2">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <div class="col-auto mb-2">
-                                            <label for="tipo_pedido">Tipo de pedido</label>
-                                            <select id="tipo_pedido" onclick="muestraopciondelivery()" class="form-control mb-2 text-center" required name="tipo_pedido">
-                                                <option value="" selected>Seleccione</option>
-                                                <option value="1">Delivery</option> 
-                                                <option value="2">Paso por el local</option> 
-                                            </select>
-
-                                            <div id="opcion">
-
-                                                <div class="col-auto mb-2">
-                                                
-                                                <div>
-                                                    <label>Fijo</label>
-                                                    <input  type="radio" name="telefono-seleccionado" id="fijo" onclick="mostrarInputFijo()">
-                                                
-                                                    <label>Celular</label>
-                                                    <input type="radio" name="telefono-seleccionado" id="celular" onclick="mostrarInputCelular()">
-                                                </div>
-                                                <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-fijo" placeholder="Ingrese su telefono fijo">
-                                                <input class="form-control mb-2 text-center inactivo" type="tel" required id="estado-celular" placeholder="Ingrese su telefono celular">
-                                                </div>
-                                                        
-                                                <div class="col-auto">
-                                                    <label>Localidad</label><br>
-                                                    <div class="hvr-icon-pulse form-group has-feedback">
-                                                        <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                                    <input class="form-control mb-2 text-center" list="lista-localidad" placeholder="Localidad">
-                                                        <datalist id="lista-localidad">
-                                                            <option value="CAPITAL-S.F.DEL VALLE DE CATAMARCA"></option>
-                                                            <option value="BANDA DE VARELA- CAPITAL"></option>
-                                                            <option value="LA CALERA "></option>
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-auto">
-                                                    <label for="zona-domicilicio">Zona</label><br>
-                                                    <div class="hvr-icon-pulse form-group has-feedback">
-                                                        <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                                    <select class="form-control mb-2 text-center" name="zona-domicilio" id="zona-domicilicio">
-                                                        <option value="" selected>Seleccione</option>
-                                                        <option value="1">Norte</option>
-                                                        <option value="2">Sur</option>
-                                                        <option value="3">Este</option>
-                                                        <option value="4">Oeste</option>
-                                                    </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <label>Barrios</label><br>
-                                                    <div class="hvr-icon-pulse form-group has-feedback">
-                                                        <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                                    <input class="form-control mb-2 text-center" list="lista-barrio" placeholder="Barrio">
-                                                        <datalist id="lista-barrio">
-                                                            <option value="10 VIVIENDA"></option>
-                                                            <option value="11 DE MAYO"></option>
-                                                            <option value="16 DE AGOSTO"></option>
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <label for="calle_y_numero">Calle</label>
-                                                    <div class="hvr-icon-pulse form-group has-feedback">
-                                                        <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
-                                                        <input type="text" class="form-control mb-2 text-center" required id="calle_y_numero" placeholder="Nombre y número de la calle">
-                                                    </div>
-                                                    </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="alert alert-success">
-                            <h6> <strong>Tus datos se han guardado exitosamente</strong></h6>
-                        </div>
-                    </div>
-            
-                    <div class="modal-footer">
-                        <button class="btn btn-warning" type="button">Cerrar</button>
-                        <!--tada-dismiss="modal" Este codigo ya no admite en el validator-->
-                        <button class="btn btn-success" type="button">Aceptar</button>
-
-                    </div>
-                </div>
-                
-            </div>    
-        </div>
-    </section>
 </div>
+{% block js %}
+    <script>
+        function alertProcesarPedido() {
+            Swal.fire({
+            "title": "Felicitaciones!!!",
+            "text": "Gracias por su compra.",
+            "icon": "success"
+        })
+        }
+    </script>
+{% endblock %}
 {% endblock %}

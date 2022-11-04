@@ -21,7 +21,7 @@ class Carrito:
             for key, value in self.carrito.items():
                 if key == id:
                     value["cantidad"] += 1
-                    value["subtotal"] = value["precio"] + plato.precio_plato
+                    value["subtotal"] = value["precio"] * value["cantidad"]
                     break
         self.guardar()
 
@@ -46,7 +46,7 @@ class Carrito:
         for key, value in self.carrito.items():
             if key == id:
                 value["cantidad"] -= 1
-                value["precio"] -= 1
+                value["subtotal"] = value["precio"] * value["cantidad"]
                 if value["cantidad"]<1:
                     self.eliminar(plato)
                     break
