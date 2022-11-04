@@ -1,0 +1,43 @@
+{% extends "base/baseAdministrador.html" %}
+{% block titulo %}Detalle de Persona{% endblock %}
+{% block contenido %}
+<h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
+    {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-center">
+    <div class="card col-sm-7 p-3 formulario">
+        <div class="mb-2">
+<p><strong>Pedido ingresado</strong></p>
+<ul>
+
+    <li>{{ pedido.cod_pedido }}</li>
+    <li>{{ pedido.fecha_pedido }}</li>
+    <li>{{ pedido.platos }}</li>
+    <li>{{ pedido.estado_entrega }}</li>
+    <li>{{ pedido.hora_entrega_hasta}}</li>
+</ul>
+
+<!-- 
+{% for p in pedido.all %}
+<p><strong>Nombre Plato: </strong>{{ p.cod_pedido}}</p>
+<p><strong>Precio de plato:</strong> {{ p.fecha_pedido}}</p>
+<p><strong>Vigencia Plato:</strong>{{ p.cod_pedido}}</p>
+<p><strong>Estado de promocion:</strong>{{ plato.estado_promocion}}</p>
+<p><strong>vigencia Plato:</strong>{{ plato.tipo_plato}}</p>
+<p><strong>vigencia Plato:</strong>{{ plato.especialidad}}</p>
+
+{% endfor %} -->
+
+<form action="#" method="POST">
+
+  {% csrf_token %}
+  <input type="hidden" name="id_plato" value="#">
+  <button class="btn btn-Secondary"><a href="#">Editar</a></button>
+</form>
+</div>
+    </div>
+        </div>
+{% endblock %}

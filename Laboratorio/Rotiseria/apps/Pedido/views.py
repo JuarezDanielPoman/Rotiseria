@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 from apps.Usuario.models import Persona
 
-from .forms import PlatoForm, PedidoForm
+from .forms import PedidoAdminForm, PedidoCadeteForm, PlatoForm, PedidoForm
 from .models import Especialidad, EstadoEntrega, ModalidadEntrega, Plato, Pedido, TipoPlato
 from .carrito import Carrito
 from django.utils.datastructures import MultiValueDictKeyError
@@ -79,30 +79,6 @@ def procesar_compra(request):
     carrito.limpiar()
     return redirect(to='Pedido:promociones')
 
-
-
-    # if(request.method == 'POST'):
-    #     pedido_form = PedidoForm(request.POST, prefix='pedido')
-    #     if(pedido_form.is_valid()):
-    #         id_user = request.POST['username']
-    #         persona = Persona.objects.get(user_id=id_user)
-    #         entrega = EstadoEntrega.objects.get(estado_entrega=1)
-    #         modalidad = ModalidadEntrega.objects.get(modoentrega=1)
-
-    #         pedido = Pedido.objects.create(persona=persona,estado_entrega=entrega,modo_entrega=modalidad)
-    #         pedido.save()
-
-    #         lista = carrito.lista()
-    #         for id_plato in lista:
-    #             print('LISTA DE PLATOS:',id_plato)
-    #             pedido.platos.add(id_plato)
-
-    #         pedido.save()
-    #         carrito.limpiar()
-    #         return redirect(to='Pedido:promociones')
-    # else:
-    #     pedido_form = PedidoForm(prefix='pedido')
-    #     return render(request,'Pedido:CarritoPedidoCliente',{'pedido_form': pedido_form})
 
 
 
@@ -204,7 +180,7 @@ def creacion_pedido(request):
             p=pedido_form.save(commit=True)
             messages.success(request,
             'Se ha agregado correctamente el plato {}'.format(p))
-            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_pedido}))
+            return redirect(reverse('Pedido:menu_detalle', args={p.cod_pedido}))
     else:
         pedido_form = PedidoForm(prefix='pedido')
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
@@ -219,25 +195,58 @@ def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
+
+@login_required(login_url='Usuario:login')
+def lista_pedidosadmin(request):
+    listaPedidos = Pedido.objects.all()
+    return render(request,'Pedido/lista_pedidosadmin.html',{'pedidos': listaPedidos})
+
+
+
+
+
 @login_required(login_url='Usuario:login')
 def pedido_edit(request, pk):
     pedido = get_object_or_404(Pedido, pk=pk)
-    pedido_form = PedidoForm(request.POST,prefix='pedido',instance=pedido)
+    pedido_form = PedidoCadeteForm(request.POST,prefix='pedido',instance=pedido)
     if request.method == 'POST' :
         if pedido_form.is_valid():
             p=pedido_form.save(commit=False)
             p.save()
             messages.success(request,
             'Se ha agregado correctamente la persona {}'.format(p))
-            return redirect(reverse('Pedido:ListaDepedidos',args={p.cod_plato}))
+            print("Llego aca ")
+            return redirect(reverse('Pedido:detalle_pedido', args={p.cod_pedido}))
     else:   
-        pedido_form = PedidoForm(prefix='pedido')
+        pedido_form = PedidoCadeteForm(prefix='pedido')
     return render(request,'Pedido/editar_pedido.html',{'pedido_form':pedido_form,'pedido':pedido})
 
 
 @login_required(login_url='Usuario:login')
 def detalle_pedido(request, pk):
-      pedido = get_object_or_404(Pedido, pk=pk)
-      return render(request,
-                    'Pedido/detalle_pedido.html',
-                    {'pedido': pedido})
+    pedido = get_object_or_404(Pedido, pk=pk)
+    return render(request,'Pedido/detalle_pedido.html',{'pedido': pedido})
+
+
+@login_required(login_url='Usuario:login')
+def pedidoadmin_edit(request, pk):
+    pedido = get_object_or_404(Pedido, pk=pk)
+    pedido_form = PedidoAdminForm(request.POST,prefix='pedido',instance=pedido)
+    if request.method == 'POST' :
+        if pedido_form.is_valid():
+            p=pedido_form.save(commit=False)
+            p.save()
+            messages.success(request,
+            'Se ha agregado correctamente la persona {}'.format(p))
+            print("Llego aca ")
+            return redirect(reverse('Pedido:detalle_pedidoadmin', args={p.cod_pedido}))
+    else:   
+        pedido_form = PedidoAdminForm(prefix='pedido')
+    return render(request,'Pedido/edit_pedidoadmin.html',{'pedido_form':pedido_form,'pedido':pedido})
+
+
+@login_required(login_url='Usuario:login')
+def detalle_pedidoadmin(request, pk):
+    pedido = get_object_or_404(Pedido, pk=pk)
+    return render(request,'Pedido/detalle_pedidoadmin.html',{'pedido': pedido})
+

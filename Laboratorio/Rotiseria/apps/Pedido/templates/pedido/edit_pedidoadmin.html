@@ -1,5 +1,5 @@
-{% extends "base/baseCadete.html" %}
-{% block titulo %}Editar de Persona{% endblock %}
+{% extends "base/baseAdministrador.html" %}
+{% block titulo %}Editar de Pedidos{% endblock %}
 {% block contenido %}
 <h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
 {% if messages %}
@@ -26,7 +26,7 @@
 
 <form action="#" method="POST">
    
-{{pedido_form.estado_entrega}} 
+{{pedido_form.hora_entrega_hasta}}
 <!-- {{pedido.persona}}
 {{pedido.hora_entrega_hasta}}
 {{pedido.fecha_pedido}}
