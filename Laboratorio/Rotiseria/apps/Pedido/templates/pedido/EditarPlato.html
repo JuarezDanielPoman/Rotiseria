@@ -4,38 +4,11 @@
 {% block contenido %}
 {% load static %}   
 
-<!-- <section>
-    <div class="d-flex justify-content-center">
-        <div class="card col-sm-7 p-3 formulario"> 
-            <div class="mb-2">
-        <form action="#" method="POST">
-            <fieldset>
-                <legend class="text-center">INGRESE LOS DATOS</legend>
-                {{menu_form.errors}}
-                {% csrf_token %}
-                <div class="col-auto mb-2">
-                {{plato_form.as_p}}
-                </div>
-                
-            </fieldset>
-            <div class="col-auto text-center">
-                <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
-                <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
-            </div>
-        </form>
-    </div>    
-    </div>  
-</div>    
-
-</section> -->
-
-
 <section>
     <div class="d-flex justify-content-center">
         <div class="card col-sm-7 p-3 formulario"> 
-            <div class="mb-2">
-                
-                <form action="#" method="POST">
+            <div class="mb-2">                
+                <form action="{% url 'Pedido:editando_menu' %}" method="POST">{% csrf_token %}
                     <fieldset>
                         <legend class="text-center">MODIFICAR PLATO</legend>
 
@@ -58,44 +31,32 @@
                         
                         <!-- Veigencia del plato -->
                         <div class="col-auto">
-                            <label for="vigencia">Vigencia del menu </label>&nbsp;Si
-                            <input type="radio" class="text-center" required id="vigencia" name="vigencia">&nbsp;No
-                            <input type="radio" class="text-center" required id="vigenciano" name="vigencia"><br>
+                            <label for="vigencia">Vigencia</label>&nbsp;Si
+                            {{plato_form.vigencia_plato}}
                         </div>
                         
                         <!-- Promoción del plato -->
                         <div class="col-auto">
-                            <label for="promocion">Promoción </label>&nbsp;Si
-                            <input type="radio" class="text-center" required id="promocion" name="promocion">&nbsp;No
-                            <input type="radio" class="text-center" required id="promocion" name="promocion"><br>
+                            <label for="promocion">Promoción </label>
+                            {{plato_form.estado_promocion}}
                         </div>
                         
                         <!-- Tipo de menú -->
                         <div class="col-auto mb-2">
                             <label for="plato">Tipo de menu</label>
-                            <select id="plato" class="form-control mb-2 text-center" required name="plato">
-                                <option value="" selected>Seleccione</option>
-                                <option value="1">Entrada</option> 
-                                <option value="2">Plato Principal</option> 
-                                <option value="3">Postre</option> 
-                            </select><br/>
-                            
+                            {{plato_form.tipo_plato}}
                         </div>
 
                         <!-- Especialidad -->
-                        <label for="tipoPlato">Especialidad</label>
-                        <select id="tipoPlato" class="form-control mb-2 text-center" required name="tipoPlato">
-                            <option value="" selected>Seleccione</option>
-                            <option value="1">Normal</option> 
-                            <option value="2">Vegetariano</option> 
-                            <option value="3" >Celiaco</option> 
-                            <option value="4">Diabetico</option> 
-                        </select><br/><br/>
+                        <div class="col-auto mb-2"></div>
+                            <label for="tipoPlato">Especialidad</label>
+                            {{plato_form.especialidad}}
                         </div>
 
                         <div class="col-auto text-center">
-                            <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
-                            <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
+                            <input class="btn btn-secondary" type="reset" name="cancelar" value="Cancelar" />
+                            <!-- <input class="btn btn-succes mb-2" type="submit" name="Enviar" value="MODIFICAR" /> -->
+                            <button type="submit" class="btn btn-primary">Modificar</button>
                         </div>
                     </fieldset>
                 </form>
