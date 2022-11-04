@@ -24,3 +24,19 @@ class PedidoForm(forms.ModelForm):
         model = Pedido
         fields = ('persona','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
         prefix = 'pedido'
+        widgets = {
+        'persona': forms.Select(attrs={'value':"pedido.persona"}),
+        'hora_entrega_hasta': forms.TimeInput(attrs={'value':"pedido.hora_entrega_hasta"}),
+        'estado_entrega': forms.Select(attrs={'value':"pedido.estado_entrega"}),
+        'platos': forms.Select(attrs={'value':"pedido.platos"}),
+        'modo_entrega': forms.Select(attrs={'value':"pedido.modo_entrega"}),
+
+        }
+
+class PedidoCadeteForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ('estado_entrega',)
+        prefix = 'pedido'
+        widgets = {
+        }

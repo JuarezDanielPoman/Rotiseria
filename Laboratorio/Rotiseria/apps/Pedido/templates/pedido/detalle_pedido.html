@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/baseCadete.html" %}
 {% block titulo %}Detalle de Persona{% endblock %}
 {% block contenido %}
 <h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
@@ -12,17 +12,21 @@
         <div class="mb-2">
 <p><strong>Plato ingresado</strong></p>
 <ul>
-  {% for plato in plato.all %}
-    <li>{{ plato }}</li>
-  {% endfor %}
+  
+    <li>{{ pedido.cod_pedido }}</li>
+    <li>{{ pedido.fecha_pedido }}</li>
+    <li>{{ pedido.platos }}</li>
+    <li>{{ pedido.estado_entrega }}</li>
 </ul>
-<p><strong>Nombre Plato: </strong>{{ plato.nombre_plato}}</p>
-<p><strong>Precio de plato:</strong> {{ plato.precio_plato}}</p>
-<p><strong>Vigencia Plato:</strong>{{ plato.vigencia_plato}}</p>
+{% for p in pedido.all %}
+<p><strong>Nombre Plato: </strong>{{ p.cod_pedido}}</p>
+<p><strong>Precio de plato:</strong> {{ p.fecha_pedido}}</p>
+<p><strong>Vigencia Plato:</strong>{{ p.cod_pedido}}</p>
 <p><strong>Estado de promocion:</strong>{{ plato.estado_promocion}}</p>
 <p><strong>vigencia Plato:</strong>{{ plato.tipo_plato}}</p>
 <p><strong>vigencia Plato:</strong>{{ plato.especialidad}}</p>
 
+{% endfor %}
 
 <form action="#" method="POST">
    

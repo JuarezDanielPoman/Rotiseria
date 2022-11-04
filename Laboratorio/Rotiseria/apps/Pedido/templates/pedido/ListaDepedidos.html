@@ -38,10 +38,11 @@
                         <form method="post">
                             {% csrf_token %}
                             <input type="hidden" name="id" value="{{ p.cod_pedido }}"> 
-                            <button class="btn-sample btn btn-danger"><a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalPedido"> Editar</a></button>
+                            <button class="btn-sample btn btn-danger"><a href="{% url 'Pedido:edit_pedido' p.cod_pedido %}" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" > Editar</a></button>
                         </form>
                         </td>
                     </tr>
+                    <!-- data-target="#ventanaModalPedido" -->
                 {% endfor%}                         
             </tbody>
             <!--<tfoot><td>Total de pedidos</td></tfoot>-->
