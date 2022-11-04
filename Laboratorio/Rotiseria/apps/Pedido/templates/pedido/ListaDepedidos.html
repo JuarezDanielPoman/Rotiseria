@@ -37,6 +37,7 @@
                         <td>
                         <form method="post">
                             {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ p.cod_pedido }}"> 
                             <button class="btn-sample btn btn-danger"><a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalPedido"> Editar</a></button>
                         </form>
                         </td>

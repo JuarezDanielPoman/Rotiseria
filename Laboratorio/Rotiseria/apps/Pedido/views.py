@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from apps.Usuario.models import Persona
 
 from .forms import PlatoForm, PedidoForm
-from .models import Especialidad, Plato, Pedido
+from .models import Especialidad, EstadoEntrega, ModalidadEntrega, Plato, Pedido
 from .carrito import Carrito
 
 #from .apps import PlatoForm,PedidoForm
@@ -64,8 +64,9 @@ def procesar_compra(request):
     
     id_user = request.POST['username']
     persona = Persona.objects.get(user_id=id_user)
+    estadoentrega = EstadoEntrega.objects.get(estado_entrega=2)
+    modoentrega = ModalidadEntrega.objects.get(modoentrega=1)
     print('PERSONA:',persona.cuil)
-
     #class Pedido(models.Model):
     #cod_pedido = models.AutoField(primary_key=True)
     #fecha_pedido = models.DateTimeField(auto_now_add=True)
@@ -76,10 +77,11 @@ def procesar_compra(request):
     #platos = models.ManyToManyField(Plato)
     #modo_entrega = models.ForeignKey(ModalidadEntrega,on_delete=models.CASCADE) 
     #cadete = models.ForeignKey(cadete,related_name='cadete',blank=True,null=True,on_delete=models.CASCADE)
-    #curso = Curso.objects.create(codigo=codigo, nombre=nombre, creditos=creditos)
+    print("El estado de entrega es: ",estadoentrega.estado_entrega)
+    print("El modo de entrega es: ",modoentrega.modoentrega)
 
     pedido = Pedido.objects.create()
-    pedido.save(persona=persona,estado_entrega=1)
+    pedido.save(persona=persona,estado_entrega=estadoentrega.estado_entrega,modo_entrega_id=modoentrega.modoentrega)
 
 
     carrito.limpiar()
@@ -178,3 +180,15 @@ def menu_delete(request):
     menus = Plato.objects.all()
     return render(request,'Pedido/listademenus.html',{'menus': menus})
 
+
+# @login_required(login_url='Usuario:login')
+# def pedido_edit(request, pk):
+#     pedido = get_object_or_404(Pedido, pk=pk)
+#     if request.method == 'POST' :
+#         pedido_form = PedidoForm(request.POST,prefix='pedido')
+#         if pedido_form.is_valid():
+#             pedido=pedido_form.save(commit=True)
+#         return redirect(reverse('Usuario:listaDepedidos', args={pedido.id}))
+#     else:   
+#         pedido_form = PedidoForm(prefix='pedido')
+#         return render(request,'Pedido/listaDepedidos.html',args={pedido.id})

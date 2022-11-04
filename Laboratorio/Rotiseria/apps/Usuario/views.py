@@ -217,6 +217,8 @@ def cadete_delete(request):
     return render(request,
                   'Usuario/ListaDeCadetes.html',{'cadetes': listaPersonas})
 
+
+
 @login_required(login_url='Usuario:login')
 def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
