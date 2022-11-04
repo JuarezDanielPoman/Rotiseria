@@ -207,14 +207,25 @@ def lista_pedidos_cadetes(request):
 
 
 
-# @login_required(login_url='Usuario:login')
-# def pedido_edit(request, pk):
-#     pedido = get_object_or_404(Pedido, pk=pk)
-#     if request.method == 'POST' :
-#         pedido_form = PedidoForm(request.POST,prefix='pedido')
-#         if pedido_form.is_valid():
-#             pedido=pedido_form.save(commit=True)
-#         return redirect(reverse('Usuario:listaDepedidos', args={pedido.id}))
-#     else:   
-#         pedido_form = PedidoForm(prefix='pedido')
-#         return render(request,'Pedido/listaDepedidos.html',args={pedido.id})
+@login_required(login_url='Usuario:login')
+def pedido_edit(request, pk):
+    pedido = get_object_or_404(Pedido, pk=pk)
+    pedido_form = PedidoForm(request.POST,prefix='pedido',instance=pedido)
+    if request.method == 'POST' :
+        if pedido_form.is_valid():
+            p=pedido_form.save(commit=False)
+            p.save()
+            messages.success(request,
+            'Se ha agregado correctamente la persona {}'.format(p))
+            return redirect(reverse('Pedido:ListaDepedidos',args={p.cod_plato}))
+    else:   
+        pedido_form = PedidoForm(prefix='pedido')
+    return render(request,'Pedido/editar_pedido.html',{'pedido_form':pedido_form,'pedido':pedido})
+
+
+@login_required(login_url='Usuario:login')
+def detalle_pedido(request, pk):
+      pedido = get_object_or_404(Pedido, pk=pk)
+      return render(request,
+                    'Pedido/detalle_pedido.html',
+                    {'pedido': pedido})
