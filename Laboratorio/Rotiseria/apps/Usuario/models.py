@@ -58,8 +58,8 @@ class Persona(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,blank=True,null=True,unique=True)
 
     def __str__(self):
-        texto = "{0} - {1} - {2} - {3} - {4} - {5}"
-        return texto.format(self.cuil, self.apellido, self.nombre, self.fecha_nacimiento, self.domicilio, self.email)
+        texto = "{0} - {1} - {2} - {3} - {4} "
+        return texto.format(self.cuil, self.apellido, self.nombre, self.fecha_nacimiento, self.domicilio)
 
 
 class cadete(Persona):

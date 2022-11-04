@@ -25,10 +25,11 @@ class PedidoForm(forms.ModelForm):
         fields = ('persona','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
         prefix = 'pedido'
         widgets = {
-        'persona': forms.Select(attrs={'value':"pedido.persona"}),
-        'hora_entrega_hasta': forms.TimeInput(attrs={'value':"pedido.hora_entrega_hasta"}),
-        'estado_entrega': forms.Select(attrs={'value':"pedido.estado_entrega"}),
-        'modo_entrega': forms.Select(attrs={'value':"pedido.modo_entrega"}),
+        'persona': forms.Select(attrs={'value':"pedido.persona", 'class':"nombre form-control mb-2 text-center"}),
+        'hora_entrega_hasta': forms.TimeInput(attrs={ 'type':"time",'class':"nombre form-control mb-2 text-center"}),
+        'estado_entrega': forms.Select(attrs={'value':"pedido.estado_entrega", 'class':"nombre form-control mb-2 text-center"}),
+        'modo_entrega': forms.Select(attrs={'value':"pedido.modo_entrega", 'class':"nombre form-control mb-2 text-center"}),
+        'platos': forms.SelectMultiple(attrs={'value':"pedido.estado_entrega", 'class':"nombre form-control mb-2 text-center"}),
 
         }
 
@@ -38,6 +39,7 @@ class PedidoCadeteForm(forms.ModelForm):
         fields = ('estado_entrega',)
         prefix = 'pedido'
         widgets = {
+        'estado_entrega': forms.Select(attrs={'value':"pedido.estado_entrega", 'class':"nombre form-control mb-2 text-center"}),
         }
 
         
@@ -47,4 +49,5 @@ class PedidoAdminForm(forms.ModelForm):
         fields = ('hora_entrega_hasta',)
         prefix = 'pedido'
         widgets = {
+        'hora_entrega_hasta': forms.TimeInput(attrs={ 'type':"time",'class':"nombre form-control mb-2 text-center"}),
         }

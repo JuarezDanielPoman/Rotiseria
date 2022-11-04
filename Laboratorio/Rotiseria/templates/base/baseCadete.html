@@ -62,7 +62,6 @@
             <ul class="menu" id="menu">
                 
                 <li class="menu__item"> <a href="../templates/index1.html" class="hvr-underline-from-center  menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-house"></i> Inicio</a> </li>
-                <li class="menu__item"> <a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalLogin"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li>
 
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-shop"></i> Pedidos <i class="hvr-icon fa-solid fa-angle-down"></i></a>
@@ -74,7 +73,55 @@
 
                 <li class="menu__item"> <a href="{% url 'Administrador' %}" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-circle-info"></i> Acerca de</a> </li>
                 <li class="menu__item"> <a href="#footer" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-phone"></i> Contacto</a> </li>
-            
+                {% if user.is_authenticated %}
+                <!-- Si se encuentra autenticado mostramos-->
+                <!-- SI ES STAFF -->
+                    {% if user.is_staff == False %}
+                    <!-- Boton carrito -->
+                    <li class="menu__item">
+                        <a href="{% url 'Pedido:CarritoPedidoCliente' %}" class="menu__link btn-outline-white">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total }}</span>
+                        </a>
+                    </li>
+                    
+                    <li class="menu__item container-submenu">
+                        <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b> {{ user.username }}</b></a>
+                        <ul class="submenu">
+                            <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                            <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                        </ul>
+                    </li>
+                    {% endif%}
+                    
+                    {% if user.is_superuser == True %}
+                    <li class="menu__item container-submenu">
+                        <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b>{{ user.username }}</b></a>
+                        <ul class="submenu">
+                            <li class="menu__item"> <a href="{% url 'Administrador' %}" class="hvr-icon-pulse menu__link">Administración</a> </li>
+                            <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                            <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    {% if user.is_staff == True %}
+                    <li class="menu__item container-submenu">
+                        <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b>{{ user.username }}</b></a>
+                        <ul class="submenu">
+                            <li class="menu__item"> <a href="{% url 'baseCadete' %}" class="hvr-icon-pulse menu__link">Cadete</a> </li>
+                            <li class="menu__item"> <a href="#" class="hvr-icon-pulse menu__link">Mi Perfil <i class="fas fa-user-alt"></i></a> </li>
+                            <li class="menu__item"> <a href="{% url 'Usuario:logout' %}" class="hvr-icon-pulse menu__link">Salir <i class="fas fa-times-circle"></i></a> </li>
+                        </ul>
+                    </li>
+                    {% endif%}
+                    {% endif%}
+                {% else %}
+                <!-- Si no esta autenticado -->
+                <!-- Login -->
+                <li class="menu__item"> <a href="#" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" data-target="#ventanaModalLogin"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li>
+                <!-- <li class="menu__item"> <a href="{% url 'Usuario:login' %}" class="hvr-underline-from-center menu__link hvr-icon-fade"><i class="hvr-icon fa-solid fa-user"></i> Ingresar</a> </li> -->
+
+                {% endif %}
                 </li>
             </ul>
 
