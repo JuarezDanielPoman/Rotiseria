@@ -62,13 +62,15 @@ def procesar_compra(request):
     carrito = Carrito(request)
     id_user = request.POST['username']
     persona = Persona.objects.get(user_id=id_user)
+    estadoentrega = EstadoEntrega.objects.get(estado_entrega=2)
+    modoentrega = ModalidadEntrega.objects.get(modoentrega=1)
     print('PERSONA:',persona.cuil)
 
     entrega = EstadoEntrega.objects.get(estado_entrega=1)
     modalidad = ModalidadEntrega.objects.get(modoentrega=1)
 
-    pedido = Pedido.objects.create(persona=persona,estado_entrega=entrega,modo_entrega=modalidad)
-    pedido.save()
+    pedido = Pedido.objects.create()
+    pedido.save(persona=persona,estado_entrega=1)
 
     lista = carrito.lista()
     for id_plato in lista:
@@ -198,3 +200,15 @@ def lista_pedidos_cadetes(request):
 
 
 
+
+# @login_required(login_url='Usuario:login')
+# def pedido_edit(request, pk):
+#     pedido = get_object_or_404(Pedido, pk=pk)
+#     if request.method == 'POST' :
+#         pedido_form = PedidoForm(request.POST,prefix='pedido')
+#         if pedido_form.is_valid():
+#             pedido=pedido_form.save(commit=True)
+#         return redirect(reverse('Usuario:listaDepedidos', args={pedido.id}))
+#     else:   
+#         pedido_form = PedidoForm(prefix='pedido')
+#         return render(request,'Pedido/listaDepedidos.html',args={pedido.id})
