@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+    {% if user.is_superuser == True %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -219,4 +220,8 @@
     <script src="{% static 'js/Menu.js' %}"></script>
     <script src="{% static 'js/botonArriba.js' %}"></script>
 </body>
+{% else %}
+<h1>403 Forbidden</h1>
+{% endif %}
+
 </html>

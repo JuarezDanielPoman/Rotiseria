@@ -186,11 +186,13 @@ def creacion_pedido(request):
     return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Pedido.view_pedido', raise_exception=True)
 def lista_pedidos(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Pedido.view_pedido', raise_exception=True)
 def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
