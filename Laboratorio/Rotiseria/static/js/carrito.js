@@ -16,7 +16,6 @@ function cargarEvento() {
     contenidoPrincipal.addEventListener('click', addProducto);
     contenedorTablaCarrito.addEventListener('click', eliminarProducto);
     vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
-    procesarcompra.addEventListener('click', procesarCompra);
 }
 
 function addProducto(e) {

@@ -3,7 +3,7 @@ from django.urls import path
 from django.urls.resolvers import URLPattern
 from apps.Pedido.views import detalle_pedido
 from apps.Pedido.views import pedido_edit
-from apps.Pedido.views import CarritoPedidoCliente,agregar_plato_carrito, editar_plato, eliminar_plato_carrito, limpiar_carrito, listarCategoriaPlato,menu_delete,lista_menus,creacion_pedido,lista_pedidos_cadetes,lista_pedidos,menu_detalle,creacion_menu, procesar_compra, promociones, restar_plato_carrito
+from apps.Pedido.views import CarritoPedidoCliente,agregar_plato_carrito, menu_edit, eliminar_plato_carrito, limpiar_carrito, listarCategoriaPlato,menu_delete,lista_menus,creacion_pedido,lista_pedidos_cadetes,lista_pedidos,menu_detalle,creacion_menu, procesar_compra, promociones, restar_plato_carrito
 
 
 app_name='Pedido'
@@ -18,9 +18,9 @@ path('ListaDepedidos',lista_pedidos, name="ListaDepedidos"),
 path('listapedidoscadetes',lista_pedidos_cadetes, name="listapedidoscadetes"),
 path('listademenus',lista_menus, name="listademenus"),
 path('delete/',menu_delete, name="menu_delete"),
-path('editarPlato/<int:pk>',editar_plato, name='editar_plato'),
+path('editarPlato/<int:pk>',menu_edit, name='editar_plato'),
 path('edit/<int:pk>',pedido_edit, name='edit_pedido'),
- path('view//<int:pk>',detalle_pedido, name='detalle_pedido'),
+path('view//<int:pk>',detalle_pedido, name='detalle_pedido'),
 
 #carrito
 path('CarritoPedidoCliente',CarritoPedidoCliente, name='CarritoPedidoCliente'),

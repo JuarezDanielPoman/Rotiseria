@@ -60,10 +60,27 @@ def limpiar_carrito(request):
 
 def procesar_compra(request):
     carrito = Carrito(request)
-    pedido_form = PedidoForm(prefix='pedido')
-    return render(request,'Pedido/CarritoCliente.html',{'pedido_form': pedido_form})
-    #plato_form = PlatoForm(prefix='menu')
-    #return render(request,'Pedido/EditarPlato.html',{'plato_form': plato_form,'plato':plato})
+    lista = carrito.lista()
+
+    id_user = request.POST.get('username', None)
+    modo_entega = request.POST.get('modo-entrega',None)
+    modalidad = ModalidadEntrega.objects.get(modoentrega=modo_entega)
+    estado = EstadoEntrega.objects.get(estado_entrega=1)
+    print('MODALIDAD ENTREGA:',modo_entega)
+    
+    persona = Persona.objects.get(user_id=id_user)
+    pedido = Pedido.objects.create(persona=persona,estado_entrega=estado,modo_entrega=modalidad)
+    pedido.save()
+
+    for id_plato in lista:
+        pedido.platos.add(id_plato)
+
+    pedido.save()
+    carrito.limpiar()
+    return redirect(to='Pedido:promociones')
+
+
+
     # if(request.method == 'POST'):
     #     pedido_form = PedidoForm(request.POST, prefix='pedido')
     #     if(pedido_form.is_valid()):
