@@ -1,110 +1,121 @@
 {% extends "base/baseAdministrador.html" %}
-{% block titulo %}Edición de persona{% endblock %}
+{% block titulo %}MODIFICAR{% endblock %}
 {% block contenido %}
-    <h1>Edición de persona</h1>
+    
     <div class="d-flex justify-content-center">
         <div class="card col-sm-7 p-3 formulario"> 
             <div class="mb-2">
-                <!--<div class="abs-center">-->
-                <form id="formulario-pedido" enctype="multipart/form-data" method="POST">
-                        <fieldset>
-                        <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
-                        
+                <form id="formulario-pedido" action="#" method="post">
                         {{form.errors}}
                         {% csrf_token %}
                         {{domicilio_form.errors}}
                         {{zona_form.errors}}
                         {{telefono_form.errors}}
                         {{persona_form.errors}}
-
-                        <!-- {% for field in form %}
-                         <div class="campo">
-                        {{ field.errors }}
-                        {{ field.label_tag }} {{ field }}
-                        </div><br>
-                         {% endfor %} -->
-                        <div class="col-auto mb-2">
-                            <label  for="cuil">Cuil</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
-                                {{persona_form.cuil}}  
-                        </div>
-
-                        <div class="col-auto mb-2">
-                            <label  for="nombre">Nombre</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
-                                {{persona_form.nombre}}
- 
-                               
-                        </div>
-                    
-                        <div class="form-group has-feedback col-auto mb-2">
-                            <label for="">Apellido</label><br>
+                    <fieldset>
+                    <legend class="text-center"><span>INGRESE LOS DATOS</span></legend>
+                
+                    <div class="col-auto mb-2">
+                        <label  for="nombre">Nombre</label><br>
                             <div class="hvr-icon-pulse form-group has-feedback">
-                                <i class="fa-solid fa-user hvr-icon form-control-feedback"></i>
-                                {{persona_form.apellido}}
-                                
-                            </div>                                        
-                        </div>
-
-                        <div class="col-auto mb-2">
-                            <label for="fecha-nacimiento">Fecha de nacimiento</label>
-                            {{persona_form.fecha_nacimiento}}
-                        </div>
-
-
-                        <div class="col-auto mb-2">
-                            <label for="correo">Mail</label><br>
-                            <div class="hvr-icon-pulse form-group has-feedback">
-                            <i class="fa-regular fa-envelope form-control-feedback hvr-icon"></i>
-                            {{persona_form.email}}
-                        </div>
-                        </div>
+                                <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
+                            <input value="{{persona.nombre}}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" type="text" class="nombre form-control mb-2 text-center" required id="nombre" placeholder="Ingrese su Nombre">
+                            </div>                               
+                    </div>
+                
+                    <div class="form-group has-feedback col-auto mb-2">
+                        <label for="">Apellido</label><br>
+                        <div class="hvr-icon-pulse form-group has-feedback">
+                            <i class="fa-solid fa-user hvr-icon form-control-feedback"></i>
+                            <input value="{{persona.apellido}}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ']{2,25}" type="text"  class="form-control mb-2 text-center" required id="apellido" placeholder="Ingrese su Apellido">
+                        </div>                                        
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <label>Seleccione el tipo de Telefono</label>
                         {{telefono_form.as_p}}
-                        <fieldset>
-                            <legend>Domicilio</legend>
-                            
-                            <div class="col-auto">
-                                <label for="numero-calle">Numero de Calle</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-arrow-up-9-1 form-control-feedback"></i>
-                                    {{domicilio_form.numero_calle}}
-                                </div> 
-                           </div>
-
-                            <div class="col-auto">
-                                <label>Calle</label><br>
-                               <div class="hvr-icon-pulse form-group has-feedback">
-                                 <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
-                                 {{domicilio_form.nombre_calle}}
-                            </div>
-
-                            <div class="col-auto">
-                                <label>Barrios</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                    {{domicilio_form.nombre_barrio}}
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <label for="zona-domicilicio">Zona</label><br>
-                                <div class="hvr-icon-pulse form-group has-feedback">
-                                    <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                    {{zona_form.descripcion_zona}}
-                                </div>
-                            </div>
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                        <input value="{{persona.fecha_nacimiento}}" class="form-control mb-2" type="date" id="fechanacimiento" required>
+                    </div>
+                
+                    <div class="col-auto mb-2">
+                        <label for="correo">Mail</label><br>
+                        <div class="hvr-icon-pulse form-group has-feedback">
+                            <i class="fa-regular fa-envelope form-control-feedback hvr-icon"></i>
+                            <input  value="{{persona.email}}" class="form-control mb-2 text-center" type="email" id="correo" required placeholder="Ingrese su Mail">
+                        </div>
+                    </div>
+                
+                    <fieldset>
+                        <legend>Domicilio</legend>
                         
-                       
+                        <div class="col-auto">
+                            <label for="numero-calle">Numero de Calle</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-solid fa-arrow-up-9-1 form-control-feedback"></i>
+                                {{domicilio_form.numero_calle}}
+                            </div> 
+                       </div>
 
+                        <div class="col-auto">
+                            <label>Calle</label><br>
+                           <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="fa-solid fa-road form-control-feedback hvr-icon"></i>
+                                {{domicilio_form.nombre_calle}}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <label>Barrios</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                {{domicilio_form.nombre_barrio}}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <label for="zona-domicilicio">Zona</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                {{zona_form.descripcion_zona}}
+                            </div>
+                        </div>
                     </fieldset>
-                 </fieldset>
-                 <div class="col-auto text-center">
+                
+                    <fieldset><legend>Cadete</legend>
+                        <div class="col-auto">
+                            <label for="vig-carnet">Vigencia del carnet</label>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-regular fa-id-card form-control-feedback"></i>
+                                <input value="{{cadete.fecha_vigencia_carnet}}" class="form-control mb-2 text-center" type="date" id="vig-carnet" required >
+                            </div>
+                        </div>
+                        
+                        <div class="col-auto">
+                            <label for="num-patente">Numero de la patente</label>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-regular fa-id-card form-control-feedback"></i>
+                                <input value="{{cadete.numero_patente}}" class="form-control mb-2 text-center" type="number" id="num-patente" required placeholder="Ingrese numero de la patente">
+                            </div>    
+                        </div>
+                
+                        <div class="col-auto">
+                            <label for="fecha-trab">Fecha inicio al trabajo</label>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-regular fa-id-card form-control-feedback"></i>
+                                <input value="{{cadete.fecha_ingreso}}" class="form-control mb-2 text-center" type="date" name="fecha-trab" id="fecha-trab" required>
+                            </div>
+                        </div>
+                        <br> 
+                    </fieldset>
+                    </fieldset>
                     
+                    <div class="col-auto text-center">
                     <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
-                    <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
-                </div>
-             </form>
+                    <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="MODIFICAR" />
+                    </div>
+            </form>
        </div>
      </div> 
    </div> 

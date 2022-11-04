@@ -1,5 +1,5 @@
 {%  extends 'base/baseAdministrador.html' %}
-{% block titulo %}Es{% endblock %}
+{% block titulo %}Empleados{% endblock %}
 {% load static %}
 {% block contenido %}
 
@@ -13,14 +13,12 @@
                 <label for="cliente" class="col-form-label text-white">Buscar:</label>
                 <div class="col-12 col-md-10">
         <form action="#" method="GET">
-         <div id="custom-search-input">
+            <div id="custom-search-input">
                 <input type="text" class="form-control" id="cadete" placeholder="Ingresa nombre de cadete" name="buscar">
                 <div class="input-group-">
-                <i class="icon icon-search"></i>
-                <button type="summit" class="btn btn-success" name="buscar" value="{{ request.POST.buscar }}">Buscar</button>                        
-
-            </div>   
-        </div>         
+                    <button type="summit" class="btn btn-success" name="buscar" value="{{ request.POST.buscar }}">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>   
+            </div>         
         </form>                    
             </div>
             </div>
@@ -30,6 +28,7 @@
                         <thead>
                             <tr>
                                 <!-- <th scope="col">Imagen</th> -->
+                                <th scope="col">#</th>
                                 <th scope="col">CUIL</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
@@ -44,6 +43,7 @@
                         <tbody class="body">
                             {% for e in cadetes %}
                                 <tr>
+                                    <td>{{forloop.counter}}</td>
                                     <td>{{e.cuil}}</td>
                                     <td>{{e.nombre}}</td>
                                     <td>{{e.apellido}}</td>
@@ -51,12 +51,14 @@
                                     <td>{{e.fecha_vigencia_carnet}}</td>
                                     <td>{{e.numero_patente}}</td>
                                     <td>
-                                        <form action="{% url 'Usuario:cadete_delete'%}" method="post">
+                                        <form action="{% url 'Usuario:cadete_delete' %}" method="post">
                                             {% csrf_token %}
-                                        <input type="hidden" name="id" value="{{ e.id }}"> 
-                                        <button class="btn-sample btn btn-danger">Editar</button>
-                                        <button type="summit" class="btn btn-secondary">Eliminar</button>
-                                       </form>
+                                            <input type="hidden" name="id" value="{{ e.id }}"> 
+                                            <!-- Editar -->
+                                            <a href="#" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
+                                            <!-- Eliminar -->
+                                            <button type="summit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             {% endfor%}

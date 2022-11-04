@@ -219,11 +219,6 @@ def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
-
-
-
-
-
 @login_required(login_url='Usuario:login')
 def pedido_edit(request, pk):
     pedido = get_object_or_404(Pedido, pk=pk)

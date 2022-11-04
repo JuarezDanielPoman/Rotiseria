@@ -12,9 +12,9 @@
         <input class="btn-sample" type="submit" value="Buscar" class="btn button"></span></form>
     </form>
     <div class="table-responsive mt-5">
-        <table id="tabla-pedidos-pendientes" class="table table-striped table-bordered table-hover text-center">
+        <table id="tabla-pedidos-pendientes" class="table table-dark table-striped table-bordered table-hover text-center">
             <caption style="color: black;background:#5d62bd">Listado de pedidos pendientes </caption>
-            <thead class="table-primary color-tabla-text">
+            <thead class="table bg-dark ">
                 <tr>
                     <th onclick="ordenarTocandoColumna(0)" class="cabera-tabla">#</th>
                     <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Cliente</th>
@@ -29,7 +29,7 @@
                 <tr>
                     {% for p in pedidos %}
                     <tr>
-                        <td>{{p.cod_pedido}}</td>
+                        <td>{{forloop.counter}}</td>
                         <td>{{p.persona}}</td>
                         <td>{{p.modo_entrega}}</td>
                         <td>{{p.estado_entrega}}</td>
