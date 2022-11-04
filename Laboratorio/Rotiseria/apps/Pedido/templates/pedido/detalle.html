@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 {% block titulo %}Detalle de Persona{% endblock %}
 {% block contenido %}
-<h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
+
 {% if messages %}
     {% for message in messages %}
         {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
@@ -28,8 +28,10 @@
    
   {% csrf_token %}
   <input type="hidden" name="id_plato" value="#">
-  <button class="btn btn-Secondary"><a href="#">Editar</a></button>
-  <input class="btn btn-Secondary" type="submit" value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
+  <a href="#" class="btn btn-warning">Editar</a>
+  <!-- <a class="btn btn-Secondary" type="submit" value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el registro?');"></a> -->
+  <a href="#" class="btn btn-danger" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">ELIMINAR</a>
+  <a href="{% url 'Administrador' %}" class="btn btn-success">CONFIRMAR</a>
 </form>
 </div>
     </div>

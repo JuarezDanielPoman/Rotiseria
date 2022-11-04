@@ -1,6 +1,6 @@
 from tkinter import Menu
 from django import forms
-from .models import Pedido
+from .models import Especialidad, ModalidadEntrega, Pedido
 from .models import Plato
 from django import forms
 

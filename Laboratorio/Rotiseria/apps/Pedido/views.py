@@ -10,9 +10,9 @@ from django.contrib.auth.decorators import login_required
 from apps.Usuario.models import Persona
 
 from .forms import PlatoForm, PedidoForm
-from .models import Especialidad, EstadoEntrega, ModalidadEntrega, Plato, Pedido
+from .models import Especialidad, EstadoEntrega, ModalidadEntrega, Plato, Pedido, TipoPlato
 from .carrito import Carrito
-
+from django.utils.datastructures import MultiValueDictKeyError
 #from .apps import PlatoForm,PedidoForm
 #from apps.Pedido.models import Plato,Pedido
 #from apps.Pedido.carrito import Carrito
@@ -20,8 +20,10 @@ from .carrito import Carrito
 
 
 def promociones(request):
-    lista_platos = Plato.objects.all()
-    return render(request,'Pedido/promociones.html',{'platos': lista_platos})
+    lista_platos_activos = Plato.objects.filter(vigencia_plato=True)
+    #lista_platos = Plato.objects.filter(estado_promocion=True)
+    lista_platos_promocion = lista_platos_activos.filter(estado_promocion=True)
+    return render(request,'Pedido/promociones.html',{'platos': lista_platos_promocion})
 
 def listarCategoriaPlato(request):
     lista_categoria = Especialidad.objects.all()
@@ -58,8 +60,6 @@ def limpiar_carrito(request):
 
 def procesar_compra(request):
     carrito = Carrito(request)
-   
-    
     id_user = request.POST['username']
     persona = Persona.objects.get(user_id=id_user)
     print('PERSONA:',persona.cuil)
@@ -78,9 +78,8 @@ def procesar_compra(request):
     pedido.save()
     carrito.limpiar()
     return redirect(to='Pedido:promociones')
-    
 
-
+#VISTAS DE MUNÚS (PLATOS)
 @login_required(login_url='Usuario:login')
 @permission_required('Plato.add_plato', raise_exception=True)
 def creacion_menu(request):
@@ -88,8 +87,6 @@ def creacion_menu(request):
         plato_form = PlatoForm(request.POST, prefix='menu')
         if plato_form.is_valid():
             p=plato_form.save(commit=True)
-            messages.success(request,
-            'Se ha agregado correctamente el plato {}'.format(p))
             return redirect(reverse('Pedido:menu_detalle', args={p.codigo_plato}))
     else:
         plato_form = PlatoForm(prefix='menu')
@@ -100,36 +97,78 @@ def menu_detalle(request, pk):
     plato = get_object_or_404(Plato, pk=pk)
     return render(request,'Pedido/detalle.html',{'plato': plato})
 
-#@permission_required(Usuario.add_persona', raise_exception=True)
 @login_required(login_url='Usuario:login')
-def creacion_pedido(request):
-    if (request.method == 'POST'):
-        pedido_form = PedidoForm(request.POST, prefix='pedido')
-        if pedido_form.is_valid():
-            p=pedido_form.save(commit=True)
+def menu_delete(request):
+    if request.method == 'POST':
+        if 'codigo_plato' in request.POST:
+            menu = get_object_or_404(Plato, pk=request.POST['codigo_plato'])
+            menu.delete()
             messages.success(request,
-            'Se ha agregado correctamente el plato {}'.format(p))
-            return redirect(reverse('Administrador'))
-    else:
-        pedido_form = PedidoForm(prefix='pedido')
-    return render(request,'Pedido/RegistroDePedido.html',{'pedido_form': pedido_form})
+            'Se ha eliminado la persona {}'.format(menu))
+    menus = Plato.objects.all()
+    return render(request,'Pedido/listademenus.html',{'menus': menus})
 
-def editar_plato(request, pk):
+@login_required(login_url='Usuario:login')
+def menu_edit(request, pk):
+    #MUESTRA EL TEMPLATE EDITAR 
     plato = Plato.objects.get(codigo_plato=pk)
-    return render(request,'Pedido/EditarPlato.html',{'plato':plato})
+    plato_form = PlatoForm(prefix='menu')
+    return render(request,'Pedido/EditarPlato.html',{'plato_form': plato_form,'plato':plato})
 
 @login_required(login_url='Usuario:login')
+def menu_editado(request):
+    #AQUÍ REALIZA LA MODIFICACION DEL PLATO
+    id = request.POST['codigo_plato']
+    plato = Plato.objects.get(codigo_plato=id)
 
-def lista_pedidos(request):
-    listaPedidos = Pedido.objects.all()
-    return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
+    try:
+        vigencia = request.POST['menu-vigencia_plato']
+    except MultiValueDictKeyError:
+            vigencia = 'Error'
+    try:
+        estado = request.POST['menu-estado_promocion']
+    except MultiValueDictKeyError:
+            estado = 'Error'
+    nombre = request.POST['nombre_plato']
+    precio = request.POST['precio_plato']
+    tipo = request.POST['menu-tipo_plato']
+    tipo_plato = TipoPlato.objects.get(tipo_plato=tipo)
+    especialidad = request.POST['menu-especialidad']
+    tipo_especialidad = Especialidad.objects.get(especialidad=especialidad)
+
+    print('VERDADADERO:',vigencia)
+    print('FALSO:',estado)
+
+    if(vigencia == 'on'):
+        plato.vigencia_plato = True
+    else:
+        plato.vigencia_plato = False
+
+    if(estado =='on'):
+        plato.estado_promocion = True
+    else:
+        plato.estado_promocion = False
+    
+    plato.nombre_plato = nombre
+    plato.precio_plato= precio
+    plato.tipo_plato = tipo_plato
+    plato.especialidad = tipo_especialidad
+
+    plato.save()
+    return redirect(to='Administrador')
+
+
 
 @login_required(login_url='Usuario:login')
-def lista_pedidos_cadetes(request):
-    listaPedidos = Pedido.objects.all()
-    return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
+@permission_required('Pedido.view_menus', raise_exception=True)
+def lista_menus(request):
+    listamenus = Plato.objects.all()
+    return render(request,'Pedido/listademenus.html',{'menus': listamenus})
 
 
+
+
+#VISTAS DE PEDIDO - ADMIN
 #@permission_required(Usuario.add_persona', raise_exception=True)
 @login_required(login_url='Usuario:login')
 @permission_required('Pedido.add_pedido', raise_exception=True)
@@ -155,20 +194,7 @@ def lista_pedidos_cadetes(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
 
-@login_required(login_url='Usuario:login')
-@permission_required('Pedido.view_menus', raise_exception=True)
-def lista_menus(request):
-    listamenus = Plato.objects.all()
-    return render(request,'Pedido/listademenus.html',{'menus': listamenus})
 
-@login_required(login_url='Usuario:login')
-def menu_delete(request):
-    if request.method == 'POST':
-        if 'codigo_plato' in request.POST:
-            menu = get_object_or_404(Plato, pk=request.POST['codigo_plato'])
-            menu.delete()
-            messages.success(request,
-            'Se ha eliminado la persona {}'.format(menu))
-    menus = Plato.objects.all()
-    return render(request,'Pedido/listademenus.html',{'menus': menus})
+
+
 
