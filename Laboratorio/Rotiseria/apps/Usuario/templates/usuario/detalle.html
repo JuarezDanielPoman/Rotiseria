@@ -1,7 +1,7 @@
 {% extends "base/baseAdministrador.html" %}
 {% block titulo %}DETALLE{% endblock %}
 {% block contenido %}
-
+{% if perms.Persona.view_persona %}}
     <h1 class="text-center" style="color: black;">DATOS INGRESADOS</h1>
 
     <div class="d-flex justify-content-center">
@@ -33,4 +33,6 @@
             </div>
         </div>
     </div>
+
+{% endif%}
 {% endblock %}

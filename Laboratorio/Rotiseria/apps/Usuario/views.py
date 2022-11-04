@@ -175,11 +175,13 @@ def creacion_cadete(request):
     return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
 @login_required(login_url='Usuario:login')
+@permission_required('Persona.view_persona', raise_exception=True)
 def persona_detalle(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     return render(request,'Usuario/detalle.html',{'persona': persona})
 
 @login_required(login_url='Usuario:login')
+#@permission_required('Persona.delete_persona', raise_exception=True)
 def persona_delete(request):
     if request.method == 'POST':
         if 'id' in request.POST:
@@ -187,8 +189,7 @@ def persona_delete(request):
             persona.delete()
             messages.success(request,
             'Se ha eliminado la persona {}'.format(persona))
-    return render(request,
-                  'Usuario/detalle.html')
+    return render(request,'Usuario/detalle.html')
 
 @login_required(login_url='Usuario:login')
 def persona_delete_lista(request):
@@ -293,55 +294,10 @@ def buscar_cadetes(request):
     return render(request, 'index.html', data)
 
 
-    
-@login_required
+@login_required(login_url='Usuario:login')
+@permission_required('Persona.view_persona', raise_exception=True)
 def estadisticas(request):
             pedidos = Pedido.objects.all()
             platos = Plato.objects.all()
             cadetes = cadete.objects.all()
             return render(request,'base/Estadistica.html',{'estadistica':pedidos,'platos':platos,'cadetes':cadetes})
-         
-# @login_required
-# def estadisticas(request):
-#     return render(request, 'cursos/estadisticas.html', {'cursos':curso.objects.all()})
-    
-# @login_required
-# def estadisticas_1(request):
-#     #if request.method == 'POST':
-#             Cursos = curso.objects.all()
-#             #Curso = get_object_or_404(curso,pk=request.POST['id_curso'])
-            
-#             #cantinscriptos = []
-#             for data in Cursos:
-#                 #cantinscriptos.append(len(Inscriptos.objects.filter(curso = data.id)))
-#                 data.cant = len(Inscriptos.objects.filter(curso = data.id))
-                 
-#             #print(cantinscriptos)
-#             return render(request,'cursos/estadisticascantinscriptos.html',{'cursos':Cursos})
-#             # nombre_curso = Curso.nombrecurso
-#             # Curso.delete()
-#             # messages.success(request, 'Se ha eliminado exitosamente el curso {}'.format(nombre_curso))
-#         # else:
-#             # messages.error(request, 'Debe indicar qué Programa se desea eliminar')
-
-# @login_required
-# def estadisticas_2(request):
-#     Cursos = curso.objects.all()
-    
-#     for data in Cursos:
-#         data.cant = len(Inscriptos.objects.filter(curso = data.id))
-#         data.cantP= len(PagoEfectivo.objects.filter(curso = data.id)) + len(PagoTarjeta.objects.filter(curso = data.id)) + len(PagoTransferencia.objects.filter(curso = data.id)) 
-#         data.cantD= data.cant - data.cantP
-    
-#     return render(request,'cursos/estadisticascantpago.html',{'cursos':Cursos})    
-
-
-# @login_required
-# def estadisticas_3(request):
-#     if request.method == 'POST':
-#         fechaini = request.POST.get('id_anioinicio',None)
-#         fechafin = request.POST.get('id_aniofin',None)
-#         intervalo= curso.objects.filter(fechaini__range=(fechaini, fechafin))
-#     return render (request,'cursos/listaCursosAnio.html',{'intervalo':intervalo,'fechaini':fechaini,'fechafin':fechafin})
-
-  

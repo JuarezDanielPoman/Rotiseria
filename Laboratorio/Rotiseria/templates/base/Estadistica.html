@@ -2,7 +2,8 @@
 {% block titulo %}Detalle de Persona{% endblock %}
 {% block contenido %}
 {% load static %}
-    
+
+{% if perms.Persona.view_persona %}
     <section class="container">
         <h2 class="text-center mt-3">ESTADISTICAS</h2>
 
@@ -165,5 +166,5 @@
 
     </section>
     <script src="{% static 'js/Estadistica.js' %}"></script>
-
+{%endif%}
 {% endblock %}

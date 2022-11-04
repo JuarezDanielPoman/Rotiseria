@@ -23,9 +23,9 @@ path('delete/',menu_delete, name="menu_delete"),
 path('editarPlato/<int:pk>',menu_edit, name='menu_edit'),
 path('editarMenu',menu_editado,name='menu_editado'),
 path('edit/<int:pk>',pedido_edit, name='edit_pedido'),
-path('view/<int:pk>',detalle_pedido, name='detalle_pedido'),
+path('VistaPedido/<int:pk>',detalle_pedido, name='detalle_pedido'),
 path('editarpedido/<int:pk>',pedidoadmin_edit, name='pedidoadmin_edit'),
-path('viewpedido/<int:pk>',detalle_pedidoadmin, name='detalle_pedidoadmin'),
+path('vistaPedidoAdmin/<int:pk>',detalle_pedidoadmin, name='detalle_pedidoadmin'),
 path('listapedidosadmin',lista_pedidosadmin, name="lista_pedidosadmin"),
 
 #carrito

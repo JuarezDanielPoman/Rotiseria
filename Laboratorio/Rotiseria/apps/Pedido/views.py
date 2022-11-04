@@ -33,7 +33,8 @@ def listarCategoriaPlato(request):
 #Vistas para el Carrito
 @login_required(login_url='Usuario:login')
 def CarritoPedidoCliente(request):
-    return render(request,'Pedido/CarritoPedidoCliente.html',{'carrito': request.session['carrito']})
+    carrito = request.session['carrito']
+    return render(request,'Pedido/CarritoPedidoCliente.html',{'carrito':carrito})
 
 def agregar_plato_carrito(request, pk):
     carrito = Carrito(request)
