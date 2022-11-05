@@ -145,25 +145,38 @@ def creacion_cliente(request):
 @permission_required('Persona.add_cadete', raise_exception=True)
 def creacion_cadete(request):
     if (request.method == 'POST'):
+        usuario = CustomUserCreationForm(request.POST,prefix='formulario')
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
         persona_form = CadeteForm(request.POST, prefix='persona')
         telefono_form = TelefonoForm(request.POST, prefix='telefono')
         zona_form = ZonaDomicilioForm(request.POST, prefix='zona')
-        if domicilio_form.is_valid() and persona_form.is_valid() and telefono_form.is_valid() and zona_form.is_valid():
+        if usuario.is_valid() and domicilio_form.is_valid() and persona_form.is_valid() and telefono_form.is_valid() and zona_form.is_valid():
+            f=usuario.save(commit=False)
             p=persona_form.save(commit=False)
             d=domicilio_form.save(commit=False)
             t=telefono_form.save(commit=False)
             z=zona_form.save(commit=False)
+            p.user_username=f.username
+            p.user_password=f.password
+            f.first_name=p.nombre
+            f.last_name=p.apellido
+            f.email=p.email
+            p.user_email=f.email
+            p.user_is_staff=True
+
             t.save()
             z.save()
 
             d.zona_id=z.cod_zona
             d.save()
-
+            
             p.domicilio_id=d.cod_domicilio
             p.telefono_id=t.id
+            f.save()
+            
+            obtener_id_user = User.objects.get(id=f.id)
+            p.user_id=obtener_id_user.pk
             p.save()
-
             #print(request.post['persona'])
             messages.success(request,'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
             return redirect(reverse('Usuario:persona_detalle', args={p.id}))
@@ -172,7 +185,9 @@ def creacion_cadete(request):
         persona_form = CadeteForm(prefix='persona')
         telefono_form = TelefonoForm(prefix='telefono')
         zona_form = ZonaDomicilioForm(prefix='zona')
-    return render(request,'Usuario/RegistroDeCadetes.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
+        usuario = CustomUserCreationForm(prefix='formulario')
+
+    return render(request,'Usuario/RegistroDeCadetes.html',{'usuario': usuario,'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form})
 
 @login_required(login_url='Usuario:login')
 @permission_required('Persona.view_persona', raise_exception=True)
@@ -301,3 +316,4 @@ def estadisticas(request):
             platos = Plato.objects.all()
             cadetes = cadete.objects.all()
             return render(request,'base/Estadistica.html',{'estadistica':pedidos,'platos':platos,'cadetes':cadetes})
+

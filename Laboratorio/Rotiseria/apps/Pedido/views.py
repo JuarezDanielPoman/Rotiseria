@@ -253,3 +253,22 @@ def detalle_pedidoadmin(request, pk):
     pedido = get_object_or_404(Pedido, pk=pk)
     return render(request,'Pedido/detalle_pedidoadmin.html',{'pedido': pedido})
 
+            
+@login_required(login_url='Usuario:login')
+# @permission_required('Persona.view_cadete', raise_exception=True)
+def lista_pedidosrealizados(request):
+    listaPedidos = Pedido.objects.all()
+    persona = Persona.objects.all()
+    return render(request,'Pedido/listapedidosrealizados.html',{'persona':persona,'pedidos': listaPedidos})
+
+
+@login_required(login_url='Usuario:login')
+def buscar_platos(request):
+    platos = Plato.objects.all()
+
+    if 'buscar' in request.GET:
+        buscar_plato = platos.filter(nombre_plato__icontains=request.GET['buscar'])
+    print(request.GET['buscar'])
+    return render(request, 'Pedido/promociones.html',
+                  {'platos': buscar_plato})
+

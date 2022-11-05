@@ -18,10 +18,10 @@
 
             <!-- Seccion Buscar -->
             <div class="pt-3">
-                <form class="d-flex d-md-inlne-block form-inline justify-content-end" method="POST" action="">
+                <form class="d-flex d-md-inlne-block form-inline justify-content-end" action="{% url 'Pedido:buscar_platos' %}" method="GET">
                     {% csrf_token %}
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-1 small text-center" name="buscador" placeholder="buscar" value="{{ request.POST.buscador }}">
+                        <input type="text" class="form-control bg-light border-1 small text-center" name="buscar" placeholder="buscar" value="{{ request.POST.buscador }}">
                         <div class="input-group-append">
                             <button class="btn btn-info mx-1" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>

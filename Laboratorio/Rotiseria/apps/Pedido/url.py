@@ -1,6 +1,8 @@
 from django import views
 from django.urls import path
 from django.urls.resolvers import URLPattern
+from apps.Pedido.views import  buscar_platos
+from apps.Pedido.views import lista_pedidosrealizados
 from apps.Pedido.views import lista_pedidosadmin, menu_edit, menu_editado
 from apps.Pedido.views import detalle_pedidoadmin, pedidoadmin_edit
 from apps.Pedido.views import detalle_pedido
@@ -27,6 +29,8 @@ path('VistaPedido/<int:pk>',detalle_pedido, name='detalle_pedido'),
 path('editarpedido/<int:pk>',pedidoadmin_edit, name='pedidoadmin_edit'),
 path('vistaPedidoAdmin/<int:pk>',detalle_pedidoadmin, name='detalle_pedidoadmin'),
 path('listapedidosadmin',lista_pedidosadmin, name="lista_pedidosadmin"),
+path('listapedidosrealizados',lista_pedidosrealizados, name="listapedidosrealizados"),
+path('buscar/',buscar_platos, name="buscar_platos"),
 
 #carrito
 path('CarritoPedidoCliente',CarritoPedidoCliente, name='CarritoPedidoCliente'),

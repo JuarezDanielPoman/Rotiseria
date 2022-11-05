@@ -89,8 +89,13 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                             <span class="badge bg-success text-white ms-1 rounded-pill">${{ importe_total }}</span>
                         </a>
+
                     </li>
-                    
+                    <li class="menu_item">
+                        <a href="{% url 'Pedido:listapedidosrealizados' %}" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b>Sus pedidos</b></a>
+
+                    </li>
+
                     <li class="menu__item container-submenu">
                         <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fas fa-user-check"></i><b> {{ user.username }}</b></a>
                         <ul class="submenu">
