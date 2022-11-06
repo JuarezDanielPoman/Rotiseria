@@ -280,7 +280,7 @@ def buscar_personas(request):
     programas = Persona.objects.all()
 
     if 'buscar' in request.GET:
-        buscar_persona = programas.filter(nombre__icontains=request.GET['buscar'])
+        buscar_persona = programas.filter(apellido__icontains=request.GET['buscar'])
     print(request.GET['buscar'])
     return render(request, 'Usuario/ListaDePersonas.html',
                   {'personas': buscar_persona})

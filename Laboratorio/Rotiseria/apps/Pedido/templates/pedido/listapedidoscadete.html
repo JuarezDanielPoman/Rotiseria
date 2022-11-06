@@ -22,7 +22,6 @@
                     <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Tipo de entrega</th> 
                     <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Estado</th>     
                     <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Hora de entrega</th>
-                    <th colspan="2">Opciones</th>
 
                 </tr>                   
             </thead>
@@ -36,13 +35,7 @@
                         <td>{{p.modo_entrega}}</td>
                         <td>{{p.estado_entrega}}</td>
                         <td>{{p.hora_entrega_hasta|time:"H:i"}}</td>
-                        <td>
-                            <form action="" method="post">
-                                {% csrf_token %}
-                            <button class="btn-sample btn btn-danger">Editar</button>
-                            <button class="btn btn-secondary">Eliminar</button>
-                        </form>
-                        </td>
+                       
                     </tr>
                     {% endif%}                         
                 {% endfor%}                         
@@ -52,5 +45,5 @@
     </div>
 </section>
     <!-- <script src="{% static 'js/ordenarPedidos.js' %}"></script> -->
-{%endif%
+{%endif%}
     {% endblock %}

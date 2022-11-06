@@ -22,10 +22,11 @@ class PlatoForm(forms.ModelForm):
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ('persona','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
+        fields = ('cadete','persona','hora_entrega_hasta','estado_entrega','platos','modo_entrega')
         prefix = 'pedido'
         widgets = {
         'persona': forms.Select(attrs={'value':"pedido.persona", 'class':"nombre form-control mb-2 text-center"}),
+        'cadete': forms.Select(attrs={'value':"pedido.cadete", 'class':"nombre form-control mb-2 text-center"}),
         'hora_entrega_hasta': forms.TimeInput(attrs={ 'type':"time",'class':"nombre form-control mb-2 text-center"}),
         'estado_entrega': forms.Select(attrs={'value':"pedido.estado_entrega", 'class':"nombre form-control mb-2 text-center"}),
         'modo_entrega': forms.Select(attrs={'value':"pedido.modo_entrega", 'class':"nombre form-control mb-2 text-center"}),

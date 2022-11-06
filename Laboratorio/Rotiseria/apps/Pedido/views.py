@@ -272,3 +272,35 @@ def buscar_platos(request):
     return render(request, 'Pedido/promociones.html',
                   {'platos': buscar_plato})
 
+
+@login_required(login_url='Usuario:login')
+def buscar_platos(request):
+    platos = Plato.objects.all()
+
+    if 'buscar' in request.GET:
+        buscar_plato = platos.filter(nombre_plato__icontains=request.GET['buscar'])
+    print(request.GET['buscar'])
+    return render(request, 'Pedido/promociones.html',
+                  {'platos': buscar_plato})
+
+
+@login_required(login_url='Usuario:login')
+def buscar_pedidos(request):
+    pedido = Pedido.objects.all()
+
+    if 'buscar' in request.GET:
+        buscar_pedido = pedido.filter(cod_pedido__icontains=request.GET['buscar'])
+    print(request.GET['buscar'])
+    return render(request, 'Pedido/lista_pedidosadmin.html',
+                  {'pedidos': buscar_pedido})
+
+
+@login_required(login_url='Usuario:login')
+def buscar_platosadmin(request):
+    platos = Plato.objects.all()
+
+    if 'buscar' in request.GET:
+        buscar_plato = platos.filter(nombre_plato__icontains=request.GET['buscar'])
+    print(request.GET['buscar'])
+    return render(request, 'Pedido/listademenus.html',
+                  {'menus': buscar_plato})
