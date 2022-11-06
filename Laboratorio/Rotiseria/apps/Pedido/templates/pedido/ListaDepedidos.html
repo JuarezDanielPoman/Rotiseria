@@ -7,6 +7,7 @@
 
 <section class="container">
     <h3 class="text-center mt-5">LISTA DE PEDIDOS DEL DIA</h3>
+    <p><strong>{{user.id}}</strong></p>
     <form action="#" method="get">
         <input type="text" name="charSearch" size="20" class="formulario" value="">
         <span class="headerList_searchButton">
@@ -29,7 +30,8 @@
                 <tr>
                     {% for p in pedidos %}
                     {% if p.estado_entrega.descripcion_estado == "Pendiente" %}
-
+                    {% if p.modo_entrega.descripcion_modo_entrega == "envio" %}
+                    {% if p.cadete.user.id == user.id %}
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{p.persona}}</td>
@@ -44,6 +46,8 @@
                         </form>
                         </td>
                     </tr>
+                    {%endif%}
+                    {%endif%}
                     {%endif%}
                     <!-- data-target="#ventanaModalPedido" -->
                 {% endfor%}                         
