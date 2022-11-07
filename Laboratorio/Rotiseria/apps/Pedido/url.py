@@ -1,6 +1,7 @@
 from django import views
 from django.urls import path
 from django.urls.resolvers import URLPattern
+from apps.Pedido.views import lista_pedidosdisponibles
 from apps.Pedido.views import buscar_platosadmin
 from apps.Pedido.views import buscar_pedidos
 from apps.Pedido.views import  buscar_platos
@@ -35,6 +36,9 @@ path('listapedidosrealizados',lista_pedidosrealizados, name="listapedidosrealiza
 path('buscar/',buscar_platos, name="buscar_platos"),
 path('buscarpedido/',buscar_pedidos, name="buscar_pedidos"),
 path('buscarplatoadmin/',buscar_platosadmin, name="buscar_platosadmin"),
+path('listapedidosdisponibles/',lista_pedidosdisponibles, name="lista_pedidosdisponibles"),
+
+
 
 #carrito
 path('CarritoPedidoCliente',CarritoPedidoCliente, name='CarritoPedidoCliente'),

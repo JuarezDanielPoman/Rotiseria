@@ -30,7 +30,7 @@
                     {% for p in pedidos %}
                     {% if p.estado_entrega.descripcion_estado == "Pendiente" %}
                     {% if p.modo_entrega.descripcion_modo_entrega == "envio" %}
-                    {% if p.cadete.user.id == user.id %}
+                    {% if p.cadete.user.id != user.id %}
 
                     <tr>
                         <td>{{forloop.counter}}</td>

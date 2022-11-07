@@ -192,6 +192,13 @@ def lista_pedidos(request):
     listaPedidos = Pedido.objects.all()
     return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
 
+
+@login_required(login_url='Usuario:login')
+def lista_pedidosdisponibles(request):
+    listaPedidos = Pedido.objects.all()
+    return render(request,'Pedido/listapedidosdisponibles.html',{'pedidos': listaPedidos})
+
+
 @login_required(login_url='Usuario:login')
 @permission_required('Pedido.view_pedido', raise_exception=True)
 def lista_pedidos_cadetes(request):
