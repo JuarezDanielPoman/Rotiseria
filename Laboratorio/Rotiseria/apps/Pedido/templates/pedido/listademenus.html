@@ -5,7 +5,7 @@
 {% load static %}
 
 <section class="container">
-    <h3 class="text-center mt-5">LISTA DE MENUS DISPONIBLES</h3>
+    <h1 class="text-center mt-5 text-title text-dark">LISTADO DE PLATOS</h1>
     <form action="#" method="get">
         <input type="text" name="charSearch" size="20" class="formulario" value="">
         <span class="headerList_searchButton">
@@ -13,14 +13,13 @@
     
     <div class="table-responsive mt-5">
         <table id="tabla-pedidos-pendientes" class="table table-dark table-striped table-bordered table-hover text-center">
-            <caption style="color: black;background:#5d62bd">Listado de pedidos pendientes </caption>
             <thead>
                 <tr>
                     <th onclick="ordenarTocandoColumna(0)" class="cabera-tabla">#</th>
                     <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Nombre</th>
                     <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Precio</th> 
-                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">vigencia_plato</th>     
-                    <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Promocion</th>
+                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Vigencia</th>     
+                    <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Promoción</th>
                     <th onclick="ordenarTocandoColumna(5)" class="cabera-tabla">Tipo de Plato</th>
                     <th onclick="ordenarTocandoColumna(6)" class="cabera-tabla">Especialidad</th>
                     <th colspan="2">Opciones</th>
@@ -34,8 +33,20 @@
                         <td>{{forloop.counter}}</td>
                         <td>{{p.nombre_plato}}</td>
                         <td>{{p.precio_plato}}</td>
-                        <td>{{p.vigencia_plato}}</td>
-                        <td>{{p.estado_promocion}}</td>
+                        <td>
+                            {% if  p.vigencia_plato == True %}
+                                SI
+                            {% else %}
+                            NO
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if  p.estado_promocion == True %}
+                                SI
+                            {% else %}
+                                NO
+                            {% endif %}
+                        </td>
                         <td>{{p.tipo_plato}}</td>
                         <td>{{p.especialidad}}</td>
                         <td>

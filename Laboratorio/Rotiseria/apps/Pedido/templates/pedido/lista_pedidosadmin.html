@@ -19,27 +19,30 @@
                     <th onclick="ordenarTocandoColumna(0)" class="cabera-tabla">#</th>
                     <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Cliente</th>
                     <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Tipo de entrega</th> 
-                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Estado</th>     
+                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Estado</th>
+                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Hora del pedido</th> 
                     <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Hora de entrega</th>
                     <th colspan="2">Opciones</th>
 
                 </tr>                   
             </thead>
             <tbody>
-                <tr>
                     {% for p in pedidos %}
                     <tr>
-                        <td>{{p.cod_pedido}}</td>
+                        <td>{{forloop.counter}}</td>
                         <td>{{p.persona}}</td>
                         <td>{{p.modo_entrega}}</td>
                         <td>{{p.estado_entrega}}</td>
+                        <td>{{p.hora_entrega_desde|time:"H:i"}}</td>
                         <td>{{p.hora_entrega_hasta|time:"H:i"}}</td>
                         <td>
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="id" value="{{ p.cod_pedido }}"> 
-                            <button class="btn-sample btn btn-danger"><a href="{% url 'Pedido:pedidoadmin_edit' p.cod_pedido %}" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" > Editar</a></button>
-                        </form>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ p.cod_pedido }}"> 
+                                <!-- Editar -->
+                                <a href="{% url 'Pedido:pedidoadmin_edit' p.cod_pedido %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
+                                <!-- <button class="btn-sample btn btn-danger"><a href="{% url 'Pedido:pedidoadmin_edit' p.cod_pedido %}" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" > Editar</a></button> -->
+                            </form>
                         </td>
                     </tr>
                     <!-- data-target="#ventanaModalPedido" -->

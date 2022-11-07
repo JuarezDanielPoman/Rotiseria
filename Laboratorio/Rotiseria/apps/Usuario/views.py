@@ -200,8 +200,7 @@ def persona_delete_lista(request):
             messages.success(request,
             'Se ha eliminado la persona {}'.format(persona))
     listaPersonas = Persona.objects.all()
-    return render(request,
-                  'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
+    return render(request,'Usuario/ListaDePersonas.html',{'personas': listaPersonas})
 
 @login_required(login_url='Usuario:login')
 def cadete_delete(request):

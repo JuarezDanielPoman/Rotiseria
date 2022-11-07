@@ -72,7 +72,7 @@ obtenerValoresHora(tablaPedidos,4)
 function obtenerValoresHora(tabla, numeroColumna) {
     let listaDeHoras =[]; 
 
-    for (let i = 2, columna; i < tabla.rows.length; i++) {
+    for (let i = 1, columna; i < tabla.rows.length; i++) {
         columna = tabla.rows[i].cells[numeroColumna];
         if(columna != null ){
 
@@ -92,7 +92,7 @@ function compararHoraEntrega(listaDeHoras) {
     var horaEnMinutosActual = horaEnMinutosLocal + minutosLocal; 
     var tabla = document.getElementById('tabla-pedidos-pendientes');
 
-    for (let i = 2; i <= listaDeHoras.length; i++) {
+    for (let i = 1; i <= listaDeHoras.length; i++) {
         var horaTabla = Number(listaDeHoras[i].substring(0,2));
         var minutosTabla = Number(listaDeHoras[i].substring(3,5));
         var horaEnMinutosTabla = (horaTabla * 60) + minutosTabla
