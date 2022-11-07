@@ -30,7 +30,7 @@
                     {% if user.last_name == p.persona.apellido %} 
 
                      <tr>
-                        <td>{{p.cod_pedido}}</td>
+                        <td>{{forloop.counter}}</td>
                         <td>{{p.modo_entrega}}</td>
                         <td>{{p.estado_entrega}}</td>
                         <td>{{user.last_name}}</td>
