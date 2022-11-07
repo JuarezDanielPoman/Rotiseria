@@ -5,12 +5,22 @@
 {% load static %}
 
 <section class="container">
-    <h1 class="text-center mt-5 text-title text-dark">LISTADO DE PLATOS</h1>
-    <form action="#" method="get">
-        <input type="text" name="charSearch" size="20" class="formulario" value="">
-        <span class="headerList_searchButton">
-        <input class="btn-sample" type="submit" value="Buscar" class="btn button"></span></form>
-    
+    <h3 class="text-center mt-5">LISTA DE MENUS DISPONIBLES</h3>
+    <div class="form-group row">
+        <label for="cliente" class="col-form-label text-white">Buscar:</label>
+        <div class="col-12 col-md-10">
+<form action="{% url 'Pedido:buscar_platosadmin' %}" method="GET">
+    <div id="custom-search-input">
+        <input type="text" class="form-control" id="persona" placeholder="Ingresa codigod de pedido" name="buscar">
+        <div class="input-group">
+        <i class="icon icon-search"></i>
+        <button type="summit" class="btn btn-success" >Buscar</button>                        
+
+    </div>   
+</div>         
+</form>                      
+    </div>
+    </div>
     <div class="table-responsive mt-5">
         <table id="tabla-pedidos-pendientes" class="table table-dark table-striped table-bordered table-hover text-center">
             <thead>

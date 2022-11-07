@@ -69,7 +69,7 @@ class cadete(Persona):
     fecha_ingreso = models.DateField(blank=True)
 
     def __str__(self):
-        texto = "{0} - Ingreso laboral: {1} - Vigencia carnet: {2} - Patente: {3} - Zona: {4}"
-        return texto.format(self.cuil, self.fecha_ingreso, self.fecha_vigencia_carnet, self.numero_patente, self.domicilio.zona)
+        texto = "{0} - Apellido: {1} - Vigencia carnet: {2} - Patente: {3} - Zona: {4}"
+        return texto.format(self.nombre, self.apellido, self.fecha_vigencia_carnet, self.numero_patente, self.domicilio.zona)
 
 

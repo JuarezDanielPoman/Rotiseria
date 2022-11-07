@@ -30,7 +30,7 @@
                     {% for p in pedidos %}
                     {% if p.estado_entrega.descripcion_estado == "Pendiente" %}
                     {% if p.modo_entrega.descripcion_modo_entrega == "envio" %}
-                    {% if p.cadete.user.id == user.id %}
+                    {% if p.cadete.user.id != user.id %}
 
                     <tr>
                         <td>{{forloop.counter}}</td>
@@ -41,10 +41,8 @@
                         <td>
                         <form method="post">
                             {% csrf_token %}
-                            <input type="hidden" name="id" value="{{ p.cod_pedido }}">
-                            <!-- Editar -->
-                            <a href="{% url 'Pedido:edit_pedido' p.cod_pedido %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
-                            <!-- <button class="btn-sample btn btn-danger"><a href="{% url 'Pedido:edit_pedido' p.cod_pedido %}" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" > Editar</a></button> -->
+                            <input type="hidden" name="id" value="{{ p.cod_pedido }}"> 
+                            <button class="btn-sample btn btn-danger"><a href="{% url 'Pedido:edit_pedido' p.cod_pedido %}" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" > Editar</a></button>
                         </form>
                         </td>
                     </tr>

@@ -1,9 +1,8 @@
-{% extends "base/baseCadete.html" %}
+{% extends "base/base.html" %}
 {% block titulo %}Lista de Pedidos disponibles{% endblock %}
 
 {% block contenido %}
 {% load static %}
-{% if perms.Pedido.view_pedido %}
 
 <section class="container">
     <h3 class="text-center mt-5">LISTA DE PEDIDOS REALIZADOS</h3>
@@ -11,39 +10,39 @@
         <input type="text" name="charSearch" size="20" class="formulario" value="">
         <span class="headerList_searchButton">
         <input class="btn-sample" type="submit" value="Buscar" class="btn button"></span></form>
-    
+    </form>
     <div class="table-responsive mt-5">
         <table id="tabla-pedidos-pendientes" class="table table-dark table-striped table-bordered table-hover text-center">
             <caption style="color: black;background:#5d62bd">Listado de pedidos pendientes </caption>
             <thead class="table-primary color-tabla-text">
                 <tr>
                     <th onclick="ordenarTocandoColumna(0)" class="cabera-tabla">#</th>
-                    <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Cliente</th>
-                    <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Tipo de entrega</th> 
-                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Estado</th>     
-                    <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Hora de entrega</th>
+                    <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Tipo de entrega</th> 
+                    <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Estado</th>     
+                    <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Cliente</th>     
 
                 </tr>                   
             </thead>
             <tbody>
                 <tr>
-                    {% for p in pedidos %}
-                    {% if  p.estado_entrega.descripcion_estado == 'Entregado' %}
-                    <tr>
+                   
+                    {% for p in pedidos.all %}
+                    {% if user.last_name == p.persona.apellido %} 
+
+                     <tr>
                         <td>{{p.cod_pedido}}</td>
-                        <td>{{p.persona}}</td>
                         <td>{{p.modo_entrega}}</td>
                         <td>{{p.estado_entrega}}</td>
-                        <td>{{p.hora_entrega_hasta|time:"H:i"}}</td>
-                       
+                        <td>{{user.last_name}}</td>
+
                     </tr>
-                    {% endif%}                         
-                {% endfor%}                         
+                    {%endif%}  
+                    {% endfor%}      
+                
             </tbody>
-            <!--<tfoot><td>Total de pedidos</td></tfoot>-->
         </table>
     </div>
+   
 </section>
     <!-- <script src="{% static 'js/ordenarPedidos.js' %}"></script> -->
-{%endif%}
-    {% endblock %}
+{% endblock %}

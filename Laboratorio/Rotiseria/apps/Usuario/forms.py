@@ -71,7 +71,7 @@ class CadeteForm(forms.ModelForm):
     
     class Meta:
         model = cadete
-        fields = ('cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','fecha_vigencia_carnet','numero_patente','fecha_ingreso')
+        fields = ('user','cuil', 'apellido','nombre', 'fecha_nacimiento', 'email','fecha_vigencia_carnet','numero_patente','fecha_ingreso')
         prefix = 'persona'
 
         widgets = {
