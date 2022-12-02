@@ -12,52 +12,15 @@
                     <fieldset>
                         <legend class="text-center">MODIFICAR PLATO</legend>
 
-                        <!-- Código -->
-                        <div class="col-auto ">
-                            <input type="hidden" class="form-control mb-2 text-center" name="codigo_plato" value="{{plato.codigo_plato}}"><br>
-                        </div>
-                        
-                        <!-- Nombre del plato -->
-                        <div class="col-auto ">
-                            <label for="nomMenu">Nombre del Plato</label><br>
-                            <input type="text" class="form-control mb-2 text-center" required placeholder="Ingrese Nombre" name="nombre_plato" value="{{plato.nombre_plato}}"><br>
-                        </div>
-
-                        <!-- Precio -->
-                        <div class="col-auto ">
-                            <label for="decripMenu">Precio</label><br>
-                            <input type="number" class="form-control mb-2 text-center" required placeholder="Ingrese descripcion" id="decripMenu" name="precio_plato" value="{{plato.precio_plato}}"><br>
-                        </div>
-                        
-                        <!-- Veigencia del plato -->
-                        <div class="col-auto">
-                            <label for="vigencia">Vigencia</label>&nbsp;Si
-                            {{plato_form.vigencia_plato}}
-                        </div>
-                        
-                        <!-- Promoción del plato -->
-                        <div class="col-auto">
-                            <label for="promocion">Promoción </label>
-                            {{plato_form.estado_promocion}}
-                        </div>
-                        
-                        <!-- Tipo de menú -->
-                        <div class="col-auto mb-2">
-                            <label for="plato">Tipo de menu</label>
-                            {{plato_form.tipo_plato}}
-                        </div>
-
-                        <!-- Especialidad -->
-                        <div class="col-auto mb-2"></div>
-                            <label for="tipoPlato">Especialidad</label>
-                            {{plato_form.especialidad}}
-                        </div>
+                        {{plato_form}}
 
                         <div class="col-auto text-center">
-                            <input class="btn btn-secondary" type="reset" name="cancelar" value="Cancelar" />
-                            <!-- <input class="btn btn-succes mb-2" type="submit" name="Enviar" value="MODIFICAR" /> -->
+                            <!-- <input class="btn btn-secondary" type="reset" name="cancelar" value="Cancelar" /> -->
+                            <a href="{% url 'Pedido:listademenus' %}" class="btn btn-secondary" name="cancelar">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Modificar</button>
                         </div>
+
+
                     </fieldset>
                 </form>
             </div>

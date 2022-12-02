@@ -49,14 +49,12 @@
                                     <td>
                                         <form action="{% url 'Usuario:persona_delete_lista' %}" method="post">
                                             {% csrf_token %}
-                                        <input type="hidden" name="id" value="{{ p.id }}"> 
-                                        <!-- <button class="btn-sample btn btn-danger">Editar</button> -->
-                                        <!-- <button type="summit" class="btn btn-secondary">Eliminar</button> -->
-                                         <!-- Editar -->
-                                         <a href="#" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
-                                         <!-- Eliminar -->
-                                         <button type="summit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                       </form>
+                                            <input type="hidden" name="id" value="{{ p.id }}"> 
+                                            <!-- Editar -->
+                                            <a  href="{% url 'Usuario:persona_edit' p.id %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
+                                            <!-- Eliminar -->
+                                            <button type="summit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                        </form>
                         </td>
                                 </tr>
                             {% endfor%}

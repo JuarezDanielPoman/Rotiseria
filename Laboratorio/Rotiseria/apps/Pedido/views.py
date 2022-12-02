@@ -115,9 +115,9 @@ def menu_delete(request):
 @login_required(login_url='Usuario:login')
 def menu_edit(request, pk):
     #MUESTRA EL TEMPLATE EDITAR 
-    plato = Plato.objects.get(codigo_plato=pk)
-    plato_form = PlatoForm(prefix='menu')
-    return render(request,'Pedido/EditarPlato.html',{'plato_form': plato_form,'plato':plato})
+    plato = get_object_or_404(Plato, codigo_plato=pk);
+    plato_form = PlatoForm(prefix='menu', instance=plato)
+    return render(request,'Pedido/EditarPlato.html',{'plato_form': plato_form})
 
 @login_required(login_url='Usuario:login')
 def menu_editado(request):

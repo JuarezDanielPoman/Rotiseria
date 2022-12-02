@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import permission_required
 from apps.Pedido.models import Plato
 from apps.Pedido.models import Pedido
 from apps.Usuario.forms import CadeteForm, CustomUserCreationForm
-from apps.Usuario.models import Persona, cadete
+from apps.Usuario.models import Persona, Telefono, cadete
 from apps.Usuario.forms import ZonaDomicilioForm
 from apps.Usuario.forms import PersonaForm
 from apps.Usuario.forms import DomicilioForm
@@ -131,8 +131,7 @@ def creacion_cliente(request):
             p.telefono_id=t.id
             p.save()
 
-            messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p.id))
+            messages.success(request,'¡PERSONA INGRESADA CORRECTAMENTE!')
             return redirect(reverse('Usuario:persona_detalle', args={p.id}))
     else:
         domicilio_form = DomicilioForm(prefix='domicilio')
@@ -232,11 +231,15 @@ def cadete_delete(request):
 @login_required(login_url='Usuario:login')
 def persona_edit(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
+
     if request.method == 'POST':
+        
+        print("ENTRA AL POST - PARA MODIFICAR")
         domicilio_form = DomicilioForm(request.POST, prefix='domicilio')
         persona_form = PersonaForm(request.POST, prefix='persona',instance=persona)
         telefono_form = TelefonoForm(request.POST, prefix='telefono')
         zona_form = ZonaDomicilioForm(request.POST, prefix='zona')
+        
         if domicilio_form.is_valid() and persona_form.is_valid() and telefono_form.is_valid() and zona_form.is_valid():
             p=persona_form.save(commit=False)
             d=domicilio_form.save(commit=False)
@@ -252,14 +255,14 @@ def persona_edit(request, pk):
             p.telefono_id=t.id
             p.save()
 
-            messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p,d,t,z))
-            return redirect(reverse('Usuario:persona_detalle', args={p.id}))
+            messages.success(request,'¡DATOS MODIFICADOS CORRECTAMENTE!')
+            return redirect(reverse('Usuario:persona_detalle'))
     else:
-        domicilio_form = DomicilioForm(prefix='domicilio')
-        persona_form = PersonaForm(prefix='persona')
-        telefono_form = TelefonoForm(prefix='telefono')
-        zona_form = ZonaDomicilioForm(prefix='zona')
+        print("ENTRA AL ELSE - PARA MOSTRAR DATOS")
+        domicilio_form = DomicilioForm(prefix='domicilio', instance=persona.domicilio)
+        persona_form = PersonaForm(prefix='persona', instance=persona)
+        telefono_form = TelefonoForm(prefix='telefono',instance=persona.telefono)
+        zona_form = ZonaDomicilioForm(prefix='zona', instance=persona.domicilio.zona)
     return render(request,'Usuario/persona_edit.html',{'persona_form': persona_form,'domicilio_form': domicilio_form,'telefono_form': telefono_form,'zona_form': zona_form, 'persona':persona})
 
 @login_required(login_url='Usuario:login')

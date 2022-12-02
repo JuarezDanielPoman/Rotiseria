@@ -1,6 +1,8 @@
 {% extends "base/baseCadete.html" %}
 {% block titulo %}Editar de Persona{% endblock %}
 {% block contenido %}
+
+
 <h1 class="text-center" style="color: black;">Persona: {{ plato.nombre_plato }}</h1>
 {% if messages %}
     {% for message in messages %}
@@ -10,35 +12,18 @@
 <div class="d-flex justify-content-center">
     <div class="card col-sm-7 p-3 formulario"> 
         <div class="mb-2">
-<!-- <p><strong>Pedido ingresado</strong></p>
-<ul>
-  {% for plato in pedido.all %}
-    <li>{{ plato }}</li>
-  {% endfor %}
-</ul>
-<p><strong>Nombre Plato: </strong>{{ plato.nombre_plato}}</p>
-<p><strong>Precio de plato:</strong> {{ plato.precio_plato}}</p>
-<p><strong>Vigencia Plato:</strong>{{ plato.vigencia_plato}}</p>
-<p><strong>Estado de promocion:</strong>{{ plato.estado_promocion}}</p>
-<p><strong>vigencia Plato:</strong>{{ plato.tipo_plato}}</p>
-<p><strong>vigencia Plato:</strong>{{ plato.especialidad}}</p> -->
-{{pedido.errors}}
+        
+          {{pedido.errors}}
 
-<form action="#" method="POST">
-   
-{{pedido_form.estado_entrega}} 
-<!-- {{pedido.persona}}
-{{pedido.hora_entrega_hasta}}
-{{pedido.fecha_pedido}}
-{{pedido.estado_entrega}}
-{{pedido.platos}} -->
+            <form action="#" method="POST">
+              
+            {{pedido_form.estado_entrega}} 
 
-
-  {% csrf_token %}
-  <input type="hidden" name="id_plato" value="{{pedido.cod_pedido}}">
-  <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
-  <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
-</form>
+              {% csrf_token %}
+              <input type="hidden" name="id_plato" value="{{pedido.cod_pedido}}">
+              <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
+              <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
+            </form>
 </div>
     </div>
         </div>
