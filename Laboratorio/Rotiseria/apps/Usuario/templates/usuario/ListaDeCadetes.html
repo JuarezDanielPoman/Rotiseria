@@ -29,10 +29,10 @@
                             <tr>
                                 <!-- <th scope="col">Imagen</th> -->
                                 <th scope="col">#</th>
-                                <th scope="col">CUIL</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
-                                <th scope="col">Fecha de ingreso</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Zona de trabajo</th>
                                 <th scope="col">Fecha del carnet</th>
                                 <th scope="col">Nro Patente</th>
                                 <th colspan="2">Opciones</th>
@@ -44,23 +44,69 @@
                             {% for e in cadetes %}
                                 <tr>
                                     <td>{{forloop.counter}}</td>
-                                    <td>{{e.cuil}}</td>
-                                    <td>{{e.nombre}}</td>
+                                    <td><a href="#" data-toggle="modal" data-target="#ventanaModalPedido">{{e.nombre}}</a></td>
                                     <td>{{e.apellido}}</td>
-                                    <td>{{e.fecha_ingreso}}</td>
+                                    <td>{{e.telefono}}</td>
+                                    <td>{{e.zona_trabajo}}</td>
                                     <td>{{e.fecha_vigencia_carnet}}</td>
                                     <td>{{e.numero_patente}}</td>
                                     <td>
                                         <form action="{% url 'Usuario:cadete_delete' %}" method="post">
                                             {% csrf_token %}
-                                            <input type="hidden" name="id" value="{{ e.id }}"> 
+                                            <input type="hidden" name="id_cadete" value="{{ e.id }}"> 
                                             <!-- Editar -->
-                                            <a href="#" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
+                                            <a href="{% url 'Usuario:editar_cadete'  e.id  %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
+                                            
                                             <!-- Eliminar -->
                                             <button type="summit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                                         </form>
                                     </td>
                                 </tr>
+
+                                <section id="seccion-pedido">
+                                    <div class="modal fade" id="ventanaModalPedido" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                
+                                                <div class="modal-header">
+                                                    <h5 id="titulo-ventana" class="text-center">Datos del Cliente</h5>
+                                                    <button class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true"></span>X</button>
+                                                </div>
+                                        
+                                                <div class="modal-body">
+                                                    <div class="card col-auto p-3 formulario"> 
+                                                        <div class="mb-2">
+                                                            <form action="#" method="post">
+                                                                <fieldset>
+                                                                    
+                                                                    <div class="col-auto mb-2">
+                                                                        <label class="form-text">Cuil: <span> {{ e.cuil }} </span></label>                                                
+                                                                    </div>
+        
+                                                                    <div class="col-auto mb-2">
+                                                                        <label class="form-text">Nombre: <span> {{ e.nombre }} </span> </label>
+                                                                    </div>
+                                        
+                                                                    <div class="col-auto mb-2">
+                                                                        <label class="form-text">Apellido: <span> {{ e.apellido }} </span></label>                                                
+                                                                    </div> 
+                                                                    <div class="col-auto mb-2">
+                                                                        <label class="form-text">Domicilio: <span> {{ e.domicilio }} </span></label>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                        
+                                                <div class="modal-footer">
+                                                    <span><a href="#" class="btn btn-warning">Cancelar</a></span>
+                                                    <button class="btn btn-success" type="button">Guardar</button>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </section>
                             {% endfor%}
                         </tbody>
                     </table>

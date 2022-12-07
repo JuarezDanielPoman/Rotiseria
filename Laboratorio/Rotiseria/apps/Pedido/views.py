@@ -7,7 +7,7 @@ from apps.Pedido.forms import PlatoForm,PedidoForm
 from apps.Pedido.models import Plato,Pedido
 from django.contrib.auth.decorators import login_required
 
-from apps.Usuario.models import Persona
+from apps.Usuario.models import Persona, Cadete
 
 from .forms import PedidoAdminForm, PedidoCadeteForm, PlatoForm, PedidoForm
 from .models import Especialidad, EstadoEntrega, ModalidadEntrega, Plato, Pedido, TipoPlato
@@ -21,7 +21,6 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 def promociones(request):
     lista_platos_activos = Plato.objects.filter(vigencia_plato=True)
-    #lista_platos = Plato.objects.filter(estado_promocion=True)
     lista_platos_promocion = lista_platos_activos.filter(estado_promocion=True)
     return render(request,'Pedido/promociones.html',{'platos': lista_platos_promocion})
 
@@ -63,12 +62,12 @@ def procesar_compra(request):
     carrito = Carrito(request)
     lista = carrito.lista()
 
-    id_user = request.POST.get('username', None)
+    id_user = request.POST['id-user']
+
     modo_entega = request.POST.get('modo-entrega',None)
     modalidad = ModalidadEntrega.objects.get(modoentrega=modo_entega)
     estado = EstadoEntrega.objects.get(estado_entrega=1)
-    print('MODALIDAD ENTREGA:',modo_entega)
-    
+
     persona = Persona.objects.get(user_id=id_user)
     pedido = Pedido.objects.create(persona=persona,estado_entrega=estado,modo_entrega=modalidad)
     pedido.save()
@@ -107,59 +106,22 @@ def menu_delete(request):
         if 'codigo_plato' in request.POST:
             menu = get_object_or_404(Plato, pk=request.POST['codigo_plato'])
             menu.delete()
-            messages.success(request,
-            'Se ha eliminado la persona {}'.format(menu))
-    menus = Plato.objects.all()
-    return render(request,'Pedido/listademenus.html',{'menus': menus})
+    return redirect(to='Pedido:listademenus')
 
 @login_required(login_url='Usuario:login')
-def menu_edit(request, pk):
-    #MUESTRA EL TEMPLATE EDITAR 
+def menu_edit(request, pk): 
     plato = get_object_or_404(Plato, codigo_plato=pk);
-    plato_form = PlatoForm(prefix='menu', instance=plato)
+
+    if request.method == 'POST':
+        plato_form = PlatoForm(request.POST, prefix='menu')
+        if plato_form.is_valid():
+            p=plato_form.save(commit=True)
+            p.save()
+            return redirect(reverse('Pedido:menu_detalle', args={p.codigo_plato}))
+    else:
+        plato_form = PlatoForm(prefix='menu', instance=plato)
     return render(request,'Pedido/EditarPlato.html',{'plato_form': plato_form})
 
-@login_required(login_url='Usuario:login')
-def menu_editado(request):
-    #AQUÍ REALIZA LA MODIFICACION DEL PLATO
-    id = request.POST['codigo_plato']
-    plato = Plato.objects.get(codigo_plato=id)
-
-    try:
-        vigencia = request.POST['menu-vigencia_plato']
-    except MultiValueDictKeyError:
-            vigencia = 'Error'
-    try:
-        estado = request.POST['menu-estado_promocion']
-    except MultiValueDictKeyError:
-            estado = 'Error'
-    nombre = request.POST['nombre_plato']
-    precio = request.POST['precio_plato']
-    tipo = request.POST['menu-tipo_plato']
-    tipo_plato = TipoPlato.objects.get(tipo_plato=tipo)
-    especialidad = request.POST['menu-especialidad']
-    tipo_especialidad = Especialidad.objects.get(especialidad=especialidad)
-
-    print('VERDADADERO:',vigencia)
-    print('FALSO:',estado)
-
-    if(vigencia == 'on'):
-        plato.vigencia_plato = True
-    else:
-        plato.vigencia_plato = False
-
-    if(estado =='on'):
-        plato.estado_promocion = True
-    else:
-        plato.estado_promocion = False
-    
-    plato.nombre_plato = nombre
-    plato.precio_plato= precio
-    plato.tipo_plato = tipo_plato
-    plato.especialidad = tipo_especialidad
-
-    plato.save()
-    return redirect(to='Administrador')
 
 @login_required(login_url='Usuario:login')
 @permission_required('Pedido.view_menus', raise_exception=True)
@@ -212,9 +174,6 @@ def lista_pedidosadmin(request):
     return render(request,'Pedido/lista_pedidosadmin.html',{'pedidos': listaPedidos})
 
 
-
-
-
 @login_required(login_url='Usuario:login')
 def pedido_edit(request, pk):
     pedido = get_object_or_404(Pedido, pk=pk)
@@ -241,6 +200,12 @@ def detalle_pedido(request, pk):
 @login_required(login_url='Usuario:login')
 def pedidoadmin_edit(request, pk):
     pedido = get_object_or_404(Pedido, pk=pk)
+    print('ZONA DE ENTREGA:',pedido.persona.domicilio.zona)
+    print('ID PERSONA:', pedido.persona.pk)
+    #lista_platos_activos = Plato.objects.filter(vigencia_plato=True)
+    listaCadetes = Cadete.objects.filter(zona_trabajo_id=31)
+    print("cadetes:",listaCadetes)
+
     pedido_form = PedidoAdminForm(request.POST,prefix='pedido',instance=pedido)
     if request.method == 'POST' :
         if pedido_form.is_valid():
@@ -251,7 +216,7 @@ def pedidoadmin_edit(request, pk):
             print("Llego aca ")
             return redirect(reverse('Pedido:detalle_pedidoadmin', args={p.cod_pedido}))
     else:   
-        pedido_form = PedidoAdminForm(prefix='pedido')
+        pedido_form = PedidoForm(prefix='pedido',instance=pedido)
     return render(request,'Pedido/edit_pedidoadmin.html',{'pedido_form':pedido_form,'pedido':pedido})
 
 
@@ -276,8 +241,7 @@ def buscar_platos(request):
     if 'buscar' in request.GET:
         buscar_plato = platos.filter(nombre_plato__icontains=request.GET['buscar'])
     print(request.GET['buscar'])
-    return render(request, 'Pedido/promociones.html',
-                  {'platos': buscar_plato})
+    return render(request, 'Pedido/promociones.html',{'platos': buscar_plato})
 
 
 @login_required(login_url='Usuario:login')
@@ -287,8 +251,7 @@ def buscar_platos(request):
     if 'buscar' in request.GET:
         buscar_plato = platos.filter(nombre_plato__icontains=request.GET['buscar'])
     print(request.GET['buscar'])
-    return render(request, 'Pedido/promociones.html',
-                  {'platos': buscar_plato})
+    return render(request, 'Pedido/promociones.html',{'platos': buscar_plato})
 
 
 @login_required(login_url='Usuario:login')

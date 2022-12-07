@@ -12,7 +12,7 @@
                 <h2 class="d-flex justify-content-center mb-3">Listado de compras</h2>
                 <form action="{% url 'Pedido:procesarcompra' %}" method="post">{% csrf_token %}
                     {{ user.id }}
-                    
+                <input type="hidden" name="id-user" value="{{ user.id }}">
                     <div id="carrito" class="form-group table-responsive" >
                         <table class="table bg-white" id="lista-compra" >
                             <thead>

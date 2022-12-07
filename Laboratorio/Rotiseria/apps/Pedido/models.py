@@ -2,7 +2,7 @@ from email.policy import default
 from enum import unique
 from random import choices
 from django.db import models
-from apps.Usuario.models import Persona,cadete
+from apps.Usuario.models import Persona,Cadete
 from tkinter import CASCADE
 from cgitb import text
 
@@ -69,7 +69,7 @@ class Pedido(models.Model):
     estado_entrega = models.ForeignKey(EstadoEntrega, on_delete=models.CASCADE)
     platos = models.ManyToManyField(Plato)
     modo_entrega = models.ForeignKey(ModalidadEntrega,on_delete=models.CASCADE) 
-    cadete = models.ForeignKey(cadete,related_name='cadete',blank=True,null=True,on_delete=models.CASCADE)
+    cadete = models.ForeignKey(Cadete,related_name='cadete',blank=True,null=True,on_delete=models.CASCADE)
 
 
     def __str__(self):

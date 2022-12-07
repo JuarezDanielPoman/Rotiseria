@@ -32,7 +32,7 @@ class Domicilio(models.Model):
     nombre_calle = models.CharField(max_length=200,blank= True)
     numero_calle = models.BigIntegerField(blank= True)
     nombre_barrio = models.CharField(max_length=200,blank= True)
-    zona = models.OneToOneField(ZonaDomicilio, on_delete=models.CASCADE)
+    zona = models.ForeignKey(ZonaDomicilio, on_delete=models.CASCADE)
 
     def __str__(self):
         texto = "Barrio: {0} - Calle: {1} - Número: {2} - Zona: {3}"
@@ -62,14 +62,15 @@ class Persona(models.Model):
         return texto.format(self.cuil, self.apellido, self.nombre, self.fecha_nacimiento, self.domicilio)
 
 
-class cadete(Persona):
+class Cadete(Persona):
     #persona = models.ForeignKey(Persona, on_delete=models.CASCADE,default=None)
     fecha_vigencia_carnet = models.DateField(blank=True)
     numero_patente = models.CharField(max_length=7,blank=True)
     fecha_ingreso = models.DateField(blank=True)
+    zona_trabajo = models.ForeignKey(ZonaDomicilio, on_delete=models.CASCADE,default=None)
 
     def __str__(self):
-        texto = "{0} - Apellido: {1} - Vigencia carnet: {2} - Patente: {3} - Zona: {4}"
-        return texto.format(self.nombre, self.apellido, self.fecha_vigencia_carnet, self.numero_patente, self.domicilio.zona)
+        texto = "Nombre: {0} - Apellido: {1} - Vigencia carnet: {2} - Patente: {3} - Zona trabajo: {4}"
+        return texto.format(self.nombre, self.apellido, self.fecha_vigencia_carnet, self.numero_patente, self.zona_trabajo)
 
 

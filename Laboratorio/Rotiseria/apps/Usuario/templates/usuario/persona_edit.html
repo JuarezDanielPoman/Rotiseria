@@ -20,7 +20,8 @@
                         <label  for="cuil">Cuil</label><br>
                             <div class="hvr-icon-pulse form-group has-feedback">
                                 <i class="fa-solid fa-signature hvr-icon form-control-feedback"></i>
-                            {{persona_form.cuil}}  
+                                {{persona_form.cuil}}
+                            </div>
                     </div>
 
                     <!-- Nombre -->
@@ -65,6 +66,14 @@
                         <legend>Domicilio</legend>
                         
                         <div class="col-auto">
+                            <label for="zona-domicilicio">Zona</label><br>
+                            <div class="hvr-icon-pulse form-group has-feedback">
+                                <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
+                                {{domicilio_form.zona}}
+                            </div>
+                        </div>
+
+                        <div class="col-auto">
                             <label for="numero-calle">Numero de Calle</label><br>
                             <div class="hvr-icon-pulse form-group has-feedback">
                                 <i class="hvr-icon fa-solid fa-arrow-up-9-1 form-control-feedback"></i>
@@ -87,13 +96,8 @@
                                 {{domicilio_form.nombre_barrio}}
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <label for="zona-domicilicio">Zona</label><br>
-                            <div class="hvr-icon-pulse form-group has-feedback">
-                                <i class="hvr-icon fa-solid fa-street-view form-control-feedback"></i>
-                                {{zona_form.descripcion_zona}}
-                            </div>
-                        </div>
+
+                        
                     </fieldset>
 
                     </fieldset> 
@@ -102,8 +106,9 @@
                         <a href="{% url 'Usuario:lista_de_personas' %}" class="btn btn-secondary" name="cancelar">Cancelar</a>
                         <button class="btn btn-primary mb-2" type="submit">Modificar</button>
                     </div>
-            </form>
-        </div>
+                </form>
+
+            </div>
+        </div> 
     </div> 
-</div> 
 {% endblock %}

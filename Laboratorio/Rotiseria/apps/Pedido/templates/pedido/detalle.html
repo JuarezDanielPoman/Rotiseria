@@ -1,5 +1,5 @@
 {% extends "base/base.html" %}
-{% block titulo %}Detalle de Persona{% endblock %}
+{% block titulo %}Detalle del Plato{% endblock %}
 {% block contenido %}
 
 {% if messages %}
@@ -7,29 +7,49 @@
         {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
     {% endfor %}
 {% endif %}
+
+
+<h1 class="text-center" style="color: black;">Datos del Plato</h1>
+
 <div class="d-flex justify-content-center">
     <div class="card col-sm-7 p-3 formulario"> 
         <div class="mb-2">
-<p><strong>Plato ingresado</strong></p>
-<ul>
-  {% for plato in plato.all %}
-    <li>{{ plato }}</li>
-  {% endfor %}
-</ul>
-<p><strong>Nombre Plato: </strong>{{ plato.nombre_plato}}</p>
-<p><strong>Precio de plato:</strong> {{ plato.precio_plato}}</p>
-<p><strong>Vigencia Plato:</strong>{{ plato.vigencia_plato}}</p>
-<p><strong>Estado de promocion:</strong>{{ plato.estado_promocion}}</p>
-<p><strong>vigencia Plato:</strong>{{ plato.tipo_plato}}</p>
-<p><strong>vigencia Plato:</strong>{{ plato.especialidad}}</p>
-
-
-<form action="#" method="POST">
-  {% csrf_token %}
-  <input type="hidden" name="id_plato" value="Cancelar">
-  <button class="btn btn-Secondary"><a href="#">Modificar</a></button>
-</form>
-</div>
-    </div>
+            
+            <div class="message alert alert-success"> <strong>PLATO MODIFICADO</strong></div>
+            <p><strong>Nombre Plato: </strong>{{ plato.nombre_plato}}</p>
+            <p><strong>Precio de plato: </strong> {{ plato.precio_plato}}</p>
+            <p><strong>Tipo: </strong> {{ plato.tipo_plato}}</p>
+            <p><strong>Especialidad: </strong>{{ plato.especialidad}}</p>
+            <p>
+              <strong>¿Esta en Promoción?: </strong>
+              {% if  plato.estado_promocion == True %}
+                SI
+              {% else %}
+                NO
+              {% endif %}
+              
+            </p>
+            <p>
+              <strong>¿Esta Vigente?: </strong>
+              {% if  plato.vigencia_plato == True %}
+                SI
+              {% else %}
+                NO
+              {% endif %}
+              
+            </p>
+            
+            {{plato.messages}}
+            
+            <form action="{% url 'Pedido:listademenus' %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ persona.id }}"> 
+                <!-- <input class="btn btn-danger mb-2" type="submit" name="Eliminar" value="Eliminar" /> -->
+                <a href="#" class="btn btn-danger">Eliminar</a>
+                <a href="#" class="btn btn-warning">Modificar</a>
+                <button class="btn btn-success" type="submit">Confirmar</button>
+            </form>
         </div>
+    </div>
+</div>
 {% endblock %}
