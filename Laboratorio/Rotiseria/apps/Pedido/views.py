@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import permission_required
 from apps.Pedido.forms import PlatoForm,PedidoForm
 from apps.Pedido.models import Plato,Pedido
 from django.contrib.auth.decorators import login_required
+from apps.Usuario.forms import CadeteForm
 
 from apps.Usuario.models import Persona, Cadete
 
@@ -150,9 +151,11 @@ def creacion_pedido(request):
 
 @login_required(login_url='Usuario:login')
 @permission_required('Pedido.view_pedido', raise_exception=True)
-def lista_pedidos(request):
-    listaPedidos = Pedido.objects.all()
-    return render(request,'Pedido/ListaDepedidos.html',{'pedidos': listaPedidos})
+def lista_pedidos_asignados(request):
+    
+    listaPedidos = Pedido.objects.filter(cod_pedido=32)
+    print("codigo pedido",listaPedidos)
+    return render(request,'Pedido/PedidosCadetes.html',{'pedidos': listaPedidos})
 
 
 @login_required(login_url='Usuario:login')
@@ -163,9 +166,10 @@ def lista_pedidosdisponibles(request):
 
 @login_required(login_url='Usuario:login')
 @permission_required('Pedido.view_pedido', raise_exception=True)
-def lista_pedidos_cadetes(request):
-    listaPedidos = Pedido.objects.all()
-    return render(request,'Pedido/listapedidoscadete.html',{'pedidos': listaPedidos})
+def pedidos_realizados_cadete(request):
+    listaPedidos = Pedido.objects.filter(estado_entrega=4)
+    print("Pedidos entregados:",listaPedidos)
+    return render(request,'Pedido/PedidosCadeteRealizados.html',{'pedidos': listaPedidos})
 
 
 @login_required(login_url='Usuario:login')
@@ -182,8 +186,7 @@ def pedido_edit(request, pk):
         if pedido_form.is_valid():
             p=pedido_form.save(commit=False)
             p.save()
-            messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p))
+            messages.success(request,'Se ha agregado correctamente la persona {}'.format(p))
             print("Llego aca ")
             return redirect(reverse('Pedido:detalle_pedido', args={p.cod_pedido}))
     else:   
@@ -199,25 +202,23 @@ def detalle_pedido(request, pk):
 
 @login_required(login_url='Usuario:login')
 def pedidoadmin_edit(request, pk):
+    
     pedido = get_object_or_404(Pedido, pk=pk)
-    print('ZONA DE ENTREGA:',pedido.persona.domicilio.zona)
-    print('ID PERSONA:', pedido.persona.pk)
-    #lista_platos_activos = Plato.objects.filter(vigencia_plato=True)
-    listaCadetes = Cadete.objects.filter(zona_trabajo_id=31)
-    print("cadetes:",listaCadetes)
+    listaCadetes = Cadete.objects.filter(zona_trabajo=28)
 
-    pedido_form = PedidoAdminForm(request.POST,prefix='pedido',instance=pedido)
-    if request.method == 'POST' :
+    if request.method == 'POST':
+        pedido_form = PedidoAdminForm(request.POST,prefix='pedido',instance=pedido)
+        id_cadete_seleccionado = request.POST['cadete']
+        print("ID DEL CADETE:",id_cadete_seleccionado)
         if pedido_form.is_valid():
             p=pedido_form.save(commit=False)
+            p.cadete_id = id_cadete_seleccionado 
             p.save()
-            messages.success(request,
-            'Se ha agregado correctamente la persona {}'.format(p))
-            print("Llego aca ")
+            print("PEDIDO: ", p)
             return redirect(reverse('Pedido:detalle_pedidoadmin', args={p.cod_pedido}))
     else:   
         pedido_form = PedidoForm(prefix='pedido',instance=pedido)
-    return render(request,'Pedido/edit_pedidoadmin.html',{'pedido_form':pedido_form,'pedido':pedido})
+    return render(request,'Pedido/edit_pedidoadmin.html',{'pedido_form':pedido_form,'cadetes':listaCadetes})
 
 
 @login_required(login_url='Usuario:login')

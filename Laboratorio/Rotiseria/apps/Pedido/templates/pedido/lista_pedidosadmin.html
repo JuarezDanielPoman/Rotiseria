@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{forloop.counter}}</td>
                             <!-- <td>{{p.persona.nombre}}</td> -->
-                            <td><a href="#" data-toggle="modal" data-target="#ventanaModalPedido">{{p.persona.nombre}}</a></td>
+                            <td><a href="#" data-toggle="modal" data-target="#ventanaModalCliente">{{p.persona.nombre}}</a></td>
                             <td>{{p.modo_entrega}}</td>
                             <td>{{p.estado_entrega}}</td>
                             <td>{{p.hora_entrega_desde|time:"H:i"}}</td>
@@ -49,14 +49,13 @@
                                     <input type="hidden" name="id" value="{{ p.cod_pedido }}"> 
                                     <!-- Editar -->
                                     <a href="{% url 'Pedido:pedidoadmin_edit' p.cod_pedido %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i></a>
-                                    <!-- <button class="btn-sample btn btn-danger"><a href="{% url 'Pedido:pedidoadmin_edit' p.cod_pedido %}" class="hvr-underline-from-center menu__link hvr-icon-fade" data-toggle="modal" > Editar</a></button> -->
                                 </form>
                             </td>
                         </tr>
                         
-
-                        <section id="seccion-pedido">
-                            <div class="modal fade" id="ventanaModalPedido" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
+                        <!-- Modal Cliente -->
+                        <section id="seccion-cliente">
+                            <div class="modal fade" id="ventanaModalCliente" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         
@@ -92,7 +91,7 @@
                                         </div>
                                 
                                         <div class="modal-footer">
-                                            <span><a href="#" class="btn btn-warning">Cancelar</a></span>
+                                            <a href="#" class="btn btn-dark">Cancelar</a>
                                             <button class="btn btn-success" type="button">Guardar</button>
                                         </div>
                                     </div>

@@ -1,0 +1,47 @@
+{% extends "base/baseCadete.html" %}
+{% block titulo %}Lista de Pedidos disponibles{% endblock %}
+
+{% block contenido %}
+{% load static %}
+{% if perms.Pedido.view_pedido %}
+
+    <section class="container">
+        <h3 class="text-center mt-5">LISTA DE PEDIDOS REALIZADOS</h3>
+        <form action="#" method="post">
+            <input type="text" name="charSearch" size="20" class="formulario" value="">
+            <span class="headerList_searchButton">
+            <input class="btn-sample" type="submit" value="Buscar" class="btn button"></span></form>
+        
+        {% if pedidos %} {% for p in pedidos %}
+        <div class="table-responsive mt-5">
+            <table id="tabla-pedidos-pendientes" class="table text-center">
+                <thead >
+                    <tr>
+                        <th onclick="ordenarTocandoColumna(0)" class="cabera-tabla">#</th>
+                        <th onclick="ordenarTocandoColumna(1)" class="cabera-tabla">Cliente</th>
+                        <th onclick="ordenarTocandoColumna(2)" class="cabera-tabla">Tipo de entrega</th> 
+                        <th onclick="ordenarTocandoColumna(3)" class="cabera-tabla">Estado</th>     
+                        <th onclick="ordenarTocandoColumna(4)" class="cabera-tabla">Hora de entrega</th>
+                    </tr>                   
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>{{p.cod_pedido}}</td>
+                            <td>{{p.persona}}</td>
+                            <td>{{p.modo_entrega}}</td>
+                            <td>{{p.estado_entrega}}</td>
+                            <td>{{p.hora_entrega_hasta|time:"H:i"}}</td>
+                        </tr>
+                        {% endfor%} {% else %}
+                        <div class="text-center mt-3">
+                            <h3 class="alert-danger"> ¡NO HAS REALIZADO PEDIDOS POR EL MOMENTO!</h3>
+                        </div> 
+                        {% endif %}                            
+                </tbody>
+                <!--<tfoot><td>Total de pedidos</td></tfoot>-->
+            </table>
+        </div>
+    </section>
+
+{% endif %}  
+{% endblock %}

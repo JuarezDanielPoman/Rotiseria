@@ -16,7 +16,7 @@
             <p><strong>Hora de entrega (aproximada):</strong> {{ pedido.hora_entrega_hasta}}</p>
             {{pedido.messages}}
             
-            <form action="{% url 'Administrador' %}" enctype="multipart/form-data" method="POST">
+            <form action="{% url 'Pedido:lista_pedidosadmin' %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ persona.id }}"> 
                 <!-- <input class="btn btn-danger mb-2" type="submit" name="Eliminar" value="Eliminar" /> -->

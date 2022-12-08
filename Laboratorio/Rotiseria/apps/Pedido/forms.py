@@ -47,7 +47,7 @@ class PedidoCadeteForm(forms.ModelForm):
 class PedidoAdminForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ('hora_entrega_hasta',)
+        fields = ('hora_entrega_hasta','modo_entrega','estado_entrega')
         prefix = 'pedido'
         widgets = {
         'hora_entrega_hasta': forms.TimeInput(attrs={ 'type':"time",'class':"nombre form-control mb-2 text-center"}),

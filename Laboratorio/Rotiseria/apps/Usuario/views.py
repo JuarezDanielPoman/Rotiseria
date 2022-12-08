@@ -292,7 +292,7 @@ def lista_cadetes(request):
 @login_required(login_url='Usuario:login')
 @permission_required('Persona.view_persona', raise_exception=True)
 def lista_personas(request):
-    listaClientes = Persona.objects.all()
+    listaClientes = Persona.objects.all().order_by('nombre', 'apellido')
     return render(request,'Usuario/ListaDePersonas.html',{'personas': listaClientes})
 
 @login_required(login_url='Usuario:login')

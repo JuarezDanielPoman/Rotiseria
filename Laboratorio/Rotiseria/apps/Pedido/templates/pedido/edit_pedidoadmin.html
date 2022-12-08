@@ -3,60 +3,112 @@
 {% block contenido %}
 
 
-<h1 class="text-center" style="color: black;">Modificar Pedido</h1>
-{% if messages %}
-    {% for message in messages %}
-        {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
-    {% endfor %}
-{% endif %}
-<div class="d-flex justify-content-center">
-    <div class="card col-sm-7 p-3 formulario"> 
-        <div class="mb-2">
-            {{pedido.errors}}
+    <h1 class="text-center" style="color: black;">Modificar Pedido</h1>
+    <div class="d-flex justify-content-center">
+        <div class="card col-sm-7 p-3 formulario"> 
+            <div class="mb-2">
+                {{pedido_form.errors}}
+                
+                
+                <form action="#" method="POST"> {% csrf_token %}
+                    <fieldset>
+                        <div class="col-auto">
+                            <label for="cadetes">Cadetes: </label>
+                            {% for c in cadetes %}
+                            <select name="cadete" id="cadete" class="nombre form-control mb-2 text-center">
+                                <option value="{{c.persona_ptr_id}}">{{c.nombre}} {{c.apellido}}</option>
+                            </select>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="col-auto">
+                            <label for="hora_entrega_hasta">Hora de entrega (aprox):</label>
+                            {{pedido_form.hora_entrega_hasta}}
+                        </div>
 
-            <form action="#" method="POST"> {% csrf_token %}
-                <label for="for">Hora aproximada de entrega:</label>
-                    <!-- {{pedido_form.hora_entrega_hasta}} -->
+                        <div class="col-auto">
+                            <label for="estado_entrega">Estado de entrega:</label>
+                            {{pedido_form.estado_entrega}}
+                        </div>
 
+                        <div class="col-auto">
+                            <label for="modo_entrega">Modo de entrega:</label>
+                            {{pedido_form.modo_entrega}}
+                        </div>
 
+                        <div class="col-auto">
+                            <label for="platos">Modo de entrega:</label>
+                            {{pedido_form.platos}}
+                        </div>
 
+                    </fieldset>
 
-                <input type="hidden" name="id_plato" value="{{pedido.cod_pedido}}">
-                <a href="#" data-toggle="modal" data-target="#ventanaModalPedido">pedido</a>
-                <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="INGRESAR DATOS" />
-            </form>
+                    <div class="col-auto text-center">
+                        <input class="btn btn-secondary mb-2" type="reset" name="cancelar" value="CANCELAR" />
+                        <input class="btn btn-primary mb-2" type="submit" name="Enviar" value="EDITAR" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<section id="seccion-pedido">
-    <div class="modal fade" id="ventanaModalPedido" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                
-                <div class="modal-header">
-                    <h5 id="titulo-ventana" class="text-center">Datos del Pedido</h5>
-                    <button class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true"></span>X</button>
-                </div>
-        
-                <div class="modal-body">
-                    <div class="card col-auto p-3 formulario"> 
-                        <div class="mb-2">
-                            <form action="#" method="post">
-                                <fieldset>
-                                    {{pedido_form}}
-                                </fieldset>
-                            </form>
+    <section id="seccion-pedido">
+        <div class="modal fade" id="ventanaModalPedido" tabindex="-1" role="dialog" aria-labelledby="titulo-ventana" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <h5 id="titulo-ventana" class="text-center">Datos del Pedido</h5>
+                        <button class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true"></span>X</button>
                     </div>
+            
+                    <div class="modal-body">
+                        <div class="card col-auto p-3 formulario"> 
+                            <div class="mb-2">
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <div class="col-auto">
+                                            <label for="cadetes">Cadetes: </label>
+                                            {% for c in cadetes %}
+                                            <select name="cadete" id="cadete" class="nombre form-control mb-2 text-center">
+                                                <option value="{{c.persona_ptr_id}}">{{c.nombre}} {{c.apellido}}</option>
+                                            </select>
+                                            {% endfor %}
+                                        </div>
+                                        
+                                        
+                                        <div class="col-auto">
+                                            <label for="hora_entrega_hasta">Hora de entrega (aprox):</label>
+                                            {{pedido_form.hora_entrega_hasta}}
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <label for="estado_entrega">Estado de entrega:</label>
+                                            {{pedido_form.estado_entrega}}
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <label for="modo_entrega">Modo de entrega:</label>
+                                            {{pedido_form.modo_entrega}}
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <label for="platos">Modo de entrega:</label>
+                                            {{pedido_form.platos}}
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                        </div>
+                        </div>
+                    </div>
+            
+                    <div class="modal-footer">
+                        <span><a href="#" class="btn btn-warning">Cancelar</a></span>
+                        <button class="btn btn-success" type="button">Guardar</button>
                     </div>
                 </div>
-        
-                <div class="modal-footer">
-                    <span><a href="#" class="btn btn-warning">Cancelar</a></span>
-                    <button class="btn btn-success" type="button">Guardar</button>
-                </div>
-            </div>
-        </div>    
-    </div>
-</section>
+            </div>    
+        </div>
+    </section>
 {% endblock %}

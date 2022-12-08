@@ -68,9 +68,9 @@
                 <li class="menu__item container-submenu"> 
                     <a href="#" class="hvr-icon-hang menu__link submenu-btn hvr-icon-fade"><i class="fa-solid fa-shop"></i> Pedidos <i class="hvr-icon fa-solid fa-angle-down"></i></a>
                     <ul class="submenu">
-                        <li id="listapedidos" class="menu__item"><a id="listapedidos" href="{% url 'Pedido:ListaDepedidos' %}" class="hvr-icon-pulse menu__link"><i id="iconod" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i> Pedidos Asignados</a></li>
-                        <li id="listapedidoscadetes" class="menu__item "><a id="listapedidoscadetes" href="{% url 'Pedido:listapedidoscadetes' %}" class="hvr-icon-pulse menu__link"><i id="icono" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i> Pedidos Realizados</a></li>
-                        <li id="listapedidoscadetes" class="menu__item "><a id="listapedidoscadetes" href="{% url 'Pedido:lista_pedidosdisponibles' %}" class="hvr-icon-pulse menu__link"><i id="icono" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i> Pedidos Disponibles</a></li>
+                        <li class="menu__item"><a href="{% url 'Pedido:lista_pedidos_asignados' %}" class="hvr-icon-pulse menu__link"><i id="iconod" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i> Pedidos Asignados</a></li>
+                        <li class="menu__item "><a href="{% url 'Pedido:pedidos_realizados_cadete' %}" class="hvr-icon-pulse menu__link"><i id="icono" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i> Pedidos Realizados</a></li>
+                        <li class="menu__item "><a href="{% url 'Pedido:lista_pedidosdisponibles' %}" class="hvr-icon-pulse menu__link"><i id="icono" style="margin-right: 20" class="icono hvr-icon fa-solid fa-hand-point-right"></i> Historial</a></li>
 
                     </ul>
                 </li>
